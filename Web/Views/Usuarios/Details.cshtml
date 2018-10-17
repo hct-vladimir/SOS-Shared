@@ -1,0 +1,50 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.Usuario
+
+@{
+    ViewBag.Title = "Ver usuario";
+}
+
+<h2>Usuario</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Datos del Usuario
+            </div>
+            <div class="panel-body collapse in">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Paterno, "Paterno")
+                        @Html.TextBoxFor(model => model.Paterno, null, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Paterno)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Materno, "Materno")
+                        @Html.TextBoxFor(model => model.Materno, null, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Materno)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Nombres, "Nombres")
+                        @Html.TextBoxFor(model => model.Nombres, null, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Nombres)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-links">
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Regresar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

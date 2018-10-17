@@ -1,0 +1,929 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AldeasInfantilesModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BajaPersonal">
+          <Key>
+            <PropertyRef Name="codigoBaja" />
+          </Key>
+          <Property Name="codigoBaja" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="item" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="numeroDocumento" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="itemAutorizado" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="fechaIngreso" Type="datetime" Nullable="false" />
+          <Property Name="fechaRetiro" Type="datetime" Nullable="false" />
+          <Property Name="codigoMotivoRetiro" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="ultimaRemuneracion" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="promedioUltimosTresSueldos" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="bajaPlanillas" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="transferencia" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="certificadoTrabajo" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="beneficiosSociales" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="saldoVacaciones" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="observaciones" Type="nvarchar" MaxLength="255" />
+          <Property Name="fechaSistema" Type="datetime" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListaAFP">
+          <Key>
+            <PropertyRef Name="codigoAfp" />
+          </Key>
+          <Property Name="codigoAfp" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListaArea">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="area" Type="nvarchar" MaxLength="70" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListaCargo">
+          <Key>
+            <PropertyRef Name="codigoCargo" />
+          </Key>
+          <Property Name="codigoCargo" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="100" />
+          <Property Name="idfkArea" Type="int" />
+          <Property Name="estado" Type="nvarchar" MaxLength="1" />
+          <Property Name="salarioMinimo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="salarioMaximo" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="ListaCiudades">
+          <Key>
+            <PropertyRef Name="codDepartamento" />
+            <PropertyRef Name="codCiudad" />
+          </Key>
+          <Property Name="codDepartamento" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="codCiudad" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListaDepartamento">
+          <Key>
+            <PropertyRef Name="codigoDepartamento" />
+          </Key>
+          <Property Name="codigoDepartamento" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListaEscalaSalarial">
+          <Key>
+            <PropertyRef Name="codigoEscalaSalarial" />
+          </Key>
+          <Property Name="codigoEscalaSalarial" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="haberBasico" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ListaFacility">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigoFacility" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ciudad" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="proyecto" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListaFilial">
+          <Key>
+            <PropertyRef Name="codigoFilial" />
+          </Key>
+          <Property Name="codigoFilial" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AldeasInfantilesSOS.dbo.ListaProfesion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ListaProfesion">
+          <Key>
+            <PropertyRef Name="codigoProfesion" />
+            <PropertyRef Name="descripcion" />
+          </Key>
+          <Property Name="codigoProfesion" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListaProgramas">
+          <Key>
+            <PropertyRef Name="codigoPrograma" />
+          </Key>
+          <Property Name="codigoPrograma" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="codigoTipoPrograma" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="codigoFilial" Type="nvarchar" MaxLength="3" />
+          <Property Name="idFacility" Type="int" />
+        </EntityType>
+        <EntityType Name="ListaSeccion">
+          <Key>
+            <PropertyRef Name="codigoSeccion" />
+          </Key>
+          <Property Name="codigoPrograma" Type="nvarchar" MaxLength="3" />
+          <Property Name="codigoSeccion" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="Personal">
+          <Key>
+            <PropertyRef Name="item" />
+          </Key>
+          <Property Name="item" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="nvarchar" MaxLength="25" />
+          <Property Name="apellidoMaterno" Type="nvarchar" MaxLength="25" />
+          <Property Name="apellidoCasada" Type="nvarchar" MaxLength="25" />
+          <Property Name="nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="datetime" />
+          <Property Name="sexo" Type="char" MaxLength="1" />
+          <Property Name="estadoCivil" Type="char" MaxLength="1" />
+          <Property Name="codigoEstudio" Type="nvarchar" MaxLength="6" />
+          <Property Name="codigoProfesion" Type="nvarchar" MaxLength="6" />
+          <Property Name="codigoTipoDocumento" Type="nvarchar" MaxLength="2" />
+          <Property Name="numeroDocumento" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="codigoDepartamento" Type="nvarchar" MaxLength="3" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="70" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="70" />
+          <Property Name="usuario_correo" Type="nvarchar" MaxLength="50" />
+          <Property Name="correo" Type="nvarchar" MaxLength="50" />
+          <Property Name="codigoFilial" Type="nvarchar" MaxLength="3" />
+          <Property Name="codigoPrograma" Type="nvarchar" MaxLength="3" />
+          <Property Name="filial" Type="nchar" MaxLength="10" />
+          <Property Name="fechaIngreso" Type="datetime" />
+          <Property Name="fechaInicioCargo" Type="datetime" />
+          <Property Name="codigoTipoContratacion" Type="nvarchar" MaxLength="6" />
+          <Property Name="codigoSeccion" Type="nvarchar" MaxLength="6" />
+          <Property Name="codigoCargoActual" Type="nvarchar" MaxLength="6" />
+          <Property Name="cargo_act" Type="nvarchar" MaxLength="35" />
+          <Property Name="codigoEscalaSalarial" Type="nvarchar" MaxLength="10" />
+          <Property Name="salario" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="contratoIndefinido" Type="nvarchar" MaxLength="2" />
+          <Property Name="tiempoCompleto" Type="nvarchar" MaxLength="2" />
+          <Property Name="numeroCuenta" Type="nvarchar" MaxLength="30" />
+          <Property Name="numeroSeguro" Type="nvarchar" MaxLength="14" />
+          <Property Name="codigoRecibeInstruccion" Type="nvarchar" MaxLength="8" />
+          <Property Name="tieneSubAlternos" Type="nvarchar" MaxLength="100" />
+          <Property Name="codigoEsEvaluado" Type="nvarchar" MaxLength="8" />
+          <Property Name="propositoCargo" Type="nvarchar" MaxLength="200" />
+          <Property Name="funcion1" Type="nvarchar" MaxLength="200" />
+          <Property Name="funcion2" Type="nvarchar" MaxLength="200" />
+          <Property Name="funcion3" Type="nvarchar" MaxLength="200" />
+          <Property Name="codigoAFP" Type="nvarchar" MaxLength="3" />
+          <Property Name="nua" Type="nvarchar" MaxLength="15" />
+          <Property Name="fechaRetiro" Type="datetime" />
+          <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="estadoADM" Type="char" MaxLength="1" />
+          <Property Name="observaciones" Type="nvarchar" MaxLength="200" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" />
+          <Property Name="fechaSistema" Type="datetime" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="zona" Type="nvarchar" MaxLength="100" />
+          <Property Name="telefonoContacto" Type="nvarchar" MaxLength="70" />
+          <Property Name="codigoFacility" Type="int" />
+          <Property Name="tipoSeguro" Type="varchar" MaxLength="20" />
+          <Property Name="tipoInicio" Type="varchar" MaxLength="20" />
+          <Property Name="area" Type="int" />
+          <Property Name="item2" Type="nvarchar" MaxLength="8" />
+          <Property Name="cotizante" Type="int" />
+          <Property Name="nacionalidad" Type="nvarchar" MaxLength="20" />
+          <Property Name="fechaFinContrato" Type="datetime" />
+          <Property Name="tipoGrupo" Type="int" />
+          <Property Name="tipoGrupoRetroactivo" Type="int" />
+          <Property Name="tipoAasignacion" Type="int" />
+          <Property Name="excepciones" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Seguros">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombreSeguro" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AldeasInfantilesSOS.dbo.TipoAFP' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TipoAFP">
+          <Key>
+            <PropertyRef Name="codigoAFP" />
+            <PropertyRef Name="descripcion" />
+          </Key>
+          <Property Name="codigoAFP" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AldeasInfantilesSOS.dbo.TipoContratacion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TipoContratacion">
+          <Key>
+            <PropertyRef Name="codigoTipoContratacion" />
+            <PropertyRef Name="descripcion" />
+          </Key>
+          <Property Name="codigoTipoContratacion" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="codigoTipoDocumento" />
+          </Key>
+          <Property Name="codigoTipoDocumento" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="abreviacion" Type="nvarchar" MaxLength="3" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AldeasInfantilesSOS.dbo.TipoEstadoCivil' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TipoEstadoCivil">
+          <Key>
+            <PropertyRef Name="codigoEstadoCivil" />
+          </Key>
+          <Property Name="codigoEstadoCivil" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="TipoEstudio">
+          <Key>
+            <PropertyRef Name="codigoEstudio" />
+          </Key>
+          <Property Name="codigoEstudio" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AldeasInfantilesSOS.dbo.TipoInicio' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="TipoInicio">
+          <Key>
+            <PropertyRef Name="CodigotipoInicio" />
+            <PropertyRef Name="descripcion" />
+          </Key>
+          <Property Name="CodigotipoInicio" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="descripcion" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoRetiro">
+          <Key>
+            <PropertyRef Name="codigoTiporetiro" />
+          </Key>
+          <Property Name="codigoTiporetiro" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <Association Name="FK_BajaPersonal_Personal">
+          <End Role="Personal" Type="Self.Personal" Multiplicity="1" />
+          <End Role="BajaPersonal" Type="Self.BajaPersonal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="item" />
+            </Principal>
+            <Dependent Role="BajaPersonal">
+              <PropertyRef Name="item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_ListaCargo">
+          <End Role="ListaCargo" Type="Self.ListaCargo" Multiplicity="0..1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListaCargo">
+              <PropertyRef Name="codigoCargo" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="codigoCargoActual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AldeasInfantilesModelStoreContainer">
+          <EntitySet Name="BajaPersonal" EntityType="Self.BajaPersonal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaAFP" EntityType="Self.ListaAFP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaArea" EntityType="Self.ListaArea" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaCargo" EntityType="Self.ListaCargo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaCiudades" EntityType="Self.ListaCiudades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaDepartamento" EntityType="Self.ListaDepartamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaEscalaSalarial" EntityType="Self.ListaEscalaSalarial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaFacility" EntityType="Self.ListaFacility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaFilial" EntityType="Self.ListaFilial" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaProgramas" EntityType="Self.ListaProgramas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaSeccion" EntityType="Self.ListaSeccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal" EntityType="Self.Personal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seguros" EntityType="Self.Seguros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoEstudio" EntityType="Self.TipoEstudio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoRetiro" EntityType="Self.TipoRetiro" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListaProfesion" EntityType="Self.ListaProfesion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ListaProfesion].[codigoProfesion] AS [codigoProfesion], 
+    [ListaProfesion].[descripcion] AS [descripcion]
+    FROM [dbo].[ListaProfesion] AS [ListaProfesion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TipoAFP" EntityType="Self.TipoAFP" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TipoAFP].[codigoAFP] AS [codigoAFP], 
+    [TipoAFP].[descripcion] AS [descripcion]
+    FROM [dbo].[TipoAFP] AS [TipoAFP]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TipoContratacion" EntityType="Self.TipoContratacion" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TipoContratacion].[codigoTipoContratacion] AS [codigoTipoContratacion], 
+    [TipoContratacion].[descripcion] AS [descripcion]
+    FROM [dbo].[TipoContratacion] AS [TipoContratacion]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TipoEstadoCivil" EntityType="Self.TipoEstadoCivil" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TipoEstadoCivil].[codigoEstadoCivil] AS [codigoEstadoCivil], 
+    [TipoEstadoCivil].[Descripcion] AS [Descripcion]
+    FROM [dbo].[TipoEstadoCivil] AS [TipoEstadoCivil]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="TipoInicio" EntityType="Self.TipoInicio" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [TipoInicio].[CodigotipoInicio] AS [CodigotipoInicio], 
+    [TipoInicio].[descripcion] AS [descripcion]
+    FROM [dbo].[TipoInicio] AS [TipoInicio]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BajaPersonal_Personal" Association="Self.FK_BajaPersonal_Personal">
+            <End Role="Personal" EntitySet="Personal" />
+            <End Role="BajaPersonal" EntitySet="BajaPersonal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_ListaCargo" Association="Self.FK_Personal_ListaCargo">
+            <End Role="ListaCargo" EntitySet="ListaCargo" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AldeasInfantilesModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AldeasInfantilesDBEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="ListaAreas" EntityType="AldeasInfantilesModel.ListaArea" />
+          <EntitySet Name="ListaCiudades" EntityType="AldeasInfantilesModel.ListaCiudad" />
+          <EntitySet Name="ListaFacilities" EntityType="AldeasInfantilesModel.ListaFacility" />
+          <EntitySet Name="ListaFilials" EntityType="AldeasInfantilesModel.ListaFilial" />
+          <EntitySet Name="ListaProgramas" EntityType="AldeasInfantilesModel.ListaPrograma" />
+          <EntitySet Name="ListaSeccions" EntityType="AldeasInfantilesModel.ListaSeccion" />
+          <EntitySet Name="TipoDocumentoes" EntityType="AldeasInfantilesModel.TipoDocumento" />
+          <EntitySet Name="ListaProfesions" EntityType="AldeasInfantilesModel.ListaProfesion" />
+          <EntitySet Name="TipoEstadoCivils" EntityType="AldeasInfantilesModel.TipoEstadoCivil" />
+          <EntitySet Name="ListaDepartamentoes" EntityType="AldeasInfantilesModel.ListaDepartamento" />
+          <EntitySet Name="TipoEstudios" EntityType="AldeasInfantilesModel.TipoEstudio" />
+          <EntitySet Name="ListaCargoes" EntityType="AldeasInfantilesModel.ListaCargo" />
+          <EntitySet Name="Seguros" EntityType="AldeasInfantilesModel.Seguro" />
+          <EntitySet Name="TipoAFPs" EntityType="AldeasInfantilesModel.TipoAFP" />
+          <EntitySet Name="TipoInicios" EntityType="AldeasInfantilesModel.TipoInicio" />
+          <EntitySet Name="TipoContratacions" EntityType="AldeasInfantilesModel.TipoContratacion" />
+          <EntitySet Name="ListaEscalaSalarials" EntityType="AldeasInfantilesModel.ListaEscalaSalarial" />
+          <EntitySet Name="ListaAFPs" EntityType="AldeasInfantilesModel.ListaAFP" />
+          <EntitySet Name="Personal" EntityType="AldeasInfantilesModel.Personal" />
+          <AssociationSet Name="FK_Personal_ListaCargo" Association="AldeasInfantilesModel.FK_Personal_ListaCargo">
+            <End Role="ListaCargo" EntitySet="ListaCargoes" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <EntitySet Name="BajaPersonals" EntityType="AldeasInfantilesModel.BajaPersonal" />
+          <AssociationSet Name="FK_BajaPersonal_Personal" Association="AldeasInfantilesModel.FK_BajaPersonal_Personal">
+            <End Role="Personal" EntitySet="Personal" />
+            <End Role="BajaPersonal" EntitySet="BajaPersonals" />
+          </AssociationSet>
+          <EntitySet Name="TipoRetiroes" EntityType="AldeasInfantilesModel.TipoRetiro" />
+        </EntityContainer>
+        <EntityType Name="ListaArea">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="area" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListaCiudad">
+          <Key>
+            <PropertyRef Name="codDepartamento" />
+            <PropertyRef Name="codCiudad" />
+          </Key>
+          <Property Name="codDepartamento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="codCiudad" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListaFacility">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigoFacility" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ciudad" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="proyecto" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListaFilial">
+          <Key>
+            <PropertyRef Name="codigoFilial" />
+          </Key>
+          <Property Name="codigoFilial" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListaPrograma">
+          <Key>
+            <PropertyRef Name="codigoPrograma" />
+          </Key>
+          <Property Name="codigoPrograma" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="codigoTipoPrograma" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="codigoFilial" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="idFacility" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ListaSeccion">
+          <Key>
+            <PropertyRef Name="codigoSeccion" />
+          </Key>
+          <Property Name="codigoPrograma" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="codigoSeccion" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="codigoTipoDocumento" />
+          </Key>
+          <Property Name="codigoTipoDocumento" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="abreviacion" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListaProfesion">
+          <Key>
+            <PropertyRef Name="codigoProfesion" />
+            <PropertyRef Name="descripcion" />
+          </Key>
+          <Property Name="codigoProfesion" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TipoEstadoCivil">
+          <Key>
+            <PropertyRef Name="codigoEstadoCivil" />
+          </Key>
+          <Property Name="codigoEstadoCivil" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListaDepartamento">
+          <Key>
+            <PropertyRef Name="codigoDepartamento" />
+          </Key>
+          <Property Name="codigoDepartamento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TipoEstudio">
+          <Key>
+            <PropertyRef Name="codigoEstudio" />
+          </Key>
+          <Property Name="codigoEstudio" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListaCargo">
+          <Key>
+            <PropertyRef Name="codigoCargo" />
+          </Key>
+          <Property Name="codigoCargo" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="idfkArea" Type="Int32" />
+          <Property Name="estado" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="salarioMinimo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="salarioMaximo" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Personals" Relationship="AldeasInfantilesModel.FK_Personal_ListaCargo" FromRole="ListaCargo" ToRole="Personal" />
+        </EntityType>
+        <EntityType Name="Seguro">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombreSeguro" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TipoAFP">
+          <Key>
+            <PropertyRef Name="codigoAFP" />
+            <PropertyRef Name="descripcion" />
+          </Key>
+          <Property Name="codigoAFP" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TipoInicio">
+          <Key>
+            <PropertyRef Name="CodigotipoInicio" />
+            <PropertyRef Name="descripcion" />
+          </Key>
+          <Property Name="CodigotipoInicio" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TipoContratacion">
+          <Key>
+            <PropertyRef Name="codigoTipoContratacion" />
+            <PropertyRef Name="descripcion" />
+          </Key>
+          <Property Name="codigoTipoContratacion" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ListaEscalaSalarial">
+          <Key>
+            <PropertyRef Name="codigoEscalaSalarial" />
+          </Key>
+          <Property Name="codigoEscalaSalarial" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="haberBasico" Type="Decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="ListaAFP">
+          <Key>
+            <PropertyRef Name="codigoAfp" />
+          </Key>
+          <Property Name="codigoAfp" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Personal">
+          <Key>
+            <PropertyRef Name="item" />
+          </Key>
+          <Property Name="item" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="apellidoPaterno" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="apellidoMaterno" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="apellidoCasada" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="estadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="codigoEstudio" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="codigoProfesion" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="codigoTipoDocumento" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="numeroDocumento" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="codigoDepartamento" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="codigoFilial" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="codigoPrograma" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="filial" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="fechaInicioCargo" Type="DateTime" Precision="3" />
+          <Property Name="codigoTipoContratacion" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="codigoSeccion" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="codigoCargoActual" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="cargo_act" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="codigoEscalaSalarial" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="salario" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="contratoIndefinido" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="tiempoCompleto" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="numeroCuenta" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="numeroSeguro" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="codigoRecibeInstruccion" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="tieneSubAlternos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="codigoEsEvaluado" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="propositoCargo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="funcion1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="funcion2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="funcion3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="codigoAFP" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="nua" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="fechaRetiro" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="estadoADM" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fechaSistema" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zona" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="telefonoContacto" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="codigoFacility" Type="Int32" />
+          <Property Name="tipoSeguro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tipoInicio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="area" Type="Int32" />
+          <Property Name="item2" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="cotizante" Type="Int32" />
+          <Property Name="nacionalidad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fechaFinContrato" Type="DateTime" Precision="3" />
+          <Property Name="tipoGrupo" Type="Int32" />
+          <Property Name="tipoGrupoRetroactivo" Type="Int32" />
+          <Property Name="tipoAasignacion" Type="Int32" />
+          <Property Name="excepciones" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="ListaCargo" Relationship="AldeasInfantilesModel.FK_Personal_ListaCargo" FromRole="Personal" ToRole="ListaCargo" />
+          <NavigationProperty Name="BajaPersonals" Relationship="AldeasInfantilesModel.FK_BajaPersonal_Personal" FromRole="Personal" ToRole="BajaPersonal" />
+        </EntityType>
+        <Association Name="FK_Personal_ListaCargo">
+          <End Type="AldeasInfantilesModel.ListaCargo" Role="ListaCargo" Multiplicity="0..1" />
+          <End Type="AldeasInfantilesModel.Personal" Role="Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ListaCargo">
+              <PropertyRef Name="codigoCargo" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="codigoCargoActual" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BajaPersonal">
+          <Key>
+            <PropertyRef Name="codigoBaja" />
+          </Key>
+          <Property Name="codigoBaja" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="item" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="numeroDocumento" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="itemAutorizado" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="fechaIngreso" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fechaRetiro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="codigoMotivoRetiro" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="ultimaRemuneracion" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="promedioUltimosTresSueldos" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="bajaPlanillas" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="transferencia" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="certificadoTrabajo" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="beneficiosSociales" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="saldoVacaciones" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="observaciones" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fechaSistema" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Personal" Relationship="AldeasInfantilesModel.FK_BajaPersonal_Personal" FromRole="BajaPersonal" ToRole="Personal" />
+        </EntityType>
+        <Association Name="FK_BajaPersonal_Personal">
+          <End Type="AldeasInfantilesModel.Personal" Role="Personal" Multiplicity="1" />
+          <End Type="AldeasInfantilesModel.BajaPersonal" Role="BajaPersonal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personal">
+              <PropertyRef Name="item" />
+            </Principal>
+            <Dependent Role="BajaPersonal">
+              <PropertyRef Name="item" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoRetiro">
+          <Key>
+            <PropertyRef Name="codigoTiporetiro" />
+          </Key>
+          <Property Name="codigoTiporetiro" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AldeasInfantilesModelStoreContainer" CdmEntityContainer="AldeasInfantilesDBEntities" >
+          <EntitySetMapping Name="ListaAreas">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaArea">
+              <MappingFragment StoreEntitySet="ListaArea">
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaCiudades">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaCiudad">
+              <MappingFragment StoreEntitySet="ListaCiudades">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="codCiudad" ColumnName="codCiudad" />
+                <ScalarProperty Name="codDepartamento" ColumnName="codDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaFacilities">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaFacility">
+              <MappingFragment StoreEntitySet="ListaFacility">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="proyecto" ColumnName="proyecto" />
+                <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+                <ScalarProperty Name="codigoFacility" ColumnName="codigoFacility" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaFilials">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaFilial">
+              <MappingFragment StoreEntitySet="ListaFilial">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoFilial" ColumnName="codigoFilial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaProgramas">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaPrograma">
+              <MappingFragment StoreEntitySet="ListaProgramas">
+                <ScalarProperty Name="idFacility" ColumnName="idFacility" />
+                <ScalarProperty Name="codigoFilial" ColumnName="codigoFilial" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="codigoTipoPrograma" ColumnName="codigoTipoPrograma" />
+                <ScalarProperty Name="codigoPrograma" ColumnName="codigoPrograma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaSeccions">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaSeccion">
+              <MappingFragment StoreEntitySet="ListaSeccion">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoSeccion" ColumnName="codigoSeccion" />
+                <ScalarProperty Name="codigoPrograma" ColumnName="codigoPrograma" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoDocumentoes">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.TipoDocumento">
+              <MappingFragment StoreEntitySet="TipoDocumento">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="abreviacion" ColumnName="abreviacion" />
+                <ScalarProperty Name="codigoTipoDocumento" ColumnName="codigoTipoDocumento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaProfesions">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaProfesion">
+              <MappingFragment StoreEntitySet="ListaProfesion">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoProfesion" ColumnName="codigoProfesion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEstadoCivils">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.TipoEstadoCivil">
+              <MappingFragment StoreEntitySet="TipoEstadoCivil">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="codigoEstadoCivil" ColumnName="codigoEstadoCivil" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaDepartamentoes">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaDepartamento">
+              <MappingFragment StoreEntitySet="ListaDepartamento">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoDepartamento" ColumnName="codigoDepartamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoEstudios">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.TipoEstudio">
+              <MappingFragment StoreEntitySet="TipoEstudio">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoEstudio" ColumnName="codigoEstudio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaCargoes">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaCargo">
+              <MappingFragment StoreEntitySet="ListaCargo">
+                <ScalarProperty Name="salarioMaximo" ColumnName="salarioMaximo" />
+                <ScalarProperty Name="salarioMinimo" ColumnName="salarioMinimo" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="idfkArea" ColumnName="idfkArea" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoCargo" ColumnName="codigoCargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seguros">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.Seguro">
+              <MappingFragment StoreEntitySet="Seguros">
+                <ScalarProperty Name="nombreSeguro" ColumnName="nombreSeguro" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoAFPs">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.TipoAFP">
+              <MappingFragment StoreEntitySet="TipoAFP">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoAFP" ColumnName="codigoAFP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoInicios">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.TipoInicio">
+              <MappingFragment StoreEntitySet="TipoInicio">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="CodigotipoInicio" ColumnName="CodigotipoInicio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoContratacions">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.TipoContratacion">
+              <MappingFragment StoreEntitySet="TipoContratacion">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoTipoContratacion" ColumnName="codigoTipoContratacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaEscalaSalarials">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaEscalaSalarial">
+              <MappingFragment StoreEntitySet="ListaEscalaSalarial">
+                <ScalarProperty Name="haberBasico" ColumnName="haberBasico" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoEscalaSalarial" ColumnName="codigoEscalaSalarial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListaAFPs">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.ListaAFP">
+              <MappingFragment StoreEntitySet="ListaAFP">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoAfp" ColumnName="codigoAfp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personal">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.Personal">
+              <MappingFragment StoreEntitySet="Personal">
+                <ScalarProperty Name="excepciones" ColumnName="excepciones" />
+                <ScalarProperty Name="tipoAasignacion" ColumnName="tipoAasignacion" />
+                <ScalarProperty Name="tipoGrupoRetroactivo" ColumnName="tipoGrupoRetroactivo" />
+                <ScalarProperty Name="tipoGrupo" ColumnName="tipoGrupo" />
+                <ScalarProperty Name="fechaFinContrato" ColumnName="fechaFinContrato" />
+                <ScalarProperty Name="nacionalidad" ColumnName="nacionalidad" />
+                <ScalarProperty Name="cotizante" ColumnName="cotizante" />
+                <ScalarProperty Name="item2" ColumnName="item2" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="tipoInicio" ColumnName="tipoInicio" />
+                <ScalarProperty Name="tipoSeguro" ColumnName="tipoSeguro" />
+                <ScalarProperty Name="codigoFacility" ColumnName="codigoFacility" />
+                <ScalarProperty Name="telefonoContacto" ColumnName="telefonoContacto" />
+                <ScalarProperty Name="zona" ColumnName="zona" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="fechaSistema" ColumnName="fechaSistema" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="estadoADM" ColumnName="estadoADM" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fechaRetiro" ColumnName="fechaRetiro" />
+                <ScalarProperty Name="nua" ColumnName="nua" />
+                <ScalarProperty Name="codigoAFP" ColumnName="codigoAFP" />
+                <ScalarProperty Name="funcion3" ColumnName="funcion3" />
+                <ScalarProperty Name="funcion2" ColumnName="funcion2" />
+                <ScalarProperty Name="funcion1" ColumnName="funcion1" />
+                <ScalarProperty Name="propositoCargo" ColumnName="propositoCargo" />
+                <ScalarProperty Name="codigoEsEvaluado" ColumnName="codigoEsEvaluado" />
+                <ScalarProperty Name="tieneSubAlternos" ColumnName="tieneSubAlternos" />
+                <ScalarProperty Name="codigoRecibeInstruccion" ColumnName="codigoRecibeInstruccion" />
+                <ScalarProperty Name="numeroSeguro" ColumnName="numeroSeguro" />
+                <ScalarProperty Name="numeroCuenta" ColumnName="numeroCuenta" />
+                <ScalarProperty Name="tiempoCompleto" ColumnName="tiempoCompleto" />
+                <ScalarProperty Name="contratoIndefinido" ColumnName="contratoIndefinido" />
+                <ScalarProperty Name="salario" ColumnName="salario" />
+                <ScalarProperty Name="codigoEscalaSalarial" ColumnName="codigoEscalaSalarial" />
+                <ScalarProperty Name="cargo_act" ColumnName="cargo_act" />
+                <ScalarProperty Name="codigoCargoActual" ColumnName="codigoCargoActual" />
+                <ScalarProperty Name="codigoSeccion" ColumnName="codigoSeccion" />
+                <ScalarProperty Name="codigoTipoContratacion" ColumnName="codigoTipoContratacion" />
+                <ScalarProperty Name="fechaInicioCargo" ColumnName="fechaInicioCargo" />
+                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
+                <ScalarProperty Name="filial" ColumnName="filial" />
+                <ScalarProperty Name="codigoPrograma" ColumnName="codigoPrograma" />
+                <ScalarProperty Name="codigoFilial" ColumnName="codigoFilial" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="usuario_correo" ColumnName="usuario_correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="codigoDepartamento" ColumnName="codigoDepartamento" />
+                <ScalarProperty Name="numeroDocumento" ColumnName="numeroDocumento" />
+                <ScalarProperty Name="codigoTipoDocumento" ColumnName="codigoTipoDocumento" />
+                <ScalarProperty Name="codigoProfesion" ColumnName="codigoProfesion" />
+                <ScalarProperty Name="codigoEstudio" ColumnName="codigoEstudio" />
+                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidoCasada" ColumnName="apellidoCasada" />
+                <ScalarProperty Name="apellidoMaterno" ColumnName="apellidoMaterno" />
+                <ScalarProperty Name="apellidoPaterno" ColumnName="apellidoPaterno" />
+                <ScalarProperty Name="item" ColumnName="item" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BajaPersonals">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.BajaPersonal">
+              <MappingFragment StoreEntitySet="BajaPersonal">
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="fechaSistema" ColumnName="fechaSistema" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="saldoVacaciones" ColumnName="saldoVacaciones" />
+                <ScalarProperty Name="beneficiosSociales" ColumnName="beneficiosSociales" />
+                <ScalarProperty Name="certificadoTrabajo" ColumnName="certificadoTrabajo" />
+                <ScalarProperty Name="transferencia" ColumnName="transferencia" />
+                <ScalarProperty Name="bajaPlanillas" ColumnName="bajaPlanillas" />
+                <ScalarProperty Name="promedioUltimosTresSueldos" ColumnName="promedioUltimosTresSueldos" />
+                <ScalarProperty Name="ultimaRemuneracion" ColumnName="ultimaRemuneracion" />
+                <ScalarProperty Name="codigoMotivoRetiro" ColumnName="codigoMotivoRetiro" />
+                <ScalarProperty Name="fechaRetiro" ColumnName="fechaRetiro" />
+                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
+                <ScalarProperty Name="itemAutorizado" ColumnName="itemAutorizado" />
+                <ScalarProperty Name="numeroDocumento" ColumnName="numeroDocumento" />
+                <ScalarProperty Name="item" ColumnName="item" />
+                <ScalarProperty Name="codigoBaja" ColumnName="codigoBaja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoRetiroes">
+            <EntityTypeMapping TypeName="AldeasInfantilesModel.TipoRetiro">
+              <MappingFragment StoreEntitySet="TipoRetiro">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigoTiporetiro" ColumnName="codigoTiporetiro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

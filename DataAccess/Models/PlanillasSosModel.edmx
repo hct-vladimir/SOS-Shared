@@ -1,0 +1,2435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PlanillasSosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ESTADOS_PLANILLAS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PARAMETROS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_PARAMETRO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DES_PARAMETRO" Type="varchar" MaxLength="300" />
+          <Property Name="COD_PARAM1" Type="varchar" MaxLength="50" />
+          <Property Name="DES_PARAM1" Type="varchar" MaxLength="300" />
+          <Property Name="COD_PARAM2" Type="varchar" MaxLength="50" />
+          <Property Name="DES_PARAM2" Type="varchar" MaxLength="300" />
+          <Property Name="COD_PARAM3" Type="varchar" MaxLength="50" />
+          <Property Name="DES_PARAM3" Type="varchar" MaxLength="300" />
+          <Property Name="COD_PARAM4" Type="varchar" MaxLength="50" />
+          <Property Name="DES_PARAM4" Type="varchar" MaxLength="300" />
+          <Property Name="COD_PARAM5" Type="varchar" MaxLength="50" />
+          <Property Name="DES_PARAM5" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="PARAMETROS_PLANILLAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="50" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="300" />
+          <Property Name="VALOR" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PERIODOS_PLANILLAS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gestion" Type="smallint" Nullable="false" />
+          <Property Name="Mes" Type="smallint" Nullable="false" />
+          <Property Name="EstadoPlanillaId" Type="smallint" Nullable="false" />
+          <Property Name="EsRetroactivo" Type="bit" Nullable="false" />
+          <Property Name="RetroactivoId" Type="int" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PLANILLA_RCIVA">
+          <Key>
+            <PropertyRef Name="GESTION" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="ITEM" />
+          </Key>
+          <Property Name="GESTION" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="MES" Type="int" Nullable="false" />
+          <Property Name="ITEM" Type="int" Nullable="false" />
+          <Property Name="CAL_SUELDO_NETO" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_MIN_NO_IMPONIBLE" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SUJETO_IMP" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMPUESTO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="MOD_COMPUTO_IVA" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_POR_NRO_SMN" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SALDO_FISCO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_A_FAVOR_DEP" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_MES_ANT" Type="decimal" Precision="21" Scale="2" Nullable="false" />
+          <Property Name="CAL_ACT_MES_ANT" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_VALOR_ACT" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_TOTAL_DEP" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_UTILIZADO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMP_RETENIDO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_FAVOR_PROX_MES" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="TOTAL_GANADO" Type="decimal" Precision="21" Scale="2" Nullable="false" />
+          <Property Name="MOD_OTR_INGRESOS" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="MES_CIERRE" Type="varchar" MaxLength="6" />
+          <Property Name="FEC_CIERRE" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PLANILLA_SUELDOS">
+          <Key>
+            <PropertyRef Name="GESTION" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="ITEM" />
+          </Key>
+          <Property Name="GESTION" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="MES" Type="int" Nullable="false" />
+          <Property Name="ITEM" Type="int" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="date" />
+          <Property Name="DIAS_PAG" Type="int" />
+          <Property Name="HABER_BASICO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BASICO_GANADO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CAL_BONO_ANTIGUEDAD" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="MOD_RC_IVA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MOD_RC_IVA_2" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MOD_COMISION" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MOD_AMIGOSOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MOD_PRESTAMOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MOD_OTRS_DESCUENTOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MOD_OTROS_INGRESOS" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MOD_MONTO_NETO" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MOD_ASIGSOS" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="CAL_TOTAL_GANADO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_APONALSOL" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_AFP" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APO_SOL_ASEG" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_TOTAL_DESCUENTO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_LIQ_PAGABLE" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="FEC_CIERRE" Type="datetime" />
+          <Property Name="MES_CIERRE" Type="varchar" MaxLength="6" />
+          <Property Name="CAL_ANTIGUEDAD_REAL" Type="decimal" Precision="18" Scale="6" />
+          <Property Name="COTIZANTE" Type="int" />
+          <Property Name="FECHA_NACIMIENTO" Type="datetime" />
+          <Property Name="CAL_APONACSOL_1" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_APONACSOL_2" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_APONACSOL_3" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMPUESTO_RETENIDO" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="ESTADO" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="SALARIO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="EDAD" Type="int" />
+        </EntityType>
+        <EntityType Name="PORCENTAJE_APORTE_NACIONAL_SOL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INTERVALO_INICIAL" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="INTERVALO_FINAL" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="PORCENTAJE" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="TIPO" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PORCENTAJE_BONO_ANTIGUEDAD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ANIOS_INICIAL" Type="int" Nullable="false" />
+          <Property Name="ANIOS_FINAL" Type="int" Nullable="false" />
+          <Property Name="PORCENTAJE" Type="decimal" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REGISTRO_UFVS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UFV_ACTUAL" Type="decimal" Precision="17" Scale="7" Nullable="false" />
+          <Property Name="UFV_ANTERIOR" Type="decimal" Precision="17" Scale="7" Nullable="false" />
+          <Property Name="FECHA_UFV" Type="nvarchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RETROACTIVOS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gestion" Type="smallint" Nullable="false" />
+          <Property Name="Mes" Type="smallint" Nullable="false" />
+          <Property Name="EstadoPlanillaId" Type="smallint" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="UsuarioModificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SALARIOS_MINIMOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SALARIO_MINIMO" Type="decimal" Precision="17" Scale="7" Nullable="false" />
+          <Property Name="FECHA_SALARIO_MINIMO" Type="nvarchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PlanillasSOS.SisPer.VPERSONAL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VPERSONAL">
+          <Key>
+            <PropertyRef Name="item" />
+            <PropertyRef Name="nombres" />
+            <PropertyRef Name="numeroDocumento" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="fechaSistema" />
+            <PropertyRef Name="login" />
+            <PropertyRef Name="PROF_PROFESION" />
+            <PropertyRef Name="TCON_CONTRATO" />
+            <PropertyRef Name="AREA_AREA" />
+            <PropertyRef Name="DEP_DEPARTAMENTO" />
+            <PropertyRef Name="FIL_FILIAL" />
+            <PropertyRef Name="PROG_PROGRAMA" />
+            <PropertyRef Name="PROG_COD_TIPO_PROG" />
+          </Key>
+          <Property Name="item" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="apellidoPaterno" Type="nvarchar" MaxLength="25" />
+          <Property Name="apellidoMaterno" Type="nvarchar" MaxLength="25" />
+          <Property Name="apellidoCasada" Type="nvarchar" MaxLength="25" />
+          <Property Name="nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechaNacimiento" Type="datetime" />
+          <Property Name="sexo" Type="char" MaxLength="1" />
+          <Property Name="estadoCivil" Type="char" MaxLength="1" />
+          <Property Name="numeroDocumento" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="70" />
+          <Property Name="telefono" Type="nvarchar" MaxLength="70" />
+          <Property Name="usuario_correo" Type="nvarchar" MaxLength="50" />
+          <Property Name="correo" Type="nvarchar" MaxLength="50" />
+          <Property Name="filial" Type="nchar" MaxLength="10" />
+          <Property Name="fechaIngreso" Type="datetime" />
+          <Property Name="fechaInicioCargo" Type="datetime" />
+          <Property Name="cargo_act" Type="nvarchar" MaxLength="35" />
+          <Property Name="salario" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="contratoIndefinido" Type="nvarchar" MaxLength="2" />
+          <Property Name="tiempoCompleto" Type="nvarchar" MaxLength="2" />
+          <Property Name="numeroCuenta" Type="nvarchar" MaxLength="4000" />
+          <Property Name="numeroSeguro" Type="nvarchar" MaxLength="14" />
+          <Property Name="tieneSubAlternos" Type="nvarchar" MaxLength="100" />
+          <Property Name="propositoCargo" Type="nvarchar" MaxLength="200" />
+          <Property Name="funcion1" Type="nvarchar" MaxLength="200" />
+          <Property Name="funcion2" Type="nvarchar" MaxLength="200" />
+          <Property Name="funcion3" Type="nvarchar" MaxLength="200" />
+          <Property Name="nua" Type="nvarchar" MaxLength="15" />
+          <Property Name="fechaRetiro" Type="datetime" />
+          <Property Name="estado" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="estadoADM" Type="char" MaxLength="1" />
+          <Property Name="observaciones" Type="nvarchar" MaxLength="200" />
+          <Property Name="password" Type="nvarchar" MaxLength="100" />
+          <Property Name="fechaSistema" Type="datetime" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="zona" Type="nvarchar" MaxLength="100" />
+          <Property Name="telefonoContacto" Type="nvarchar" MaxLength="70" />
+          <Property Name="tipoSeguro" Type="varchar" MaxLength="20" />
+          <Property Name="tipoInicio" Type="varchar" MaxLength="20" />
+          <Property Name="area" Type="int" />
+          <Property Name="item2" Type="nvarchar" MaxLength="8" />
+          <Property Name="cotizante" Type="int" />
+          <Property Name="nacionalidad" Type="nvarchar" MaxLength="20" />
+          <Property Name="fechaFinContrato" Type="datetime" />
+          <Property Name="tipoGrupo" Type="int" />
+          <Property Name="tipoGrupoRetroactivo" Type="int" />
+          <Property Name="tipoAasignacion" Type="int" />
+          <Property Name="excepciones" Type="char" MaxLength="1" />
+          <Property Name="codigoEsEvaluado" Type="nvarchar" MaxLength="8" />
+          <Property Name="codigoRecibeInstruccion" Type="nvarchar" MaxLength="8" />
+          <Property Name="codigoEstudio" Type="nvarchar" MaxLength="6" />
+          <Property Name="TEST_ESTUDIO" Type="nvarchar" MaxLength="50" />
+          <Property Name="codigoProfesion" Type="nvarchar" MaxLength="6" />
+          <Property Name="PROF_PROFESION" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="codigoTipoDocumento" Type="nvarchar" MaxLength="2" />
+          <Property Name="TDOC_TIPO_DOCUMENTO" Type="nvarchar" MaxLength="20" />
+          <Property Name="TDOC_ABV_TIPO_DOCUMENTO" Type="nvarchar" MaxLength="3" />
+          <Property Name="codigoFacility" Type="int" />
+          <Property Name="FACI_CODIGO" Type="nvarchar" MaxLength="20" />
+          <Property Name="FACI_NOMBRE" Type="nvarchar" MaxLength="100" />
+          <Property Name="FACI_PROYECTO" Type="nvarchar" MaxLength="70" />
+          <Property Name="FACI_CIUDAD" Type="nvarchar" MaxLength="30" />
+          <Property Name="codigoTipoContratacion" Type="nvarchar" MaxLength="6" />
+          <Property Name="TCON_CONTRATO" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="codigoSeccion" Type="nvarchar" MaxLength="6" />
+          <Property Name="SECC_SECCION" Type="nvarchar" MaxLength="70" />
+          <Property Name="codigoCargoActual" Type="nvarchar" MaxLength="6" />
+          <Property Name="CARG_CARGO" Type="nvarchar" MaxLength="100" />
+          <Property Name="CARG_ESTADO" Type="nvarchar" MaxLength="1" />
+          <Property Name="CARG_SAL_MAX" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CARG_SAL_MIN" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CARG_COD_AREA" Type="int" />
+          <Property Name="AREA_AREA" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="codigoEscalaSalarial" Type="nvarchar" MaxLength="10" />
+          <Property Name="ESCSAL_ESCALA_SAL" Type="nvarchar" MaxLength="10" />
+          <Property Name="ESCSAL_HABER_BAS" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="codigoDepartamento" Type="nvarchar" MaxLength="3" />
+          <Property Name="DEP_DEPARTAMENTO" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="codigoFilial" Type="nvarchar" MaxLength="3" />
+          <Property Name="FIL_FILIAL" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="codigoPrograma" Type="nvarchar" MaxLength="3" />
+          <Property Name="PROG_PROGRAMA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PROG_COD_TIPO_PROG" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="TPROG_TIPO_PROGRAMA" Type="nvarchar" MaxLength="50" />
+          <Property Name="codigoAFP" Type="nvarchar" MaxLength="3" />
+          <Property Name="AFP_AFP" Type="nvarchar" MaxLength="30" />
+          <Property Name="SEG_TIPO_SEGURO" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PlanillasSOS.SisPer.VPLANILLA_AFP_FUTURO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VPLANILLA_AFP_FUTURO">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="CI" />
+            <PropertyRef Name="EXT" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="NOVEDAD" />
+            <PropertyRef Name="NOMBRES" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="PROGRAMA" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+          </Key>
+          <Property Name="ITEM" Type="int" Nullable="false" />
+          <Property Name="CI" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EXT" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CARGO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIAS_TRAB" Type="int" />
+          <Property Name="FECHA_INGRESO" Type="varchar" MaxLength="10" />
+          <Property Name="TOTAL_GANADO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="NOVEDAD" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="FECHANOVEDAD" Type="varchar" MaxLength="10" />
+          <Property Name="AFP_12_21" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AFP_SOL_5" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="APO_SOL_1" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="APO_SOL_5" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="APO_SOL_10" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="APO_PAT" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="APO_PRO_VIV" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="APO_PAT_SOL" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="APELLIDO_PATERNO" Type="nvarchar" MaxLength="25" />
+          <Property Name="APELLIDO_MATERNO" Type="nvarchar" MaxLength="25" />
+          <Property Name="APELLIDO_CASADA" Type="nvarchar" MaxLength="25" />
+          <Property Name="NOMBRES" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NUA" Type="nvarchar" MaxLength="15" />
+          <Property Name="FILIAL" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="TIPO_DOC" Type="nvarchar" MaxLength="3" />
+          <Property Name="PROGRAMA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MES_CIERRE" Type="varchar" MaxLength="6" />
+          <Property Name="MES" Type="int" Nullable="false" />
+          <Property Name="GESTION" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PlanillasSOS.SisPer.VPLANILLA_AFP_PREVISION' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VPLANILLA_AFP_PREVISION">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="CI" />
+            <PropertyRef Name="EXT" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="NOVEDAD" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+          </Key>
+          <Property Name="ITEM" Type="int" Nullable="false" />
+          <Property Name="CI" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EXT" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CARGO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DIAS_TRAB" Type="int" />
+          <Property Name="FECHA_INGRESO" Type="date" />
+          <Property Name="TOTAL_GANADO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="NOVEDAD" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="FECHANOVEDAD" Type="varchar" MaxLength="10" />
+          <Property Name="AFP_12_21" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AFP_SOL_5" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="APO_SOL_1" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="APO_SOL_5" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="APO_SOL_10" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="APO_PAT" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="APO_PRO_VIV" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="APO_PAT_SOL" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="APELLIDO_PATENRO" Type="nvarchar" MaxLength="25" />
+          <Property Name="APELLIDO_MATERNO" Type="nvarchar" MaxLength="25" />
+          <Property Name="APELLIDO_CASADA" Type="nvarchar" MaxLength="25" />
+          <Property Name="NOMBRES" Type="nvarchar" MaxLength="50" />
+          <Property Name="NUA" Type="nvarchar" MaxLength="15" />
+          <Property Name="FILIAL" Type="nvarchar" MaxLength="15" />
+          <Property Name="TIPO_DOC" Type="nvarchar" MaxLength="3" />
+          <Property Name="PROG_PROGRAMA" Type="nvarchar" MaxLength="50" />
+          <Property Name="MES_CIERRE" Type="varchar" MaxLength="6" />
+          <Property Name="MES" Type="int" Nullable="false" />
+          <Property Name="GESTION" Type="varchar" MaxLength="4" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PlanillasSOS.SisPer.VPLANILLA_APORTES_SALUD' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VPLANILLA_APORTES_SALUD">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="COD_ESCALA_SAL" />
+            <PropertyRef Name="PROGRAMA" />
+            <PropertyRef Name="NUMERO_DOC" />
+            <PropertyRef Name="EXT" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="HORA_PAG" />
+            <PropertyRef Name="ASIGNACION_SOS" />
+            <PropertyRef Name="HORAS_EXTRAS" />
+            <PropertyRef Name="OTROS_BONOS" />
+            <PropertyRef Name="AMIGO_SOS" />
+            <PropertyRef Name="NOMBRES" />
+            <PropertyRef Name="COMISION" />
+            <PropertyRef Name="OTROS_DESCUENTOS" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+          </Key>
+          <Property Name="ITEM" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="COD_ESCALA_SAL" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="PROGRAMA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NUMERO_DOC" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EXT" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FECHA_NAC" Type="varchar" MaxLength="10" />
+          <Property Name="SEXO" Type="char" MaxLength="1" />
+          <Property Name="CARGO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="varchar" MaxLength="10" />
+          <Property Name="DIAS_TRAB" Type="int" />
+          <Property Name="HORA_PAG" Type="int" Nullable="false" />
+          <Property Name="SUELDO_BASICO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BASICO_GANADO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BONO_ANTIGUEDAD" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="ASIGNACION_SOS" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="HORAS_EXTRAS" Type="int" Nullable="false" />
+          <Property Name="MONTO_PAGADO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BONO_PRODUCCION" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="OTROS_BONOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NRO_DIAS_DOMINICALES" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MONTO_DOMINICALES" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="TOTAL_GANADO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="AFP" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="AFP_1221" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AFP_050" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SOLIDARIO" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="RC_IVA" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="DESCUENTOS" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="AMIGO_SOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TOTAL_DESCUENTO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="LIQUIDO_PAGABLE" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="numeroCuenta" Type="nvarchar" MaxLength="4000" />
+          <Property Name="APELLIDO_PATERNO" Type="nvarchar" MaxLength="25" />
+          <Property Name="APELLIDO_MATERNO" Type="nvarchar" MaxLength="25" />
+          <Property Name="APELLIDO_CASADA" Type="nvarchar" MaxLength="25" />
+          <Property Name="NOMBRES" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="COMISION" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="OTROS_DESCUENTOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FILIAL" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="COD_TIPO_SEGURO" Type="varchar" MaxLength="20" />
+          <Property Name="TIPO_SEGURO" Type="nvarchar" MaxLength="50" />
+          <Property Name="TOTAL_APORTE" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CARGA_HORARIA" Type="int" />
+          <Property Name="NUMERO_CUENTA" Type="nvarchar" MaxLength="4000" />
+          <Property Name="MES" Type="int" Nullable="false" />
+          <Property Name="GESTION" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="MES_CIERRE" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PlanillasSOS.SisPer.VPLANILLA_MINISTERIO' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VPLANILLA_MINISTERIO">
+          <Key>
+            <PropertyRef Name="NUMERO_DOC" />
+            <PropertyRef Name="EXPEDIDO" />
+            <PropertyRef Name="FECHA_NACIMIENTO" />
+            <PropertyRef Name="SEXO" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="FECHA_RETIRO" />
+            <PropertyRef Name="ASIG_SOS" />
+            <PropertyRef Name="NUMERO" />
+            <PropertyRef Name="MONTO_PAGADO" />
+            <PropertyRef Name="BONO_PRODUCCION" />
+            <PropertyRef Name="OTROS_BONOS" />
+            <PropertyRef Name="NUMERO_DOMINICAL" />
+            <PropertyRef Name="DOMINICAL" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+          </Key>
+          <Property Name="NUMERO_DOC" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EXPEDIDO" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="AFP_APORTA" Type="nvarchar" MaxLength="30" />
+          <Property Name="NUA" Type="nvarchar" MaxLength="15" />
+          <Property Name="APELLIDO_PATERNO" Type="nvarchar" MaxLength="25" />
+          <Property Name="APELLIDO_MATERNO" Type="nvarchar" MaxLength="25" />
+          <Property Name="APELLIDO_CASADA" Type="nvarchar" MaxLength="25" />
+          <Property Name="NOMBRES" Type="nvarchar" MaxLength="50" />
+          <Property Name="NACIONALIDAD" Type="nvarchar" MaxLength="20" />
+          <Property Name="FECHA_NACIMIENTO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="SEXO" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CARGO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="varchar" MaxLength="10" />
+          <Property Name="TIPO_CONTRATO" Type="nvarchar" MaxLength="25" />
+          <Property Name="FECHA_RETIRO" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DIAS_TRAB" Type="int" />
+          <Property Name="CARGA_HORARIA" Type="int" />
+          <Property Name="HABER_BASICO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BONO_ANTIGUEDAD" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="ASIG_SOS" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="NUMERO" Type="int" Nullable="false" />
+          <Property Name="MONTO_PAGADO" Type="int" Nullable="false" />
+          <Property Name="BONO_PRODUCCION" Type="int" Nullable="false" />
+          <Property Name="OTROS_BONOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="NUMERO_DOMINICAL" Type="int" Nullable="false" />
+          <Property Name="DOMINICAL" Type="int" Nullable="false" />
+          <Property Name="TOTAL_GANADO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="AFP" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="RC_IVA" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="OTROS_DESCUENTOS" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="TOTAL_DESCUENTO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="LIQ_PAGABLE" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="FILIAL" Type="nvarchar" MaxLength="15" />
+          <Property Name="PROGRAMA" Type="nvarchar" MaxLength="50" />
+          <Property Name="SECCION" Type="nvarchar" MaxLength="6" />
+          <Property Name="ESCALA_SALARIAL" Type="nvarchar" MaxLength="10" />
+          <Property Name="MES" Type="int" Nullable="false" />
+          <Property Name="GESTION" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="MES_CIERRE" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PlanillasSOS.SisPer.VPLANILLA_RCIVA' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VPLANILLA_RCIVA">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CAL_SLD_MES_ANT" />
+            <PropertyRef Name="TOTAL_GANADO" />
+            <PropertyRef Name="CI" />
+            <PropertyRef Name="EXTENDIDO" />
+            <PropertyRef Name="NROCUENTA" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="PROGRAMA" />
+            <PropertyRef Name="SECCION" />
+          </Key>
+          <Property Name="ITEM" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CAL_SUELDO_NETO" Type="decimal" Precision="22" Scale="2" />
+          <Property Name="MOD_OTR_INGRESOS" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SUELDO_TOTAL_NETO" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_MIN_NO_IMPONIBLE" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SUJETO_IMP" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMPUESTO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="MOD_COMPUTO_IVA" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_POR_NRO_SMN" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SALDO_FISCO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_A_FAVOR_DEP" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_MES_ANT" Type="decimal" Precision="21" Scale="2" Nullable="false" />
+          <Property Name="CAL_ACT_MES_ANT" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_VALOR_ACT" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_TOTAL_DEP" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_UTILIZADO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMP_RETENIDO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_FAVOR_PROX_MES" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="TOTAL_GANADO" Type="decimal" Precision="21" Scale="2" Nullable="false" />
+          <Property Name="CI" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EXTENDIDO" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="NROCUENTA" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="FILIAL" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="PROGRAMA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SECCION" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="MES_CIERRE" Type="varchar" MaxLength="6" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PlanillasSOS.SisPer.VPLANILLA_SUELDOS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VPLANILLA_SUELDOS">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="MOD_ASIGSOS" />
+            <PropertyRef Name="MOD_COMISION" />
+            <PropertyRef Name="MOD_PRESTAMOS" />
+            <PropertyRef Name="MOD_OTRS_DESCUENTOS" />
+            <PropertyRef Name="MOD_AMIGOSOS" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="PROGRAMA" />
+            <PropertyRef Name="NUMERO_DOC" />
+            <PropertyRef Name="EXPEDIDO" />
+            <PropertyRef Name="COD_ESCALA_SAL" />
+            <PropertyRef Name="NUMERO_CUENTA" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+          </Key>
+          <Property Name="ITEM" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CARGO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="date" />
+          <Property Name="DIAS_PAG" Type="int" />
+          <Property Name="HABER_BASICO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BASICO_GANADO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CAL_BONO_ANTIGUEDAD" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="MOD_ASIGSOS" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="MOD_COMISION" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CAL_TOTAL_GANADO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="MOD_RC_IVA" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="RC_IVA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CAL_AFP" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APO_SOL_ASEG" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APONALSOL" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MOD_PRESTAMOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MOD_OTRS_DESCUENTOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MOD_OTROS_INGRESOS" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="MOD_AMIGOSOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CAL_TOTAL_DESCUENTO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_LIQ_PAGABLE" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="FILIAL" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PROGRAMA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NUMERO_DOC" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EXPEDIDO" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="COD_ESCALA_SAL" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="NUMERO_CUENTA" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="MES" Type="int" Nullable="false" />
+          <Property Name="GESTION" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="FACI_CODIGO" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PlanillasSOS.SisPer.VPLANILLA_SUELDOS_GENERAL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VPLANILLA_SUELDOS_GENERAL">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="FECHA_NACIMIENTO" />
+            <PropertyRef Name="SEXO" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="NUMERO_DOC" />
+            <PropertyRef Name="EXPEDIDO" />
+            <PropertyRef Name="NUMERO_CUENTA" />
+            <PropertyRef Name="COD_FILIAL" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="PROGRAMA" />
+            <PropertyRef Name="COD_SECCION" />
+            <PropertyRef Name="SECCION" />
+            <PropertyRef Name="MOD_COMISION" />
+            <PropertyRef Name="MOD_AMIGOSOS" />
+            <PropertyRef Name="MOD_PRESTAMOS" />
+            <PropertyRef Name="MOD_OTRS_DESCUENTOS" />
+            <PropertyRef Name="COD_ESCALA_SAL" />
+            <PropertyRef Name="CODIGO_FACILITY" />
+            <PropertyRef Name="NOM_FACILITY" />
+            <PropertyRef Name="NOM_FACPROYECTO" />
+            <PropertyRef Name="AREA" />
+            <PropertyRef Name="ITEM_2" />
+            <PropertyRef Name="NACIONALIDAD" />
+            <PropertyRef Name="TIPO_SEGURO" />
+            <PropertyRef Name="TIPO_AFP" />
+          </Key>
+          <Property Name="ITEM" Type="int" Nullable="false" />
+          <Property Name="FECHA_NACIMIENTO" Type="date" Nullable="false" />
+          <Property Name="SEXO" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="MES" Type="int" Nullable="false" />
+          <Property Name="GESTION" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CARGO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NUMERO_DOC" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="EXPEDIDO" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="date" />
+          <Property Name="DIAS_PAG" Type="int" />
+          <Property Name="NUMERO_CUENTA" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="HABER_BASICO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BASICO_GANADO" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="COD_FILIAL" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="FILIAL" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="PROGRAMA" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="COD_SECCION" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="SECCION" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="CAL_BONO_ANTIGUEDAD" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="MOD_RC_IVA" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MOD_COMISION" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MOD_AMIGOSOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MOD_PRESTAMOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="MOD_OTRS_DESCUENTOS" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CAL_TOTAL_GANADO" Type="decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_APONALSOL" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_AFP" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APO_SOL_ASEG" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="COD_ESCALA_SAL" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CAL_IMPUESTO_RETENIDO" Type="decimal" Precision="12" Scale="2" />
+          <Property Name="CODIGO_FACILITY" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="NOM_FACILITY" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="NOM_FACPROYECTO" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="AREA" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="CAL_APONACSOL_3" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APONACSOL_2" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APONACSOL_1" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ITEM_2" Type="int" Nullable="false" />
+          <Property Name="NACIONALIDAD" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TIPO_SEGURO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="COTIZANTE" Type="varchar" MaxLength="9" />
+          <Property Name="TIPO_AFP" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PERIODOS_PLANILLAS_ESTADOS_PLANILLAS">
+          <End Role="ESTADOS_PLANILLAS" Type="Self.ESTADOS_PLANILLAS" Multiplicity="1" />
+          <End Role="PERIODOS_PLANILLAS" Type="Self.PERIODOS_PLANILLAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOS_PLANILLAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PERIODOS_PLANILLAS">
+              <PropertyRef Name="EstadoPlanillaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERIODOS_PLANILLAS_RETROACTIVOS">
+          <End Role="RETROACTIVOS" Type="Self.RETROACTIVOS" Multiplicity="0..1" />
+          <End Role="PERIODOS_PLANILLAS" Type="Self.PERIODOS_PLANILLAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RETROACTIVOS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PERIODOS_PLANILLAS">
+              <PropertyRef Name="RetroactivoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RETROACTIVOS_ESTADOS_PLANILLAS">
+          <End Role="ESTADOS_PLANILLAS" Type="Self.ESTADOS_PLANILLAS" Multiplicity="1" />
+          <End Role="RETROACTIVOS" Type="Self.RETROACTIVOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOS_PLANILLAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RETROACTIVOS">
+              <PropertyRef Name="EstadoPlanillaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GENERA_PLANILLA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SisPer">
+          <Parameter Name="TIPO_CIERRE" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GENERA_PLANILLA_RCIVA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SisPer">
+          <Parameter Name="TIPO_CIERRE" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="PlanillasSosModelStoreContainer">
+          <EntitySet Name="ESTADOS_PLANILLAS" EntityType="Self.ESTADOS_PLANILLAS" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="PARAMETROS" EntityType="Self.PARAMETROS" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="PARAMETROS_PLANILLAS" EntityType="Self.PARAMETROS_PLANILLAS" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="PERIODOS_PLANILLAS" EntityType="Self.PERIODOS_PLANILLAS" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="PLANILLA_RCIVA" EntityType="Self.PLANILLA_RCIVA" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="PLANILLA_SUELDOS" EntityType="Self.PLANILLA_SUELDOS" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="PORCENTAJE_APORTE_NACIONAL_SOL" EntityType="Self.PORCENTAJE_APORTE_NACIONAL_SOL" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="PORCENTAJE_BONO_ANTIGUEDAD" EntityType="Self.PORCENTAJE_BONO_ANTIGUEDAD" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="REGISTRO_UFVS" EntityType="Self.REGISTRO_UFVS" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="RETROACTIVOS" EntityType="Self.RETROACTIVOS" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="SALARIOS_MINIMOS" EntityType="Self.SALARIOS_MINIMOS" Schema="SisPer" store:Type="Tables" />
+          <EntitySet Name="VPERSONAL" EntityType="Self.VPERSONAL" store:Type="Views" store:Schema="SisPer">
+            <DefiningQuery>SELECT 
+    [VPERSONAL].[item] AS [item], 
+    [VPERSONAL].[apellidoPaterno] AS [apellidoPaterno], 
+    [VPERSONAL].[apellidoMaterno] AS [apellidoMaterno], 
+    [VPERSONAL].[apellidoCasada] AS [apellidoCasada], 
+    [VPERSONAL].[nombres] AS [nombres], 
+    [VPERSONAL].[fechaNacimiento] AS [fechaNacimiento], 
+    [VPERSONAL].[sexo] AS [sexo], 
+    [VPERSONAL].[estadoCivil] AS [estadoCivil], 
+    [VPERSONAL].[numeroDocumento] AS [numeroDocumento], 
+    [VPERSONAL].[direccion] AS [direccion], 
+    [VPERSONAL].[telefono] AS [telefono], 
+    [VPERSONAL].[usuario_correo] AS [usuario_correo], 
+    [VPERSONAL].[correo] AS [correo], 
+    [VPERSONAL].[filial] AS [filial], 
+    [VPERSONAL].[fechaIngreso] AS [fechaIngreso], 
+    [VPERSONAL].[fechaInicioCargo] AS [fechaInicioCargo], 
+    [VPERSONAL].[cargo_act] AS [cargo_act], 
+    [VPERSONAL].[salario] AS [salario], 
+    [VPERSONAL].[contratoIndefinido] AS [contratoIndefinido], 
+    [VPERSONAL].[tiempoCompleto] AS [tiempoCompleto], 
+    [VPERSONAL].[numeroCuenta] AS [numeroCuenta], 
+    [VPERSONAL].[numeroSeguro] AS [numeroSeguro], 
+    [VPERSONAL].[tieneSubAlternos] AS [tieneSubAlternos], 
+    [VPERSONAL].[propositoCargo] AS [propositoCargo], 
+    [VPERSONAL].[funcion1] AS [funcion1], 
+    [VPERSONAL].[funcion2] AS [funcion2], 
+    [VPERSONAL].[funcion3] AS [funcion3], 
+    [VPERSONAL].[nua] AS [nua], 
+    [VPERSONAL].[fechaRetiro] AS [fechaRetiro], 
+    [VPERSONAL].[estado] AS [estado], 
+    [VPERSONAL].[estadoADM] AS [estadoADM], 
+    [VPERSONAL].[observaciones] AS [observaciones], 
+    [VPERSONAL].[password] AS [password], 
+    [VPERSONAL].[fechaSistema] AS [fechaSistema], 
+    [VPERSONAL].[login] AS [login], 
+    [VPERSONAL].[zona] AS [zona], 
+    [VPERSONAL].[telefonoContacto] AS [telefonoContacto], 
+    [VPERSONAL].[tipoSeguro] AS [tipoSeguro], 
+    [VPERSONAL].[tipoInicio] AS [tipoInicio], 
+    [VPERSONAL].[area] AS [area], 
+    [VPERSONAL].[item2] AS [item2], 
+    [VPERSONAL].[cotizante] AS [cotizante], 
+    [VPERSONAL].[nacionalidad] AS [nacionalidad], 
+    [VPERSONAL].[fechaFinContrato] AS [fechaFinContrato], 
+    [VPERSONAL].[tipoGrupo] AS [tipoGrupo], 
+    [VPERSONAL].[tipoGrupoRetroactivo] AS [tipoGrupoRetroactivo], 
+    [VPERSONAL].[tipoAasignacion] AS [tipoAasignacion], 
+    [VPERSONAL].[excepciones] AS [excepciones], 
+    [VPERSONAL].[codigoEsEvaluado] AS [codigoEsEvaluado], 
+    [VPERSONAL].[codigoRecibeInstruccion] AS [codigoRecibeInstruccion], 
+    [VPERSONAL].[codigoEstudio] AS [codigoEstudio], 
+    [VPERSONAL].[TEST_ESTUDIO] AS [TEST_ESTUDIO], 
+    [VPERSONAL].[codigoProfesion] AS [codigoProfesion], 
+    [VPERSONAL].[PROF_PROFESION] AS [PROF_PROFESION], 
+    [VPERSONAL].[codigoTipoDocumento] AS [codigoTipoDocumento], 
+    [VPERSONAL].[TDOC_TIPO_DOCUMENTO] AS [TDOC_TIPO_DOCUMENTO], 
+    [VPERSONAL].[TDOC_ABV_TIPO_DOCUMENTO] AS [TDOC_ABV_TIPO_DOCUMENTO], 
+    [VPERSONAL].[codigoFacility] AS [codigoFacility], 
+    [VPERSONAL].[FACI_CODIGO] AS [FACI_CODIGO], 
+    [VPERSONAL].[FACI_NOMBRE] AS [FACI_NOMBRE], 
+    [VPERSONAL].[FACI_PROYECTO] AS [FACI_PROYECTO], 
+    [VPERSONAL].[FACI_CIUDAD] AS [FACI_CIUDAD], 
+    [VPERSONAL].[codigoTipoContratacion] AS [codigoTipoContratacion], 
+    [VPERSONAL].[TCON_CONTRATO] AS [TCON_CONTRATO], 
+    [VPERSONAL].[codigoSeccion] AS [codigoSeccion], 
+    [VPERSONAL].[SECC_SECCION] AS [SECC_SECCION], 
+    [VPERSONAL].[codigoCargoActual] AS [codigoCargoActual], 
+    [VPERSONAL].[CARG_CARGO] AS [CARG_CARGO], 
+    [VPERSONAL].[CARG_ESTADO] AS [CARG_ESTADO], 
+    [VPERSONAL].[CARG_SAL_MAX] AS [CARG_SAL_MAX], 
+    [VPERSONAL].[CARG_SAL_MIN] AS [CARG_SAL_MIN], 
+    [VPERSONAL].[CARG_COD_AREA] AS [CARG_COD_AREA], 
+    [VPERSONAL].[AREA_AREA] AS [AREA_AREA], 
+    [VPERSONAL].[codigoEscalaSalarial] AS [codigoEscalaSalarial], 
+    [VPERSONAL].[ESCSAL_ESCALA_SAL] AS [ESCSAL_ESCALA_SAL], 
+    [VPERSONAL].[ESCSAL_HABER_BAS] AS [ESCSAL_HABER_BAS], 
+    [VPERSONAL].[codigoDepartamento] AS [codigoDepartamento], 
+    [VPERSONAL].[DEP_DEPARTAMENTO] AS [DEP_DEPARTAMENTO], 
+    [VPERSONAL].[codigoFilial] AS [codigoFilial], 
+    [VPERSONAL].[FIL_FILIAL] AS [FIL_FILIAL], 
+    [VPERSONAL].[codigoPrograma] AS [codigoPrograma], 
+    [VPERSONAL].[PROG_PROGRAMA] AS [PROG_PROGRAMA], 
+    [VPERSONAL].[PROG_COD_TIPO_PROG] AS [PROG_COD_TIPO_PROG], 
+    [VPERSONAL].[TPROG_TIPO_PROGRAMA] AS [TPROG_TIPO_PROGRAMA], 
+    [VPERSONAL].[codigoAFP] AS [codigoAFP], 
+    [VPERSONAL].[AFP_AFP] AS [AFP_AFP], 
+    [VPERSONAL].[SEG_TIPO_SEGURO] AS [SEG_TIPO_SEGURO]
+    FROM [SisPer].[VPERSONAL] AS [VPERSONAL]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VPLANILLA_AFP_FUTURO" EntityType="Self.VPLANILLA_AFP_FUTURO" store:Type="Views" store:Schema="SisPer">
+            <DefiningQuery>SELECT 
+    [VPLANILLA_AFP_FUTURO].[ITEM] AS [ITEM], 
+    [VPLANILLA_AFP_FUTURO].[CI] AS [CI], 
+    [VPLANILLA_AFP_FUTURO].[EXT] AS [EXT], 
+    [VPLANILLA_AFP_FUTURO].[NOMBRE] AS [NOMBRE], 
+    [VPLANILLA_AFP_FUTURO].[CARGO] AS [CARGO], 
+    [VPLANILLA_AFP_FUTURO].[DIAS_TRAB] AS [DIAS_TRAB], 
+    [VPLANILLA_AFP_FUTURO].[FECHA_INGRESO] AS [FECHA_INGRESO], 
+    [VPLANILLA_AFP_FUTURO].[TOTAL_GANADO] AS [TOTAL_GANADO], 
+    [VPLANILLA_AFP_FUTURO].[NOVEDAD] AS [NOVEDAD], 
+    [VPLANILLA_AFP_FUTURO].[FECHANOVEDAD] AS [FECHANOVEDAD], 
+    [VPLANILLA_AFP_FUTURO].[AFP_12_21] AS [AFP_12_21], 
+    [VPLANILLA_AFP_FUTURO].[AFP_SOL_5] AS [AFP_SOL_5], 
+    [VPLANILLA_AFP_FUTURO].[APO_SOL_1] AS [APO_SOL_1], 
+    [VPLANILLA_AFP_FUTURO].[APO_SOL_5] AS [APO_SOL_5], 
+    [VPLANILLA_AFP_FUTURO].[APO_SOL_10] AS [APO_SOL_10], 
+    [VPLANILLA_AFP_FUTURO].[APO_PAT] AS [APO_PAT], 
+    [VPLANILLA_AFP_FUTURO].[APO_PRO_VIV] AS [APO_PRO_VIV], 
+    [VPLANILLA_AFP_FUTURO].[APO_PAT_SOL] AS [APO_PAT_SOL], 
+    [VPLANILLA_AFP_FUTURO].[APELLIDO_PATERNO] AS [APELLIDO_PATERNO], 
+    [VPLANILLA_AFP_FUTURO].[APELLIDO_MATERNO] AS [APELLIDO_MATERNO], 
+    [VPLANILLA_AFP_FUTURO].[APELLIDO_CASADA] AS [APELLIDO_CASADA], 
+    [VPLANILLA_AFP_FUTURO].[NOMBRES] AS [NOMBRES], 
+    [VPLANILLA_AFP_FUTURO].[NUA] AS [NUA], 
+    [VPLANILLA_AFP_FUTURO].[FILIAL] AS [FILIAL], 
+    [VPLANILLA_AFP_FUTURO].[TIPO_DOC] AS [TIPO_DOC], 
+    [VPLANILLA_AFP_FUTURO].[PROGRAMA] AS [PROGRAMA], 
+    [VPLANILLA_AFP_FUTURO].[MES_CIERRE] AS [MES_CIERRE], 
+    [VPLANILLA_AFP_FUTURO].[MES] AS [MES], 
+    [VPLANILLA_AFP_FUTURO].[GESTION] AS [GESTION]
+    FROM [SisPer].[VPLANILLA_AFP_FUTURO] AS [VPLANILLA_AFP_FUTURO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VPLANILLA_AFP_PREVISION" EntityType="Self.VPLANILLA_AFP_PREVISION" store:Type="Views" store:Schema="SisPer">
+            <DefiningQuery>SELECT 
+    [VPLANILLA_AFP_PREVISION].[ITEM] AS [ITEM], 
+    [VPLANILLA_AFP_PREVISION].[CI] AS [CI], 
+    [VPLANILLA_AFP_PREVISION].[EXT] AS [EXT], 
+    [VPLANILLA_AFP_PREVISION].[NOMBRE] AS [NOMBRE], 
+    [VPLANILLA_AFP_PREVISION].[CARGO] AS [CARGO], 
+    [VPLANILLA_AFP_PREVISION].[DIAS_TRAB] AS [DIAS_TRAB], 
+    [VPLANILLA_AFP_PREVISION].[FECHA_INGRESO] AS [FECHA_INGRESO], 
+    [VPLANILLA_AFP_PREVISION].[TOTAL_GANADO] AS [TOTAL_GANADO], 
+    [VPLANILLA_AFP_PREVISION].[NOVEDAD] AS [NOVEDAD], 
+    [VPLANILLA_AFP_PREVISION].[FECHANOVEDAD] AS [FECHANOVEDAD], 
+    [VPLANILLA_AFP_PREVISION].[AFP_12_21] AS [AFP_12_21], 
+    [VPLANILLA_AFP_PREVISION].[AFP_SOL_5] AS [AFP_SOL_5], 
+    [VPLANILLA_AFP_PREVISION].[APO_SOL_1] AS [APO_SOL_1], 
+    [VPLANILLA_AFP_PREVISION].[APO_SOL_5] AS [APO_SOL_5], 
+    [VPLANILLA_AFP_PREVISION].[APO_SOL_10] AS [APO_SOL_10], 
+    [VPLANILLA_AFP_PREVISION].[APO_PAT] AS [APO_PAT], 
+    [VPLANILLA_AFP_PREVISION].[APO_PRO_VIV] AS [APO_PRO_VIV], 
+    [VPLANILLA_AFP_PREVISION].[APO_PAT_SOL] AS [APO_PAT_SOL], 
+    [VPLANILLA_AFP_PREVISION].[APELLIDO_PATENRO] AS [APELLIDO_PATENRO], 
+    [VPLANILLA_AFP_PREVISION].[APELLIDO_MATERNO] AS [APELLIDO_MATERNO], 
+    [VPLANILLA_AFP_PREVISION].[APELLIDO_CASADA] AS [APELLIDO_CASADA], 
+    [VPLANILLA_AFP_PREVISION].[NOMBRES] AS [NOMBRES], 
+    [VPLANILLA_AFP_PREVISION].[NUA] AS [NUA], 
+    [VPLANILLA_AFP_PREVISION].[FILIAL] AS [FILIAL], 
+    [VPLANILLA_AFP_PREVISION].[TIPO_DOC] AS [TIPO_DOC], 
+    [VPLANILLA_AFP_PREVISION].[PROG_PROGRAMA] AS [PROG_PROGRAMA], 
+    [VPLANILLA_AFP_PREVISION].[MES_CIERRE] AS [MES_CIERRE], 
+    [VPLANILLA_AFP_PREVISION].[MES] AS [MES], 
+    [VPLANILLA_AFP_PREVISION].[GESTION] AS [GESTION]
+    FROM [SisPer].[VPLANILLA_AFP_PREVISION] AS [VPLANILLA_AFP_PREVISION]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VPLANILLA_APORTES_SALUD" EntityType="Self.VPLANILLA_APORTES_SALUD" store:Type="Views" store:Schema="SisPer">
+            <DefiningQuery>SELECT 
+    [VPLANILLA_APORTES_SALUD].[ITEM] AS [ITEM], 
+    [VPLANILLA_APORTES_SALUD].[COD_ESCALA_SAL] AS [COD_ESCALA_SAL], 
+    [VPLANILLA_APORTES_SALUD].[PROGRAMA] AS [PROGRAMA], 
+    [VPLANILLA_APORTES_SALUD].[NUMERO_DOC] AS [NUMERO_DOC], 
+    [VPLANILLA_APORTES_SALUD].[EXT] AS [EXT], 
+    [VPLANILLA_APORTES_SALUD].[NOMBRE] AS [NOMBRE], 
+    [VPLANILLA_APORTES_SALUD].[FECHA_NAC] AS [FECHA_NAC], 
+    [VPLANILLA_APORTES_SALUD].[SEXO] AS [SEXO], 
+    [VPLANILLA_APORTES_SALUD].[CARGO] AS [CARGO], 
+    [VPLANILLA_APORTES_SALUD].[FECHA_INGRESO] AS [FECHA_INGRESO], 
+    [VPLANILLA_APORTES_SALUD].[DIAS_TRAB] AS [DIAS_TRAB], 
+    [VPLANILLA_APORTES_SALUD].[HORA_PAG] AS [HORA_PAG], 
+    [VPLANILLA_APORTES_SALUD].[SUELDO_BASICO] AS [SUELDO_BASICO], 
+    [VPLANILLA_APORTES_SALUD].[BASICO_GANADO] AS [BASICO_GANADO], 
+    [VPLANILLA_APORTES_SALUD].[BONO_ANTIGUEDAD] AS [BONO_ANTIGUEDAD], 
+    [VPLANILLA_APORTES_SALUD].[ASIGNACION_SOS] AS [ASIGNACION_SOS], 
+    [VPLANILLA_APORTES_SALUD].[HORAS_EXTRAS] AS [HORAS_EXTRAS], 
+    [VPLANILLA_APORTES_SALUD].[MONTO_PAGADO] AS [MONTO_PAGADO], 
+    [VPLANILLA_APORTES_SALUD].[BONO_PRODUCCION] AS [BONO_PRODUCCION], 
+    [VPLANILLA_APORTES_SALUD].[OTROS_BONOS] AS [OTROS_BONOS], 
+    [VPLANILLA_APORTES_SALUD].[NRO_DIAS_DOMINICALES] AS [NRO_DIAS_DOMINICALES], 
+    [VPLANILLA_APORTES_SALUD].[MONTO_DOMINICALES] AS [MONTO_DOMINICALES], 
+    [VPLANILLA_APORTES_SALUD].[TOTAL_GANADO] AS [TOTAL_GANADO], 
+    [VPLANILLA_APORTES_SALUD].[AFP] AS [AFP], 
+    [VPLANILLA_APORTES_SALUD].[AFP_1221] AS [AFP_1221], 
+    [VPLANILLA_APORTES_SALUD].[AFP_050] AS [AFP_050], 
+    [VPLANILLA_APORTES_SALUD].[SOLIDARIO] AS [SOLIDARIO], 
+    [VPLANILLA_APORTES_SALUD].[RC_IVA] AS [RC_IVA], 
+    [VPLANILLA_APORTES_SALUD].[DESCUENTOS] AS [DESCUENTOS], 
+    [VPLANILLA_APORTES_SALUD].[AMIGO_SOS] AS [AMIGO_SOS], 
+    [VPLANILLA_APORTES_SALUD].[TOTAL_DESCUENTO] AS [TOTAL_DESCUENTO], 
+    [VPLANILLA_APORTES_SALUD].[LIQUIDO_PAGABLE] AS [LIQUIDO_PAGABLE], 
+    [VPLANILLA_APORTES_SALUD].[numeroCuenta] AS [numeroCuenta], 
+    [VPLANILLA_APORTES_SALUD].[APELLIDO_PATERNO] AS [APELLIDO_PATERNO], 
+    [VPLANILLA_APORTES_SALUD].[APELLIDO_MATERNO] AS [APELLIDO_MATERNO], 
+    [VPLANILLA_APORTES_SALUD].[APELLIDO_CASADA] AS [APELLIDO_CASADA], 
+    [VPLANILLA_APORTES_SALUD].[NOMBRES] AS [NOMBRES], 
+    [VPLANILLA_APORTES_SALUD].[COMISION] AS [COMISION], 
+    [VPLANILLA_APORTES_SALUD].[OTROS_DESCUENTOS] AS [OTROS_DESCUENTOS], 
+    [VPLANILLA_APORTES_SALUD].[FILIAL] AS [FILIAL], 
+    [VPLANILLA_APORTES_SALUD].[COD_TIPO_SEGURO] AS [COD_TIPO_SEGURO], 
+    [VPLANILLA_APORTES_SALUD].[TIPO_SEGURO] AS [TIPO_SEGURO], 
+    [VPLANILLA_APORTES_SALUD].[TOTAL_APORTE] AS [TOTAL_APORTE], 
+    [VPLANILLA_APORTES_SALUD].[CARGA_HORARIA] AS [CARGA_HORARIA], 
+    [VPLANILLA_APORTES_SALUD].[NUMERO_CUENTA] AS [NUMERO_CUENTA], 
+    [VPLANILLA_APORTES_SALUD].[MES] AS [MES], 
+    [VPLANILLA_APORTES_SALUD].[GESTION] AS [GESTION], 
+    [VPLANILLA_APORTES_SALUD].[MES_CIERRE] AS [MES_CIERRE]
+    FROM [SisPer].[VPLANILLA_APORTES_SALUD] AS [VPLANILLA_APORTES_SALUD]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VPLANILLA_MINISTERIO" EntityType="Self.VPLANILLA_MINISTERIO" store:Type="Views" store:Schema="SisPer">
+            <DefiningQuery>SELECT 
+    [VPLANILLA_MINISTERIO].[NUMERO_DOC] AS [NUMERO_DOC], 
+    [VPLANILLA_MINISTERIO].[EXPEDIDO] AS [EXPEDIDO], 
+    [VPLANILLA_MINISTERIO].[AFP_APORTA] AS [AFP_APORTA], 
+    [VPLANILLA_MINISTERIO].[NUA] AS [NUA], 
+    [VPLANILLA_MINISTERIO].[APELLIDO_PATERNO] AS [APELLIDO_PATERNO], 
+    [VPLANILLA_MINISTERIO].[APELLIDO_MATERNO] AS [APELLIDO_MATERNO], 
+    [VPLANILLA_MINISTERIO].[APELLIDO_CASADA] AS [APELLIDO_CASADA], 
+    [VPLANILLA_MINISTERIO].[NOMBRES] AS [NOMBRES], 
+    [VPLANILLA_MINISTERIO].[NACIONALIDAD] AS [NACIONALIDAD], 
+    [VPLANILLA_MINISTERIO].[FECHA_NACIMIENTO] AS [FECHA_NACIMIENTO], 
+    [VPLANILLA_MINISTERIO].[SEXO] AS [SEXO], 
+    [VPLANILLA_MINISTERIO].[CARGO] AS [CARGO], 
+    [VPLANILLA_MINISTERIO].[FECHA_INGRESO] AS [FECHA_INGRESO], 
+    [VPLANILLA_MINISTERIO].[TIPO_CONTRATO] AS [TIPO_CONTRATO], 
+    [VPLANILLA_MINISTERIO].[FECHA_RETIRO] AS [FECHA_RETIRO], 
+    [VPLANILLA_MINISTERIO].[DIAS_TRAB] AS [DIAS_TRAB], 
+    [VPLANILLA_MINISTERIO].[CARGA_HORARIA] AS [CARGA_HORARIA], 
+    [VPLANILLA_MINISTERIO].[HABER_BASICO] AS [HABER_BASICO], 
+    [VPLANILLA_MINISTERIO].[BONO_ANTIGUEDAD] AS [BONO_ANTIGUEDAD], 
+    [VPLANILLA_MINISTERIO].[ASIG_SOS] AS [ASIG_SOS], 
+    [VPLANILLA_MINISTERIO].[NUMERO] AS [NUMERO], 
+    [VPLANILLA_MINISTERIO].[MONTO_PAGADO] AS [MONTO_PAGADO], 
+    [VPLANILLA_MINISTERIO].[BONO_PRODUCCION] AS [BONO_PRODUCCION], 
+    [VPLANILLA_MINISTERIO].[OTROS_BONOS] AS [OTROS_BONOS], 
+    [VPLANILLA_MINISTERIO].[NUMERO_DOMINICAL] AS [NUMERO_DOMINICAL], 
+    [VPLANILLA_MINISTERIO].[DOMINICAL] AS [DOMINICAL], 
+    [VPLANILLA_MINISTERIO].[TOTAL_GANADO] AS [TOTAL_GANADO], 
+    [VPLANILLA_MINISTERIO].[AFP] AS [AFP], 
+    [VPLANILLA_MINISTERIO].[RC_IVA] AS [RC_IVA], 
+    [VPLANILLA_MINISTERIO].[OTROS_DESCUENTOS] AS [OTROS_DESCUENTOS], 
+    [VPLANILLA_MINISTERIO].[TOTAL_DESCUENTO] AS [TOTAL_DESCUENTO], 
+    [VPLANILLA_MINISTERIO].[LIQ_PAGABLE] AS [LIQ_PAGABLE], 
+    [VPLANILLA_MINISTERIO].[FILIAL] AS [FILIAL], 
+    [VPLANILLA_MINISTERIO].[PROGRAMA] AS [PROGRAMA], 
+    [VPLANILLA_MINISTERIO].[SECCION] AS [SECCION], 
+    [VPLANILLA_MINISTERIO].[ESCALA_SALARIAL] AS [ESCALA_SALARIAL], 
+    [VPLANILLA_MINISTERIO].[MES] AS [MES], 
+    [VPLANILLA_MINISTERIO].[GESTION] AS [GESTION], 
+    [VPLANILLA_MINISTERIO].[MES_CIERRE] AS [MES_CIERRE]
+    FROM [SisPer].[VPLANILLA_MINISTERIO] AS [VPLANILLA_MINISTERIO]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VPLANILLA_RCIVA" EntityType="Self.VPLANILLA_RCIVA" store:Type="Views" store:Schema="SisPer">
+            <DefiningQuery>SELECT 
+    [VPLANILLA_RCIVA].[ITEM] AS [ITEM], 
+    [VPLANILLA_RCIVA].[NOMBRE] AS [NOMBRE], 
+    [VPLANILLA_RCIVA].[CAL_SUELDO_NETO] AS [CAL_SUELDO_NETO], 
+    [VPLANILLA_RCIVA].[MOD_OTR_INGRESOS] AS [MOD_OTR_INGRESOS], 
+    [VPLANILLA_RCIVA].[CAL_SUELDO_TOTAL_NETO] AS [CAL_SUELDO_TOTAL_NETO], 
+    [VPLANILLA_RCIVA].[CAL_MIN_NO_IMPONIBLE] AS [CAL_MIN_NO_IMPONIBLE], 
+    [VPLANILLA_RCIVA].[CAL_SUJETO_IMP] AS [CAL_SUJETO_IMP], 
+    [VPLANILLA_RCIVA].[CAL_IMPUESTO] AS [CAL_IMPUESTO], 
+    [VPLANILLA_RCIVA].[MOD_COMPUTO_IVA] AS [MOD_COMPUTO_IVA], 
+    [VPLANILLA_RCIVA].[CAL_POR_NRO_SMN] AS [CAL_POR_NRO_SMN], 
+    [VPLANILLA_RCIVA].[CAL_SALDO_FISCO] AS [CAL_SALDO_FISCO], 
+    [VPLANILLA_RCIVA].[CAL_A_FAVOR_DEP] AS [CAL_A_FAVOR_DEP], 
+    [VPLANILLA_RCIVA].[CAL_SLD_MES_ANT] AS [CAL_SLD_MES_ANT], 
+    [VPLANILLA_RCIVA].[CAL_ACT_MES_ANT] AS [CAL_ACT_MES_ANT], 
+    [VPLANILLA_RCIVA].[CAL_VALOR_ACT] AS [CAL_VALOR_ACT], 
+    [VPLANILLA_RCIVA].[CAL_SLD_TOTAL_DEP] AS [CAL_SLD_TOTAL_DEP], 
+    [VPLANILLA_RCIVA].[CAL_SLD_UTILIZADO] AS [CAL_SLD_UTILIZADO], 
+    [VPLANILLA_RCIVA].[CAL_IMP_RETENIDO] AS [CAL_IMP_RETENIDO], 
+    [VPLANILLA_RCIVA].[CAL_SLD_FAVOR_PROX_MES] AS [CAL_SLD_FAVOR_PROX_MES], 
+    [VPLANILLA_RCIVA].[TOTAL_GANADO] AS [TOTAL_GANADO], 
+    [VPLANILLA_RCIVA].[CI] AS [CI], 
+    [VPLANILLA_RCIVA].[EXTENDIDO] AS [EXTENDIDO], 
+    [VPLANILLA_RCIVA].[NROCUENTA] AS [NROCUENTA], 
+    [VPLANILLA_RCIVA].[FILIAL] AS [FILIAL], 
+    [VPLANILLA_RCIVA].[PROGRAMA] AS [PROGRAMA], 
+    [VPLANILLA_RCIVA].[SECCION] AS [SECCION], 
+    [VPLANILLA_RCIVA].[MES_CIERRE] AS [MES_CIERRE]
+    FROM [SisPer].[VPLANILLA_RCIVA] AS [VPLANILLA_RCIVA]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VPLANILLA_SUELDOS" EntityType="Self.VPLANILLA_SUELDOS" store:Type="Views" store:Schema="SisPer">
+            <DefiningQuery>SELECT 
+    [VPLANILLA_SUELDOS].[ITEM] AS [ITEM], 
+    [VPLANILLA_SUELDOS].[NOMBRE] AS [NOMBRE], 
+    [VPLANILLA_SUELDOS].[CARGO] AS [CARGO], 
+    [VPLANILLA_SUELDOS].[FECHA_INGRESO] AS [FECHA_INGRESO], 
+    [VPLANILLA_SUELDOS].[DIAS_PAG] AS [DIAS_PAG], 
+    [VPLANILLA_SUELDOS].[HABER_BASICO] AS [HABER_BASICO], 
+    [VPLANILLA_SUELDOS].[BASICO_GANADO] AS [BASICO_GANADO], 
+    [VPLANILLA_SUELDOS].[CAL_BONO_ANTIGUEDAD] AS [CAL_BONO_ANTIGUEDAD], 
+    [VPLANILLA_SUELDOS].[MOD_ASIGSOS] AS [MOD_ASIGSOS], 
+    [VPLANILLA_SUELDOS].[MOD_COMISION] AS [MOD_COMISION], 
+    [VPLANILLA_SUELDOS].[CAL_TOTAL_GANADO] AS [CAL_TOTAL_GANADO], 
+    [VPLANILLA_SUELDOS].[MOD_RC_IVA] AS [MOD_RC_IVA], 
+    [VPLANILLA_SUELDOS].[RC_IVA] AS [RC_IVA], 
+    [VPLANILLA_SUELDOS].[CAL_AFP] AS [CAL_AFP], 
+    [VPLANILLA_SUELDOS].[CAL_APO_SOL_ASEG] AS [CAL_APO_SOL_ASEG], 
+    [VPLANILLA_SUELDOS].[CAL_APONALSOL] AS [CAL_APONALSOL], 
+    [VPLANILLA_SUELDOS].[MOD_PRESTAMOS] AS [MOD_PRESTAMOS], 
+    [VPLANILLA_SUELDOS].[MOD_OTRS_DESCUENTOS] AS [MOD_OTRS_DESCUENTOS], 
+    [VPLANILLA_SUELDOS].[MOD_OTROS_INGRESOS] AS [MOD_OTROS_INGRESOS], 
+    [VPLANILLA_SUELDOS].[MOD_AMIGOSOS] AS [MOD_AMIGOSOS], 
+    [VPLANILLA_SUELDOS].[CAL_TOTAL_DESCUENTO] AS [CAL_TOTAL_DESCUENTO], 
+    [VPLANILLA_SUELDOS].[CAL_LIQ_PAGABLE] AS [CAL_LIQ_PAGABLE], 
+    [VPLANILLA_SUELDOS].[FILIAL] AS [FILIAL], 
+    [VPLANILLA_SUELDOS].[PROGRAMA] AS [PROGRAMA], 
+    [VPLANILLA_SUELDOS].[NUMERO_DOC] AS [NUMERO_DOC], 
+    [VPLANILLA_SUELDOS].[EXPEDIDO] AS [EXPEDIDO], 
+    [VPLANILLA_SUELDOS].[COD_ESCALA_SAL] AS [COD_ESCALA_SAL], 
+    [VPLANILLA_SUELDOS].[NUMERO_CUENTA] AS [NUMERO_CUENTA], 
+    [VPLANILLA_SUELDOS].[MES] AS [MES], 
+    [VPLANILLA_SUELDOS].[GESTION] AS [GESTION], 
+    [VPLANILLA_SUELDOS].[FACI_CODIGO] AS [FACI_CODIGO]
+    FROM [SisPer].[VPLANILLA_SUELDOS] AS [VPLANILLA_SUELDOS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VPLANILLA_SUELDOS_GENERAL" EntityType="Self.VPLANILLA_SUELDOS_GENERAL" store:Type="Views" store:Schema="SisPer">
+            <DefiningQuery>SELECT 
+    [VPLANILLA_SUELDOS_GENERAL].[ITEM] AS [ITEM], 
+    [VPLANILLA_SUELDOS_GENERAL].[FECHA_NACIMIENTO] AS [FECHA_NACIMIENTO], 
+    [VPLANILLA_SUELDOS_GENERAL].[SEXO] AS [SEXO], 
+    [VPLANILLA_SUELDOS_GENERAL].[MES] AS [MES], 
+    [VPLANILLA_SUELDOS_GENERAL].[GESTION] AS [GESTION], 
+    [VPLANILLA_SUELDOS_GENERAL].[NOMBRE] AS [NOMBRE], 
+    [VPLANILLA_SUELDOS_GENERAL].[CARGO] AS [CARGO], 
+    [VPLANILLA_SUELDOS_GENERAL].[NUMERO_DOC] AS [NUMERO_DOC], 
+    [VPLANILLA_SUELDOS_GENERAL].[EXPEDIDO] AS [EXPEDIDO], 
+    [VPLANILLA_SUELDOS_GENERAL].[FECHA_INGRESO] AS [FECHA_INGRESO], 
+    [VPLANILLA_SUELDOS_GENERAL].[DIAS_PAG] AS [DIAS_PAG], 
+    [VPLANILLA_SUELDOS_GENERAL].[NUMERO_CUENTA] AS [NUMERO_CUENTA], 
+    [VPLANILLA_SUELDOS_GENERAL].[HABER_BASICO] AS [HABER_BASICO], 
+    [VPLANILLA_SUELDOS_GENERAL].[BASICO_GANADO] AS [BASICO_GANADO], 
+    [VPLANILLA_SUELDOS_GENERAL].[COD_FILIAL] AS [COD_FILIAL], 
+    [VPLANILLA_SUELDOS_GENERAL].[FILIAL] AS [FILIAL], 
+    [VPLANILLA_SUELDOS_GENERAL].[PROGRAMA] AS [PROGRAMA], 
+    [VPLANILLA_SUELDOS_GENERAL].[COD_SECCION] AS [COD_SECCION], 
+    [VPLANILLA_SUELDOS_GENERAL].[SECCION] AS [SECCION], 
+    [VPLANILLA_SUELDOS_GENERAL].[CAL_BONO_ANTIGUEDAD] AS [CAL_BONO_ANTIGUEDAD], 
+    [VPLANILLA_SUELDOS_GENERAL].[MOD_RC_IVA] AS [MOD_RC_IVA], 
+    [VPLANILLA_SUELDOS_GENERAL].[MOD_COMISION] AS [MOD_COMISION], 
+    [VPLANILLA_SUELDOS_GENERAL].[MOD_AMIGOSOS] AS [MOD_AMIGOSOS], 
+    [VPLANILLA_SUELDOS_GENERAL].[MOD_PRESTAMOS] AS [MOD_PRESTAMOS], 
+    [VPLANILLA_SUELDOS_GENERAL].[MOD_OTRS_DESCUENTOS] AS [MOD_OTRS_DESCUENTOS], 
+    [VPLANILLA_SUELDOS_GENERAL].[CAL_TOTAL_GANADO] AS [CAL_TOTAL_GANADO], 
+    [VPLANILLA_SUELDOS_GENERAL].[CAL_APONALSOL] AS [CAL_APONALSOL], 
+    [VPLANILLA_SUELDOS_GENERAL].[CAL_AFP] AS [CAL_AFP], 
+    [VPLANILLA_SUELDOS_GENERAL].[CAL_APO_SOL_ASEG] AS [CAL_APO_SOL_ASEG], 
+    [VPLANILLA_SUELDOS_GENERAL].[COD_ESCALA_SAL] AS [COD_ESCALA_SAL], 
+    [VPLANILLA_SUELDOS_GENERAL].[CAL_IMPUESTO_RETENIDO] AS [CAL_IMPUESTO_RETENIDO], 
+    [VPLANILLA_SUELDOS_GENERAL].[CODIGO_FACILITY] AS [CODIGO_FACILITY], 
+    [VPLANILLA_SUELDOS_GENERAL].[NOM_FACILITY] AS [NOM_FACILITY], 
+    [VPLANILLA_SUELDOS_GENERAL].[NOM_FACPROYECTO] AS [NOM_FACPROYECTO], 
+    [VPLANILLA_SUELDOS_GENERAL].[AREA] AS [AREA], 
+    [VPLANILLA_SUELDOS_GENERAL].[CAL_APONACSOL_3] AS [CAL_APONACSOL_3], 
+    [VPLANILLA_SUELDOS_GENERAL].[CAL_APONACSOL_2] AS [CAL_APONACSOL_2], 
+    [VPLANILLA_SUELDOS_GENERAL].[CAL_APONACSOL_1] AS [CAL_APONACSOL_1], 
+    [VPLANILLA_SUELDOS_GENERAL].[ITEM_2] AS [ITEM_2], 
+    [VPLANILLA_SUELDOS_GENERAL].[NACIONALIDAD] AS [NACIONALIDAD], 
+    [VPLANILLA_SUELDOS_GENERAL].[TIPO_SEGURO] AS [TIPO_SEGURO], 
+    [VPLANILLA_SUELDOS_GENERAL].[COTIZANTE] AS [COTIZANTE], 
+    [VPLANILLA_SUELDOS_GENERAL].[TIPO_AFP] AS [TIPO_AFP]
+    FROM [SisPer].[VPLANILLA_SUELDOS_GENERAL] AS [VPLANILLA_SUELDOS_GENERAL]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_PERIODOS_PLANILLAS_ESTADOS_PLANILLAS" Association="Self.FK_PERIODOS_PLANILLAS_ESTADOS_PLANILLAS">
+            <End Role="ESTADOS_PLANILLAS" EntitySet="ESTADOS_PLANILLAS" />
+            <End Role="PERIODOS_PLANILLAS" EntitySet="PERIODOS_PLANILLAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERIODOS_PLANILLAS_RETROACTIVOS" Association="Self.FK_PERIODOS_PLANILLAS_RETROACTIVOS">
+            <End Role="RETROACTIVOS" EntitySet="RETROACTIVOS" />
+            <End Role="PERIODOS_PLANILLAS" EntitySet="PERIODOS_PLANILLAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RETROACTIVOS_ESTADOS_PLANILLAS" Association="Self.FK_RETROACTIVOS_ESTADOS_PLANILLAS">
+            <End Role="ESTADOS_PLANILLAS" EntitySet="ESTADOS_PLANILLAS" />
+            <End Role="RETROACTIVOS" EntitySet="RETROACTIVOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PlanillasSosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="PlanillasSosDBEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="GENERA_PLANILLA">
+          <Parameter Name="TIPO_CIERRE" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GENERA_PLANILLA_RCIVA">
+          <Parameter Name="TIPO_CIERRE" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="PARAMETROS" EntityType="PlanillasSosModel.PARAMETRO" />
+          <EntitySet Name="PLANILLA_SUELDOS" EntityType="PlanillasSosModel.PLANILLA_SUELDOS" />
+          <EntitySet Name="ESTADOS_PLANILLAS" EntityType="PlanillasSosModel.ESTADOS_PLANILLAS" />
+          <EntitySet Name="VPERSONALs" EntityType="PlanillasSosModel.VPERSONAL" />
+          <EntitySet Name="VPLANILLA_SUELDOS_GENERAL" EntityType="PlanillasSosModel.VPLANILLA_SUELDOS_GENERAL" />
+          <EntitySet Name="VPLANILLA_AFP_FUTURO" EntityType="PlanillasSosModel.VPLANILLA_AFP_FUTURO" />
+          <EntitySet Name="VPLANILLA_AFP_PREVISION" EntityType="PlanillasSosModel.VPLANILLA_AFP_PREVISION" />
+          <EntitySet Name="VPLANILLA_APORTES_SALUD" EntityType="PlanillasSosModel.VPLANILLA_APORTES_SALUD" />
+          <EntitySet Name="VPLANILLA_MINISTERIO" EntityType="PlanillasSosModel.VPLANILLA_MINISTERIO" />
+          <EntitySet Name="VPLANILLA_SUELDOS" EntityType="PlanillasSosModel.VPLANILLA_SUELDOS" />
+          <EntitySet Name="PLANILLA_RCIVA" EntityType="PlanillasSosModel.PLANILLA_RCIVA" />
+          <EntitySet Name="VPLANILLA_RCIVA" EntityType="PlanillasSosModel.VPLANILLA_RCIVA" />
+          <EntitySet Name="PERIODOS_PLANILLAS" EntityType="PlanillasSosModel.PERIODOS_PLANILLAS" />
+          <AssociationSet Name="FK_PERIODOS_PLANILLAS_ESTADOS_PLANILLAS" Association="PlanillasSosModel.FK_PERIODOS_PLANILLAS_ESTADOS_PLANILLAS">
+            <End Role="ESTADOS_PLANILLAS" EntitySet="ESTADOS_PLANILLAS" />
+            <End Role="PERIODOS_PLANILLAS" EntitySet="PERIODOS_PLANILLAS" />
+          </AssociationSet>
+          <EntitySet Name="RETROACTIVOS" EntityType="PlanillasSosModel.RETROACTIVO" />
+          <AssociationSet Name="FK_RETROACTIVOS_ESTADOS_PLANILLAS" Association="PlanillasSosModel.FK_RETROACTIVOS_ESTADOS_PLANILLAS">
+            <End Role="ESTADOS_PLANILLAS" EntitySet="ESTADOS_PLANILLAS" />
+            <End Role="RETROACTIVO" EntitySet="RETROACTIVOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERIODOS_PLANILLAS_RETROACTIVOS" Association="PlanillasSosModel.FK_PERIODOS_PLANILLAS_RETROACTIVOS">
+            <End Role="RETROACTIVO" EntitySet="RETROACTIVOS" />
+            <End Role="PERIODOS_PLANILLAS" EntitySet="PERIODOS_PLANILLAS" />
+          </AssociationSet>
+          <EntitySet Name="PARAMETROS_PLANILLAS" EntityType="PlanillasSosModel.PARAMETROS_PLANILLAS" />
+          <EntitySet Name="PORCENTAJE_APORTE_NACIONAL_SOL" EntityType="PlanillasSosModel.PORCENTAJE_APORTE_NACIONAL_SOL" />
+          <EntitySet Name="PORCENTAJE_BONO_ANTIGUEDAD" EntityType="PlanillasSosModel.PORCENTAJE_BONO_ANTIGUEDAD" />
+          <EntitySet Name="SALARIOS_MINIMOS" EntityType="PlanillasSosModel.SALARIOS_MINIMOS" />
+          <EntitySet Name="REGISTRO_UFVS" EntityType="PlanillasSosModel.REGISTRO_UFVS" />
+        </EntityContainer>
+        <EntityType Name="PARAMETRO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="COD_PARAMETRO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DES_PARAMETRO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="COD_PARAM1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DES_PARAM1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="COD_PARAM2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DES_PARAM2" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="COD_PARAM3" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DES_PARAM3" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="COD_PARAM4" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DES_PARAM4" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="COD_PARAM5" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DES_PARAM5" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PLANILLA_SUELDOS">
+          <Key>
+            <PropertyRef Name="GESTION" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="ITEM" />
+          </Key>
+          <Property Name="GESTION" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="MES" Type="Int32" Nullable="false" />
+          <Property Name="ITEM" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_INGRESO" Type="DateTime" Precision="0" />
+          <Property Name="DIAS_PAG" Type="Int32" />
+          <Property Name="HABER_BASICO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BASICO_GANADO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CAL_BONO_ANTIGUEDAD" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="MOD_RC_IVA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MOD_RC_IVA_2" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MOD_COMISION" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MOD_AMIGOSOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MOD_PRESTAMOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MOD_OTRS_DESCUENTOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MOD_OTROS_INGRESOS" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MOD_MONTO_NETO" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MOD_ASIGSOS" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CAL_TOTAL_GANADO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_APONALSOL" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_AFP" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APO_SOL_ASEG" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_TOTAL_DESCUENTO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_LIQ_PAGABLE" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="FEC_CIERRE" Type="DateTime" Precision="3" />
+          <Property Name="MES_CIERRE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="CAL_ANTIGUEDAD_REAL" Type="Decimal" Precision="18" Scale="6" />
+          <Property Name="COTIZANTE" Type="Int32" />
+          <Property Name="FECHA_NACIMIENTO" Type="DateTime" Precision="3" />
+          <Property Name="CAL_APONACSOL_1" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_APONACSOL_2" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_APONACSOL_3" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMPUESTO_RETENIDO" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="ESTADO" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="SALARIO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="EDAD" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ESTADOS_PLANILLAS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PERIODOS_PLANILLAS" Relationship="PlanillasSosModel.FK_PERIODOS_PLANILLAS_ESTADOS_PLANILLAS" FromRole="ESTADOS_PLANILLAS" ToRole="PERIODOS_PLANILLAS" />
+          <NavigationProperty Name="RETROACTIVOS" Relationship="PlanillasSosModel.FK_RETROACTIVOS_ESTADOS_PLANILLAS" FromRole="ESTADOS_PLANILLAS" ToRole="RETROACTIVO" />
+        </EntityType>
+        <EntityType Name="VPERSONAL">
+          <Key>
+            <PropertyRef Name="item" />
+            <PropertyRef Name="nombres" />
+            <PropertyRef Name="numeroDocumento" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="fechaSistema" />
+            <PropertyRef Name="login" />
+            <PropertyRef Name="PROF_PROFESION" />
+            <PropertyRef Name="TCON_CONTRATO" />
+            <PropertyRef Name="AREA_AREA" />
+            <PropertyRef Name="DEP_DEPARTAMENTO" />
+            <PropertyRef Name="FIL_FILIAL" />
+            <PropertyRef Name="PROG_PROGRAMA" />
+            <PropertyRef Name="PROG_COD_TIPO_PROG" />
+          </Key>
+          <Property Name="item" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="apellidoPaterno" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="apellidoMaterno" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="apellidoCasada" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fechaNacimiento" Type="DateTime" Precision="3" />
+          <Property Name="sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="estadoCivil" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="numeroDocumento" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="telefono" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="correo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="filial" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="fechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="fechaInicioCargo" Type="DateTime" Precision="3" />
+          <Property Name="cargo_act" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="salario" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="contratoIndefinido" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="tiempoCompleto" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="numeroCuenta" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="numeroSeguro" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="tieneSubAlternos" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="propositoCargo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="funcion1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="funcion2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="funcion3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="nua" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="fechaRetiro" Type="DateTime" Precision="3" />
+          <Property Name="estado" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="estadoADM" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="observaciones" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="fechaSistema" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="zona" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="telefonoContacto" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="tipoSeguro" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="tipoInicio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="area" Type="Int32" />
+          <Property Name="item2" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="cotizante" Type="Int32" />
+          <Property Name="nacionalidad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fechaFinContrato" Type="DateTime" Precision="3" />
+          <Property Name="tipoGrupo" Type="Int32" />
+          <Property Name="tipoGrupoRetroactivo" Type="Int32" />
+          <Property Name="tipoAasignacion" Type="Int32" />
+          <Property Name="excepciones" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="codigoEsEvaluado" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="codigoRecibeInstruccion" Type="String" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="codigoEstudio" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="TEST_ESTUDIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="codigoProfesion" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="PROF_PROFESION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="codigoTipoDocumento" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="TDOC_TIPO_DOCUMENTO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TDOC_ABV_TIPO_DOCUMENTO" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="codigoFacility" Type="Int32" />
+          <Property Name="FACI_CODIGO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FACI_NOMBRE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FACI_PROYECTO" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="FACI_CIUDAD" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="codigoTipoContratacion" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="TCON_CONTRATO" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="codigoSeccion" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="SECC_SECCION" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="codigoCargoActual" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="CARG_CARGO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CARG_ESTADO" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="CARG_SAL_MAX" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CARG_SAL_MIN" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CARG_COD_AREA" Type="Int32" />
+          <Property Name="AREA_AREA" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="codigoEscalaSalarial" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ESCSAL_ESCALA_SAL" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ESCSAL_HABER_BAS" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="codigoDepartamento" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="DEP_DEPARTAMENTO" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="codigoFilial" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="FIL_FILIAL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="codigoPrograma" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="PROG_PROGRAMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PROG_COD_TIPO_PROG" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="TPROG_TIPO_PROGRAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="codigoAFP" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="AFP_AFP" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="SEG_TIPO_SEGURO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VPLANILLA_SUELDOS_GENERAL">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="FECHA_NACIMIENTO" />
+            <PropertyRef Name="SEXO" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="NUMERO_DOC" />
+            <PropertyRef Name="EXPEDIDO" />
+            <PropertyRef Name="NUMERO_CUENTA" />
+            <PropertyRef Name="COD_FILIAL" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="PROGRAMA" />
+            <PropertyRef Name="COD_SECCION" />
+            <PropertyRef Name="SECCION" />
+            <PropertyRef Name="MOD_COMISION" />
+            <PropertyRef Name="MOD_AMIGOSOS" />
+            <PropertyRef Name="MOD_PRESTAMOS" />
+            <PropertyRef Name="MOD_OTRS_DESCUENTOS" />
+            <PropertyRef Name="COD_ESCALA_SAL" />
+            <PropertyRef Name="CODIGO_FACILITY" />
+            <PropertyRef Name="NOM_FACILITY" />
+            <PropertyRef Name="NOM_FACPROYECTO" />
+            <PropertyRef Name="AREA" />
+            <PropertyRef Name="ITEM_2" />
+            <PropertyRef Name="NACIONALIDAD" />
+            <PropertyRef Name="TIPO_SEGURO" />
+            <PropertyRef Name="TIPO_AFP" />
+          </Key>
+          <Property Name="ITEM" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_NACIMIENTO" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SEXO" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="MES" Type="Int32" Nullable="false" />
+          <Property Name="GESTION" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CARGO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NUMERO_DOC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXPEDIDO" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_INGRESO" Type="DateTime" Precision="0" />
+          <Property Name="DIAS_PAG" Type="Int32" />
+          <Property Name="NUMERO_CUENTA" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="HABER_BASICO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BASICO_GANADO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="COD_FILIAL" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="FILIAL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="PROGRAMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COD_SECCION" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="SECCION" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="CAL_BONO_ANTIGUEDAD" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="MOD_RC_IVA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MOD_COMISION" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MOD_AMIGOSOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MOD_PRESTAMOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MOD_OTRS_DESCUENTOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CAL_TOTAL_GANADO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_APONALSOL" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_AFP" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APO_SOL_ASEG" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="COD_ESCALA_SAL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CAL_IMPUESTO_RETENIDO" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="CODIGO_FACILITY" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="NOM_FACILITY" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NOM_FACPROYECTO" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="AREA" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="CAL_APONACSOL_3" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APONACSOL_2" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APONACSOL_1" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="ITEM_2" Type="Int32" Nullable="false" />
+          <Property Name="NACIONALIDAD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TIPO_SEGURO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COTIZANTE" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO_AFP" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VPLANILLA_AFP_FUTURO">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="CI" />
+            <PropertyRef Name="EXT" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="NOVEDAD" />
+            <PropertyRef Name="NOMBRES" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="PROGRAMA" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+          </Key>
+          <Property Name="ITEM" Type="Int32" Nullable="false" />
+          <Property Name="CI" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXT" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CARGO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIAS_TRAB" Type="Int32" />
+          <Property Name="FECHA_INGRESO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TOTAL_GANADO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="NOVEDAD" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FECHANOVEDAD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AFP_12_21" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AFP_SOL_5" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="APO_SOL_1" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="APO_SOL_5" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="APO_SOL_10" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="APO_PAT" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="APO_PRO_VIV" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="APO_PAT_SOL" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="APELLIDO_PATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_MATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_CASADA" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRES" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NUA" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="FILIAL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TIPO_DOC" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="PROGRAMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MES_CIERRE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MES" Type="Int32" Nullable="false" />
+          <Property Name="GESTION" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VPLANILLA_AFP_PREVISION">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="CI" />
+            <PropertyRef Name="EXT" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="NOVEDAD" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+          </Key>
+          <Property Name="ITEM" Type="Int32" Nullable="false" />
+          <Property Name="CI" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXT" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CARGO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DIAS_TRAB" Type="Int32" />
+          <Property Name="FECHA_INGRESO" Type="DateTime" Precision="0" />
+          <Property Name="TOTAL_GANADO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="NOVEDAD" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="FECHANOVEDAD" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AFP_12_21" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AFP_SOL_5" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="APO_SOL_1" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="APO_SOL_5" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="APO_SOL_10" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="APO_PAT" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="APO_PRO_VIV" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="APO_PAT_SOL" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="APELLIDO_PATENRO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_MATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_CASADA" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NUA" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="FILIAL" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TIPO_DOC" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="PROG_PROGRAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MES_CIERRE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="MES" Type="Int32" Nullable="false" />
+          <Property Name="GESTION" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VPLANILLA_APORTES_SALUD">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="NUMERO_DOC" />
+            <PropertyRef Name="EXT" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="HORA_PAG" />
+            <PropertyRef Name="ASIGNACION_SOS" />
+            <PropertyRef Name="HORAS_EXTRAS" />
+            <PropertyRef Name="OTROS_BONOS" />
+            <PropertyRef Name="AMIGO_SOS" />
+            <PropertyRef Name="NOMBRES" />
+            <PropertyRef Name="COMISION" />
+            <PropertyRef Name="OTROS_DESCUENTOS" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+            <PropertyRef Name="COD_ESCALA_SAL" />
+            <PropertyRef Name="PROGRAMA" />
+          </Key>
+          <Property Name="ITEM" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="NUMERO_DOC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXT" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_NAC" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SEXO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CARGO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_INGRESO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DIAS_TRAB" Type="Int32" />
+          <Property Name="HORA_PAG" Type="Int32" Nullable="false" />
+          <Property Name="SUELDO_BASICO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BASICO_GANADO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BONO_ANTIGUEDAD" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="ASIGNACION_SOS" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="HORAS_EXTRAS" Type="Int32" Nullable="false" />
+          <Property Name="MONTO_PAGADO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BONO_PRODUCCION" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="OTROS_BONOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="NRO_DIAS_DOMINICALES" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MONTO_DOMINICALES" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="TOTAL_GANADO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="AFP" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="AFP_1221" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AFP_050" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SOLIDARIO" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="RC_IVA" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="DESCUENTOS" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="AMIGO_SOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TOTAL_DESCUENTO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="LIQUIDO_PAGABLE" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="numeroCuenta" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_PATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_MATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_CASADA" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRES" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="COMISION" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="OTROS_DESCUENTOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="FILIAL" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="COD_TIPO_SEGURO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO_SEGURO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TOTAL_APORTE" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CARGA_HORARIA" Type="Int32" />
+          <Property Name="NUMERO_CUENTA" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="MES" Type="Int32" Nullable="false" />
+          <Property Name="GESTION" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="MES_CIERRE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="COD_ESCALA_SAL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PROGRAMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VPLANILLA_MINISTERIO">
+          <Key>
+            <PropertyRef Name="NUMERO_DOC" />
+            <PropertyRef Name="EXPEDIDO" />
+            <PropertyRef Name="FECHA_NACIMIENTO" />
+            <PropertyRef Name="SEXO" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="FECHA_RETIRO" />
+            <PropertyRef Name="ASIG_SOS" />
+            <PropertyRef Name="NUMERO" />
+            <PropertyRef Name="MONTO_PAGADO" />
+            <PropertyRef Name="BONO_PRODUCCION" />
+            <PropertyRef Name="OTROS_BONOS" />
+            <PropertyRef Name="NUMERO_DOMINICAL" />
+            <PropertyRef Name="DOMINICAL" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+          </Key>
+          <Property Name="NUMERO_DOC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXPEDIDO" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="AFP_APORTA" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NUA" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_PATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_MATERNO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="APELLIDO_CASADA" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NACIONALIDAD" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_NACIMIENTO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="SEXO" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CARGO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_INGRESO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO_CONTRATO" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_RETIRO" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DIAS_TRAB" Type="Int32" />
+          <Property Name="CARGA_HORARIA" Type="Int32" />
+          <Property Name="HABER_BASICO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BONO_ANTIGUEDAD" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="ASIG_SOS" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="NUMERO" Type="Int32" Nullable="false" />
+          <Property Name="MONTO_PAGADO" Type="Int32" Nullable="false" />
+          <Property Name="BONO_PRODUCCION" Type="Int32" Nullable="false" />
+          <Property Name="OTROS_BONOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="NUMERO_DOMINICAL" Type="Int32" Nullable="false" />
+          <Property Name="DOMINICAL" Type="Int32" Nullable="false" />
+          <Property Name="TOTAL_GANADO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="AFP" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="RC_IVA" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="OTROS_DESCUENTOS" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="TOTAL_DESCUENTO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="LIQ_PAGABLE" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="FILIAL" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="PROGRAMA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SECCION" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="ESCALA_SALARIAL" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MES" Type="Int32" Nullable="false" />
+          <Property Name="GESTION" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="MES_CIERRE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="VPLANILLA_SUELDOS">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CARGO" />
+            <PropertyRef Name="MOD_ASIGSOS" />
+            <PropertyRef Name="MOD_COMISION" />
+            <PropertyRef Name="MOD_PRESTAMOS" />
+            <PropertyRef Name="MOD_OTRS_DESCUENTOS" />
+            <PropertyRef Name="MOD_AMIGOSOS" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="PROGRAMA" />
+            <PropertyRef Name="NUMERO_DOC" />
+            <PropertyRef Name="EXPEDIDO" />
+            <PropertyRef Name="COD_ESCALA_SAL" />
+            <PropertyRef Name="NUMERO_CUENTA" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="GESTION" />
+          </Key>
+          <Property Name="ITEM" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CARGO" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FECHA_INGRESO" Type="DateTime" Precision="0" />
+          <Property Name="DIAS_PAG" Type="Int32" />
+          <Property Name="HABER_BASICO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BASICO_GANADO" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CAL_BONO_ANTIGUEDAD" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="MOD_ASIGSOS" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="MOD_COMISION" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CAL_TOTAL_GANADO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="MOD_RC_IVA" Type="Decimal" Precision="12" Scale="2" />
+          <Property Name="RC_IVA" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CAL_AFP" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APO_SOL_ASEG" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_APONALSOL" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MOD_PRESTAMOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MOD_OTRS_DESCUENTOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="MOD_OTROS_INGRESOS" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="MOD_AMIGOSOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CAL_TOTAL_DESCUENTO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_LIQ_PAGABLE" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="FILIAL" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PROGRAMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NUMERO_DOC" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXPEDIDO" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="COD_ESCALA_SAL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="NUMERO_CUENTA" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="MES" Type="Int32" Nullable="false" />
+          <Property Name="GESTION" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="FACI_CODIGO" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PLANILLA_RCIVA">
+          <Key>
+            <PropertyRef Name="GESTION" />
+            <PropertyRef Name="MES" />
+            <PropertyRef Name="ITEM" />
+          </Key>
+          <Property Name="GESTION" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="MES" Type="Int32" Nullable="false" />
+          <Property Name="ITEM" Type="Int32" Nullable="false" />
+          <Property Name="CAL_SUELDO_NETO" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_MIN_NO_IMPONIBLE" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SUJETO_IMP" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMPUESTO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="MOD_COMPUTO_IVA" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_POR_NRO_SMN" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SALDO_FISCO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_A_FAVOR_DEP" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_MES_ANT" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+          <Property Name="CAL_ACT_MES_ANT" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_VALOR_ACT" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_TOTAL_DEP" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_UTILIZADO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMP_RETENIDO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_FAVOR_PROX_MES" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="TOTAL_GANADO" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+          <Property Name="MOD_OTR_INGRESOS" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="MES_CIERRE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="FEC_CIERRE" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VPLANILLA_RCIVA">
+          <Key>
+            <PropertyRef Name="ITEM" />
+            <PropertyRef Name="NOMBRE" />
+            <PropertyRef Name="CAL_SLD_MES_ANT" />
+            <PropertyRef Name="TOTAL_GANADO" />
+            <PropertyRef Name="CI" />
+            <PropertyRef Name="EXTENDIDO" />
+            <PropertyRef Name="NROCUENTA" />
+            <PropertyRef Name="FILIAL" />
+            <PropertyRef Name="PROGRAMA" />
+            <PropertyRef Name="SECCION" />
+          </Key>
+          <Property Name="ITEM" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CAL_SUELDO_NETO" Type="Decimal" Precision="22" Scale="2" />
+          <Property Name="MOD_OTR_INGRESOS" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SUELDO_TOTAL_NETO" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="CAL_MIN_NO_IMPONIBLE" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SUJETO_IMP" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMPUESTO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="MOD_COMPUTO_IVA" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_POR_NRO_SMN" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SALDO_FISCO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_A_FAVOR_DEP" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_MES_ANT" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+          <Property Name="CAL_ACT_MES_ANT" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_VALOR_ACT" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_TOTAL_DEP" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_UTILIZADO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_IMP_RETENIDO" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="CAL_SLD_FAVOR_PROX_MES" Type="Decimal" Precision="21" Scale="2" />
+          <Property Name="TOTAL_GANADO" Type="Decimal" Nullable="false" Precision="21" Scale="2" />
+          <Property Name="CI" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EXTENDIDO" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="NROCUENTA" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="FILIAL" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="PROGRAMA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SECCION" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="MES_CIERRE" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PERIODOS_PLANILLAS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gestion" Type="Int16" Nullable="false" />
+          <Property Name="Mes" Type="Int16" Nullable="false" />
+          <Property Name="EstadoPlanillaId" Type="Int16" Nullable="false" />
+          <Property Name="EsRetroactivo" Type="Boolean" Nullable="false" />
+          <Property Name="RetroactivoId" Type="Int32" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ESTADOS_PLANILLAS" Relationship="PlanillasSosModel.FK_PERIODOS_PLANILLAS_ESTADOS_PLANILLAS" FromRole="PERIODOS_PLANILLAS" ToRole="ESTADOS_PLANILLAS" />
+          <NavigationProperty Name="RETROACTIVO" Relationship="PlanillasSosModel.FK_PERIODOS_PLANILLAS_RETROACTIVOS" FromRole="PERIODOS_PLANILLAS" ToRole="RETROACTIVO" />
+        </EntityType>
+        <Association Name="FK_PERIODOS_PLANILLAS_ESTADOS_PLANILLAS">
+          <End Type="PlanillasSosModel.ESTADOS_PLANILLAS" Role="ESTADOS_PLANILLAS" Multiplicity="1" />
+          <End Type="PlanillasSosModel.PERIODOS_PLANILLAS" Role="PERIODOS_PLANILLAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOS_PLANILLAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PERIODOS_PLANILLAS">
+              <PropertyRef Name="EstadoPlanillaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RETROACTIVO">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gestion" Type="Int16" Nullable="false" />
+          <Property Name="Mes" Type="Int16" Nullable="false" />
+          <Property Name="EstadoPlanillaId" Type="Int16" Nullable="false" />
+          <Property Name="UsuarioCreacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UsuarioModificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaModificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ESTADOS_PLANILLAS" Relationship="PlanillasSosModel.FK_RETROACTIVOS_ESTADOS_PLANILLAS" FromRole="RETROACTIVO" ToRole="ESTADOS_PLANILLAS" />
+          <NavigationProperty Name="PERIODOS_PLANILLAS" Relationship="PlanillasSosModel.FK_PERIODOS_PLANILLAS_RETROACTIVOS" FromRole="RETROACTIVO" ToRole="PERIODOS_PLANILLAS" />
+        </EntityType>
+        <Association Name="FK_RETROACTIVOS_ESTADOS_PLANILLAS">
+          <End Type="PlanillasSosModel.ESTADOS_PLANILLAS" Role="ESTADOS_PLANILLAS" Multiplicity="1" />
+          <End Type="PlanillasSosModel.RETROACTIVO" Role="RETROACTIVO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ESTADOS_PLANILLAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RETROACTIVO">
+              <PropertyRef Name="EstadoPlanillaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERIODOS_PLANILLAS_RETROACTIVOS">
+          <End Type="PlanillasSosModel.RETROACTIVO" Role="RETROACTIVO" Multiplicity="0..1" />
+          <End Type="PlanillasSosModel.PERIODOS_PLANILLAS" Role="PERIODOS_PLANILLAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RETROACTIVO">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PERIODOS_PLANILLAS">
+              <PropertyRef Name="RetroactivoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PARAMETROS_PLANILLAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="VALOR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PORCENTAJE_APORTE_NACIONAL_SOL">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INTERVALO_INICIAL" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="INTERVALO_FINAL" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="PORCENTAJE" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="TIPO" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PORCENTAJE_BONO_ANTIGUEDAD">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ANIOS_INICIAL" Type="Int32" Nullable="false" />
+          <Property Name="ANIOS_FINAL" Type="Int32" Nullable="false" />
+          <Property Name="PORCENTAJE" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+        </EntityType>
+        <EntityType Name="SALARIOS_MINIMOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SALARIO_MINIMO" Type="Decimal" Nullable="false" Precision="17" Scale="7" />
+          <Property Name="FECHA_SALARIO_MINIMO" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="REGISTRO_UFVS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UFV_ACTUAL" Type="Decimal" Nullable="false" Precision="17" Scale="7" />
+          <Property Name="UFV_ANTERIOR" Type="Decimal" Nullable="false" Precision="17" Scale="7" />
+          <Property Name="FECHA_UFV" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PlanillasSosModelStoreContainer" CdmEntityContainer="PlanillasSosDBEntities" >
+          <FunctionImportMapping FunctionImportName="GENERA_PLANILLA" FunctionName="PlanillasSosModel.Store.GENERA_PLANILLA" />
+          <FunctionImportMapping FunctionImportName="GENERA_PLANILLA_RCIVA" FunctionName="PlanillasSosModel.Store.GENERA_PLANILLA_RCIVA" />
+          <EntitySetMapping Name="PARAMETROS">
+            <EntityTypeMapping TypeName="PlanillasSosModel.PARAMETRO">
+              <MappingFragment StoreEntitySet="PARAMETROS">
+                <ScalarProperty Name="DES_PARAM5" ColumnName="DES_PARAM5" />
+                <ScalarProperty Name="COD_PARAM5" ColumnName="COD_PARAM5" />
+                <ScalarProperty Name="DES_PARAM4" ColumnName="DES_PARAM4" />
+                <ScalarProperty Name="COD_PARAM4" ColumnName="COD_PARAM4" />
+                <ScalarProperty Name="DES_PARAM3" ColumnName="DES_PARAM3" />
+                <ScalarProperty Name="COD_PARAM3" ColumnName="COD_PARAM3" />
+                <ScalarProperty Name="DES_PARAM2" ColumnName="DES_PARAM2" />
+                <ScalarProperty Name="COD_PARAM2" ColumnName="COD_PARAM2" />
+                <ScalarProperty Name="DES_PARAM1" ColumnName="DES_PARAM1" />
+                <ScalarProperty Name="COD_PARAM1" ColumnName="COD_PARAM1" />
+                <ScalarProperty Name="DES_PARAMETRO" ColumnName="DES_PARAMETRO" />
+                <ScalarProperty Name="COD_PARAMETRO" ColumnName="COD_PARAMETRO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANILLA_SUELDOS">
+            <EntityTypeMapping TypeName="PlanillasSosModel.PLANILLA_SUELDOS">
+              <MappingFragment StoreEntitySet="PLANILLA_SUELDOS">
+                <ScalarProperty Name="EDAD" ColumnName="EDAD" />
+                <ScalarProperty Name="SALARIO" ColumnName="SALARIO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="CAL_IMPUESTO_RETENIDO" ColumnName="CAL_IMPUESTO_RETENIDO" />
+                <ScalarProperty Name="CAL_APONACSOL_3" ColumnName="CAL_APONACSOL_3" />
+                <ScalarProperty Name="CAL_APONACSOL_2" ColumnName="CAL_APONACSOL_2" />
+                <ScalarProperty Name="CAL_APONACSOL_1" ColumnName="CAL_APONACSOL_1" />
+                <ScalarProperty Name="FECHA_NACIMIENTO" ColumnName="FECHA_NACIMIENTO" />
+                <ScalarProperty Name="COTIZANTE" ColumnName="COTIZANTE" />
+                <ScalarProperty Name="CAL_ANTIGUEDAD_REAL" ColumnName="CAL_ANTIGUEDAD_REAL" />
+                <ScalarProperty Name="MES_CIERRE" ColumnName="MES_CIERRE" />
+                <ScalarProperty Name="FEC_CIERRE" ColumnName="FEC_CIERRE" />
+                <ScalarProperty Name="CAL_LIQ_PAGABLE" ColumnName="CAL_LIQ_PAGABLE" />
+                <ScalarProperty Name="CAL_TOTAL_DESCUENTO" ColumnName="CAL_TOTAL_DESCUENTO" />
+                <ScalarProperty Name="CAL_APO_SOL_ASEG" ColumnName="CAL_APO_SOL_ASEG" />
+                <ScalarProperty Name="CAL_AFP" ColumnName="CAL_AFP" />
+                <ScalarProperty Name="CAL_APONALSOL" ColumnName="CAL_APONALSOL" />
+                <ScalarProperty Name="CAL_TOTAL_GANADO" ColumnName="CAL_TOTAL_GANADO" />
+                <ScalarProperty Name="MOD_ASIGSOS" ColumnName="MOD_ASIGSOS" />
+                <ScalarProperty Name="MOD_MONTO_NETO" ColumnName="MOD_MONTO_NETO" />
+                <ScalarProperty Name="MOD_OTROS_INGRESOS" ColumnName="MOD_OTROS_INGRESOS" />
+                <ScalarProperty Name="MOD_OTRS_DESCUENTOS" ColumnName="MOD_OTRS_DESCUENTOS" />
+                <ScalarProperty Name="MOD_PRESTAMOS" ColumnName="MOD_PRESTAMOS" />
+                <ScalarProperty Name="MOD_AMIGOSOS" ColumnName="MOD_AMIGOSOS" />
+                <ScalarProperty Name="MOD_COMISION" ColumnName="MOD_COMISION" />
+                <ScalarProperty Name="MOD_RC_IVA_2" ColumnName="MOD_RC_IVA_2" />
+                <ScalarProperty Name="MOD_RC_IVA" ColumnName="MOD_RC_IVA" />
+                <ScalarProperty Name="CAL_BONO_ANTIGUEDAD" ColumnName="CAL_BONO_ANTIGUEDAD" />
+                <ScalarProperty Name="BASICO_GANADO" ColumnName="BASICO_GANADO" />
+                <ScalarProperty Name="HABER_BASICO" ColumnName="HABER_BASICO" />
+                <ScalarProperty Name="DIAS_PAG" ColumnName="DIAS_PAG" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="GESTION" ColumnName="GESTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ESTADOS_PLANILLAS">
+            <EntityTypeMapping TypeName="PlanillasSosModel.ESTADOS_PLANILLAS">
+              <MappingFragment StoreEntitySet="ESTADOS_PLANILLAS">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPERSONALs">
+            <EntityTypeMapping TypeName="PlanillasSosModel.VPERSONAL">
+              <MappingFragment StoreEntitySet="VPERSONAL">
+                <ScalarProperty Name="SEG_TIPO_SEGURO" ColumnName="SEG_TIPO_SEGURO" />
+                <ScalarProperty Name="AFP_AFP" ColumnName="AFP_AFP" />
+                <ScalarProperty Name="codigoAFP" ColumnName="codigoAFP" />
+                <ScalarProperty Name="TPROG_TIPO_PROGRAMA" ColumnName="TPROG_TIPO_PROGRAMA" />
+                <ScalarProperty Name="PROG_COD_TIPO_PROG" ColumnName="PROG_COD_TIPO_PROG" />
+                <ScalarProperty Name="PROG_PROGRAMA" ColumnName="PROG_PROGRAMA" />
+                <ScalarProperty Name="codigoPrograma" ColumnName="codigoPrograma" />
+                <ScalarProperty Name="FIL_FILIAL" ColumnName="FIL_FILIAL" />
+                <ScalarProperty Name="codigoFilial" ColumnName="codigoFilial" />
+                <ScalarProperty Name="DEP_DEPARTAMENTO" ColumnName="DEP_DEPARTAMENTO" />
+                <ScalarProperty Name="codigoDepartamento" ColumnName="codigoDepartamento" />
+                <ScalarProperty Name="ESCSAL_HABER_BAS" ColumnName="ESCSAL_HABER_BAS" />
+                <ScalarProperty Name="ESCSAL_ESCALA_SAL" ColumnName="ESCSAL_ESCALA_SAL" />
+                <ScalarProperty Name="codigoEscalaSalarial" ColumnName="codigoEscalaSalarial" />
+                <ScalarProperty Name="AREA_AREA" ColumnName="AREA_AREA" />
+                <ScalarProperty Name="CARG_COD_AREA" ColumnName="CARG_COD_AREA" />
+                <ScalarProperty Name="CARG_SAL_MIN" ColumnName="CARG_SAL_MIN" />
+                <ScalarProperty Name="CARG_SAL_MAX" ColumnName="CARG_SAL_MAX" />
+                <ScalarProperty Name="CARG_ESTADO" ColumnName="CARG_ESTADO" />
+                <ScalarProperty Name="CARG_CARGO" ColumnName="CARG_CARGO" />
+                <ScalarProperty Name="codigoCargoActual" ColumnName="codigoCargoActual" />
+                <ScalarProperty Name="SECC_SECCION" ColumnName="SECC_SECCION" />
+                <ScalarProperty Name="codigoSeccion" ColumnName="codigoSeccion" />
+                <ScalarProperty Name="TCON_CONTRATO" ColumnName="TCON_CONTRATO" />
+                <ScalarProperty Name="codigoTipoContratacion" ColumnName="codigoTipoContratacion" />
+                <ScalarProperty Name="FACI_CIUDAD" ColumnName="FACI_CIUDAD" />
+                <ScalarProperty Name="FACI_PROYECTO" ColumnName="FACI_PROYECTO" />
+                <ScalarProperty Name="FACI_NOMBRE" ColumnName="FACI_NOMBRE" />
+                <ScalarProperty Name="FACI_CODIGO" ColumnName="FACI_CODIGO" />
+                <ScalarProperty Name="codigoFacility" ColumnName="codigoFacility" />
+                <ScalarProperty Name="TDOC_ABV_TIPO_DOCUMENTO" ColumnName="TDOC_ABV_TIPO_DOCUMENTO" />
+                <ScalarProperty Name="TDOC_TIPO_DOCUMENTO" ColumnName="TDOC_TIPO_DOCUMENTO" />
+                <ScalarProperty Name="codigoTipoDocumento" ColumnName="codigoTipoDocumento" />
+                <ScalarProperty Name="PROF_PROFESION" ColumnName="PROF_PROFESION" />
+                <ScalarProperty Name="codigoProfesion" ColumnName="codigoProfesion" />
+                <ScalarProperty Name="TEST_ESTUDIO" ColumnName="TEST_ESTUDIO" />
+                <ScalarProperty Name="codigoEstudio" ColumnName="codigoEstudio" />
+                <ScalarProperty Name="codigoRecibeInstruccion" ColumnName="codigoRecibeInstruccion" />
+                <ScalarProperty Name="codigoEsEvaluado" ColumnName="codigoEsEvaluado" />
+                <ScalarProperty Name="excepciones" ColumnName="excepciones" />
+                <ScalarProperty Name="tipoAasignacion" ColumnName="tipoAasignacion" />
+                <ScalarProperty Name="tipoGrupoRetroactivo" ColumnName="tipoGrupoRetroactivo" />
+                <ScalarProperty Name="tipoGrupo" ColumnName="tipoGrupo" />
+                <ScalarProperty Name="fechaFinContrato" ColumnName="fechaFinContrato" />
+                <ScalarProperty Name="nacionalidad" ColumnName="nacionalidad" />
+                <ScalarProperty Name="cotizante" ColumnName="cotizante" />
+                <ScalarProperty Name="item2" ColumnName="item2" />
+                <ScalarProperty Name="area" ColumnName="area" />
+                <ScalarProperty Name="tipoInicio" ColumnName="tipoInicio" />
+                <ScalarProperty Name="tipoSeguro" ColumnName="tipoSeguro" />
+                <ScalarProperty Name="telefonoContacto" ColumnName="telefonoContacto" />
+                <ScalarProperty Name="zona" ColumnName="zona" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="fechaSistema" ColumnName="fechaSistema" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="observaciones" ColumnName="observaciones" />
+                <ScalarProperty Name="estadoADM" ColumnName="estadoADM" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fechaRetiro" ColumnName="fechaRetiro" />
+                <ScalarProperty Name="nua" ColumnName="nua" />
+                <ScalarProperty Name="funcion3" ColumnName="funcion3" />
+                <ScalarProperty Name="funcion2" ColumnName="funcion2" />
+                <ScalarProperty Name="funcion1" ColumnName="funcion1" />
+                <ScalarProperty Name="propositoCargo" ColumnName="propositoCargo" />
+                <ScalarProperty Name="tieneSubAlternos" ColumnName="tieneSubAlternos" />
+                <ScalarProperty Name="numeroSeguro" ColumnName="numeroSeguro" />
+                <ScalarProperty Name="numeroCuenta" ColumnName="numeroCuenta" />
+                <ScalarProperty Name="tiempoCompleto" ColumnName="tiempoCompleto" />
+                <ScalarProperty Name="contratoIndefinido" ColumnName="contratoIndefinido" />
+                <ScalarProperty Name="salario" ColumnName="salario" />
+                <ScalarProperty Name="cargo_act" ColumnName="cargo_act" />
+                <ScalarProperty Name="fechaInicioCargo" ColumnName="fechaInicioCargo" />
+                <ScalarProperty Name="fechaIngreso" ColumnName="fechaIngreso" />
+                <ScalarProperty Name="filial" ColumnName="filial" />
+                <ScalarProperty Name="correo" ColumnName="correo" />
+                <ScalarProperty Name="usuario_correo" ColumnName="usuario_correo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="numeroDocumento" ColumnName="numeroDocumento" />
+                <ScalarProperty Name="estadoCivil" ColumnName="estadoCivil" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="fechaNacimiento" ColumnName="fechaNacimiento" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidoCasada" ColumnName="apellidoCasada" />
+                <ScalarProperty Name="apellidoMaterno" ColumnName="apellidoMaterno" />
+                <ScalarProperty Name="apellidoPaterno" ColumnName="apellidoPaterno" />
+                <ScalarProperty Name="item" ColumnName="item" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPLANILLA_SUELDOS_GENERAL">
+            <EntityTypeMapping TypeName="PlanillasSosModel.VPLANILLA_SUELDOS_GENERAL">
+              <MappingFragment StoreEntitySet="VPLANILLA_SUELDOS_GENERAL">
+                <ScalarProperty Name="TIPO_AFP" ColumnName="TIPO_AFP" />
+                <ScalarProperty Name="COTIZANTE" ColumnName="COTIZANTE" />
+                <ScalarProperty Name="TIPO_SEGURO" ColumnName="TIPO_SEGURO" />
+                <ScalarProperty Name="NACIONALIDAD" ColumnName="NACIONALIDAD" />
+                <ScalarProperty Name="ITEM_2" ColumnName="ITEM_2" />
+                <ScalarProperty Name="CAL_APONACSOL_1" ColumnName="CAL_APONACSOL_1" />
+                <ScalarProperty Name="CAL_APONACSOL_2" ColumnName="CAL_APONACSOL_2" />
+                <ScalarProperty Name="CAL_APONACSOL_3" ColumnName="CAL_APONACSOL_3" />
+                <ScalarProperty Name="AREA" ColumnName="AREA" />
+                <ScalarProperty Name="NOM_FACPROYECTO" ColumnName="NOM_FACPROYECTO" />
+                <ScalarProperty Name="NOM_FACILITY" ColumnName="NOM_FACILITY" />
+                <ScalarProperty Name="CODIGO_FACILITY" ColumnName="CODIGO_FACILITY" />
+                <ScalarProperty Name="CAL_IMPUESTO_RETENIDO" ColumnName="CAL_IMPUESTO_RETENIDO" />
+                <ScalarProperty Name="COD_ESCALA_SAL" ColumnName="COD_ESCALA_SAL" />
+                <ScalarProperty Name="CAL_APO_SOL_ASEG" ColumnName="CAL_APO_SOL_ASEG" />
+                <ScalarProperty Name="CAL_AFP" ColumnName="CAL_AFP" />
+                <ScalarProperty Name="CAL_APONALSOL" ColumnName="CAL_APONALSOL" />
+                <ScalarProperty Name="CAL_TOTAL_GANADO" ColumnName="CAL_TOTAL_GANADO" />
+                <ScalarProperty Name="MOD_OTRS_DESCUENTOS" ColumnName="MOD_OTRS_DESCUENTOS" />
+                <ScalarProperty Name="MOD_PRESTAMOS" ColumnName="MOD_PRESTAMOS" />
+                <ScalarProperty Name="MOD_AMIGOSOS" ColumnName="MOD_AMIGOSOS" />
+                <ScalarProperty Name="MOD_COMISION" ColumnName="MOD_COMISION" />
+                <ScalarProperty Name="MOD_RC_IVA" ColumnName="MOD_RC_IVA" />
+                <ScalarProperty Name="CAL_BONO_ANTIGUEDAD" ColumnName="CAL_BONO_ANTIGUEDAD" />
+                <ScalarProperty Name="SECCION" ColumnName="SECCION" />
+                <ScalarProperty Name="COD_SECCION" ColumnName="COD_SECCION" />
+                <ScalarProperty Name="PROGRAMA" ColumnName="PROGRAMA" />
+                <ScalarProperty Name="FILIAL" ColumnName="FILIAL" />
+                <ScalarProperty Name="COD_FILIAL" ColumnName="COD_FILIAL" />
+                <ScalarProperty Name="BASICO_GANADO" ColumnName="BASICO_GANADO" />
+                <ScalarProperty Name="HABER_BASICO" ColumnName="HABER_BASICO" />
+                <ScalarProperty Name="NUMERO_CUENTA" ColumnName="NUMERO_CUENTA" />
+                <ScalarProperty Name="DIAS_PAG" ColumnName="DIAS_PAG" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="EXPEDIDO" ColumnName="EXPEDIDO" />
+                <ScalarProperty Name="NUMERO_DOC" ColumnName="NUMERO_DOC" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="GESTION" ColumnName="GESTION" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="FECHA_NACIMIENTO" ColumnName="FECHA_NACIMIENTO" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPLANILLA_AFP_FUTURO">
+            <EntityTypeMapping TypeName="PlanillasSosModel.VPLANILLA_AFP_FUTURO">
+              <MappingFragment StoreEntitySet="VPLANILLA_AFP_FUTURO">
+                <ScalarProperty Name="GESTION" ColumnName="GESTION" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="MES_CIERRE" ColumnName="MES_CIERRE" />
+                <ScalarProperty Name="PROGRAMA" ColumnName="PROGRAMA" />
+                <ScalarProperty Name="TIPO_DOC" ColumnName="TIPO_DOC" />
+                <ScalarProperty Name="FILIAL" ColumnName="FILIAL" />
+                <ScalarProperty Name="NUA" ColumnName="NUA" />
+                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+                <ScalarProperty Name="APELLIDO_CASADA" ColumnName="APELLIDO_CASADA" />
+                <ScalarProperty Name="APELLIDO_MATERNO" ColumnName="APELLIDO_MATERNO" />
+                <ScalarProperty Name="APELLIDO_PATERNO" ColumnName="APELLIDO_PATERNO" />
+                <ScalarProperty Name="APO_PAT_SOL" ColumnName="APO_PAT_SOL" />
+                <ScalarProperty Name="APO_PRO_VIV" ColumnName="APO_PRO_VIV" />
+                <ScalarProperty Name="APO_PAT" ColumnName="APO_PAT" />
+                <ScalarProperty Name="APO_SOL_10" ColumnName="APO_SOL_10" />
+                <ScalarProperty Name="APO_SOL_5" ColumnName="APO_SOL_5" />
+                <ScalarProperty Name="APO_SOL_1" ColumnName="APO_SOL_1" />
+                <ScalarProperty Name="AFP_SOL_5" ColumnName="AFP_SOL_5" />
+                <ScalarProperty Name="AFP_12_21" ColumnName="AFP_12_21" />
+                <ScalarProperty Name="FECHANOVEDAD" ColumnName="FECHANOVEDAD" />
+                <ScalarProperty Name="NOVEDAD" ColumnName="NOVEDAD" />
+                <ScalarProperty Name="TOTAL_GANADO" ColumnName="TOTAL_GANADO" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="DIAS_TRAB" ColumnName="DIAS_TRAB" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="EXT" ColumnName="EXT" />
+                <ScalarProperty Name="CI" ColumnName="CI" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPLANILLA_AFP_PREVISION">
+            <EntityTypeMapping TypeName="PlanillasSosModel.VPLANILLA_AFP_PREVISION">
+              <MappingFragment StoreEntitySet="VPLANILLA_AFP_PREVISION">
+                <ScalarProperty Name="GESTION" ColumnName="GESTION" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="MES_CIERRE" ColumnName="MES_CIERRE" />
+                <ScalarProperty Name="PROG_PROGRAMA" ColumnName="PROG_PROGRAMA" />
+                <ScalarProperty Name="TIPO_DOC" ColumnName="TIPO_DOC" />
+                <ScalarProperty Name="FILIAL" ColumnName="FILIAL" />
+                <ScalarProperty Name="NUA" ColumnName="NUA" />
+                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+                <ScalarProperty Name="APELLIDO_CASADA" ColumnName="APELLIDO_CASADA" />
+                <ScalarProperty Name="APELLIDO_MATERNO" ColumnName="APELLIDO_MATERNO" />
+                <ScalarProperty Name="APELLIDO_PATENRO" ColumnName="APELLIDO_PATENRO" />
+                <ScalarProperty Name="APO_PAT_SOL" ColumnName="APO_PAT_SOL" />
+                <ScalarProperty Name="APO_PRO_VIV" ColumnName="APO_PRO_VIV" />
+                <ScalarProperty Name="APO_PAT" ColumnName="APO_PAT" />
+                <ScalarProperty Name="APO_SOL_10" ColumnName="APO_SOL_10" />
+                <ScalarProperty Name="APO_SOL_5" ColumnName="APO_SOL_5" />
+                <ScalarProperty Name="APO_SOL_1" ColumnName="APO_SOL_1" />
+                <ScalarProperty Name="AFP_SOL_5" ColumnName="AFP_SOL_5" />
+                <ScalarProperty Name="AFP_12_21" ColumnName="AFP_12_21" />
+                <ScalarProperty Name="FECHANOVEDAD" ColumnName="FECHANOVEDAD" />
+                <ScalarProperty Name="NOVEDAD" ColumnName="NOVEDAD" />
+                <ScalarProperty Name="TOTAL_GANADO" ColumnName="TOTAL_GANADO" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="DIAS_TRAB" ColumnName="DIAS_TRAB" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="EXT" ColumnName="EXT" />
+                <ScalarProperty Name="CI" ColumnName="CI" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPLANILLA_APORTES_SALUD">
+            <EntityTypeMapping TypeName="PlanillasSosModel.VPLANILLA_APORTES_SALUD">
+              <MappingFragment StoreEntitySet="VPLANILLA_APORTES_SALUD">
+                <ScalarProperty Name="PROGRAMA" ColumnName="PROGRAMA" />
+                <ScalarProperty Name="COD_ESCALA_SAL" ColumnName="COD_ESCALA_SAL" />
+                <ScalarProperty Name="MES_CIERRE" ColumnName="MES_CIERRE" />
+                <ScalarProperty Name="GESTION" ColumnName="GESTION" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="NUMERO_CUENTA" ColumnName="NUMERO_CUENTA" />
+                <ScalarProperty Name="CARGA_HORARIA" ColumnName="CARGA_HORARIA" />
+                <ScalarProperty Name="TOTAL_APORTE" ColumnName="TOTAL_APORTE" />
+                <ScalarProperty Name="TIPO_SEGURO" ColumnName="TIPO_SEGURO" />
+                <ScalarProperty Name="COD_TIPO_SEGURO" ColumnName="COD_TIPO_SEGURO" />
+                <ScalarProperty Name="FILIAL" ColumnName="FILIAL" />
+                <ScalarProperty Name="OTROS_DESCUENTOS" ColumnName="OTROS_DESCUENTOS" />
+                <ScalarProperty Name="COMISION" ColumnName="COMISION" />
+                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+                <ScalarProperty Name="APELLIDO_CASADA" ColumnName="APELLIDO_CASADA" />
+                <ScalarProperty Name="APELLIDO_MATERNO" ColumnName="APELLIDO_MATERNO" />
+                <ScalarProperty Name="APELLIDO_PATERNO" ColumnName="APELLIDO_PATERNO" />
+                <ScalarProperty Name="numeroCuenta" ColumnName="numeroCuenta" />
+                <ScalarProperty Name="LIQUIDO_PAGABLE" ColumnName="LIQUIDO_PAGABLE" />
+                <ScalarProperty Name="TOTAL_DESCUENTO" ColumnName="TOTAL_DESCUENTO" />
+                <ScalarProperty Name="AMIGO_SOS" ColumnName="AMIGO_SOS" />
+                <ScalarProperty Name="DESCUENTOS" ColumnName="DESCUENTOS" />
+                <ScalarProperty Name="RC_IVA" ColumnName="RC_IVA" />
+                <ScalarProperty Name="SOLIDARIO" ColumnName="SOLIDARIO" />
+                <ScalarProperty Name="AFP_050" ColumnName="AFP_050" />
+                <ScalarProperty Name="AFP_1221" ColumnName="AFP_1221" />
+                <ScalarProperty Name="AFP" ColumnName="AFP" />
+                <ScalarProperty Name="TOTAL_GANADO" ColumnName="TOTAL_GANADO" />
+                <ScalarProperty Name="MONTO_DOMINICALES" ColumnName="MONTO_DOMINICALES" />
+                <ScalarProperty Name="NRO_DIAS_DOMINICALES" ColumnName="NRO_DIAS_DOMINICALES" />
+                <ScalarProperty Name="OTROS_BONOS" ColumnName="OTROS_BONOS" />
+                <ScalarProperty Name="BONO_PRODUCCION" ColumnName="BONO_PRODUCCION" />
+                <ScalarProperty Name="MONTO_PAGADO" ColumnName="MONTO_PAGADO" />
+                <ScalarProperty Name="HORAS_EXTRAS" ColumnName="HORAS_EXTRAS" />
+                <ScalarProperty Name="ASIGNACION_SOS" ColumnName="ASIGNACION_SOS" />
+                <ScalarProperty Name="BONO_ANTIGUEDAD" ColumnName="BONO_ANTIGUEDAD" />
+                <ScalarProperty Name="BASICO_GANADO" ColumnName="BASICO_GANADO" />
+                <ScalarProperty Name="SUELDO_BASICO" ColumnName="SUELDO_BASICO" />
+                <ScalarProperty Name="HORA_PAG" ColumnName="HORA_PAG" />
+                <ScalarProperty Name="DIAS_TRAB" ColumnName="DIAS_TRAB" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="FECHA_NAC" ColumnName="FECHA_NAC" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="EXT" ColumnName="EXT" />
+                <ScalarProperty Name="NUMERO_DOC" ColumnName="NUMERO_DOC" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPLANILLA_MINISTERIO">
+            <EntityTypeMapping TypeName="PlanillasSosModel.VPLANILLA_MINISTERIO">
+              <MappingFragment StoreEntitySet="VPLANILLA_MINISTERIO">
+                <ScalarProperty Name="MES_CIERRE" ColumnName="MES_CIERRE" />
+                <ScalarProperty Name="GESTION" ColumnName="GESTION" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="ESCALA_SALARIAL" ColumnName="ESCALA_SALARIAL" />
+                <ScalarProperty Name="SECCION" ColumnName="SECCION" />
+                <ScalarProperty Name="PROGRAMA" ColumnName="PROGRAMA" />
+                <ScalarProperty Name="FILIAL" ColumnName="FILIAL" />
+                <ScalarProperty Name="LIQ_PAGABLE" ColumnName="LIQ_PAGABLE" />
+                <ScalarProperty Name="TOTAL_DESCUENTO" ColumnName="TOTAL_DESCUENTO" />
+                <ScalarProperty Name="OTROS_DESCUENTOS" ColumnName="OTROS_DESCUENTOS" />
+                <ScalarProperty Name="RC_IVA" ColumnName="RC_IVA" />
+                <ScalarProperty Name="AFP" ColumnName="AFP" />
+                <ScalarProperty Name="TOTAL_GANADO" ColumnName="TOTAL_GANADO" />
+                <ScalarProperty Name="DOMINICAL" ColumnName="DOMINICAL" />
+                <ScalarProperty Name="NUMERO_DOMINICAL" ColumnName="NUMERO_DOMINICAL" />
+                <ScalarProperty Name="OTROS_BONOS" ColumnName="OTROS_BONOS" />
+                <ScalarProperty Name="BONO_PRODUCCION" ColumnName="BONO_PRODUCCION" />
+                <ScalarProperty Name="MONTO_PAGADO" ColumnName="MONTO_PAGADO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="ASIG_SOS" ColumnName="ASIG_SOS" />
+                <ScalarProperty Name="BONO_ANTIGUEDAD" ColumnName="BONO_ANTIGUEDAD" />
+                <ScalarProperty Name="HABER_BASICO" ColumnName="HABER_BASICO" />
+                <ScalarProperty Name="CARGA_HORARIA" ColumnName="CARGA_HORARIA" />
+                <ScalarProperty Name="DIAS_TRAB" ColumnName="DIAS_TRAB" />
+                <ScalarProperty Name="FECHA_RETIRO" ColumnName="FECHA_RETIRO" />
+                <ScalarProperty Name="TIPO_CONTRATO" ColumnName="TIPO_CONTRATO" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="FECHA_NACIMIENTO" ColumnName="FECHA_NACIMIENTO" />
+                <ScalarProperty Name="NACIONALIDAD" ColumnName="NACIONALIDAD" />
+                <ScalarProperty Name="NOMBRES" ColumnName="NOMBRES" />
+                <ScalarProperty Name="APELLIDO_CASADA" ColumnName="APELLIDO_CASADA" />
+                <ScalarProperty Name="APELLIDO_MATERNO" ColumnName="APELLIDO_MATERNO" />
+                <ScalarProperty Name="APELLIDO_PATERNO" ColumnName="APELLIDO_PATERNO" />
+                <ScalarProperty Name="NUA" ColumnName="NUA" />
+                <ScalarProperty Name="AFP_APORTA" ColumnName="AFP_APORTA" />
+                <ScalarProperty Name="EXPEDIDO" ColumnName="EXPEDIDO" />
+                <ScalarProperty Name="NUMERO_DOC" ColumnName="NUMERO_DOC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPLANILLA_SUELDOS">
+            <EntityTypeMapping TypeName="PlanillasSosModel.VPLANILLA_SUELDOS">
+              <MappingFragment StoreEntitySet="VPLANILLA_SUELDOS">
+                <ScalarProperty Name="FACI_CODIGO" ColumnName="FACI_CODIGO" />
+                <ScalarProperty Name="GESTION" ColumnName="GESTION" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="NUMERO_CUENTA" ColumnName="NUMERO_CUENTA" />
+                <ScalarProperty Name="COD_ESCALA_SAL" ColumnName="COD_ESCALA_SAL" />
+                <ScalarProperty Name="EXPEDIDO" ColumnName="EXPEDIDO" />
+                <ScalarProperty Name="NUMERO_DOC" ColumnName="NUMERO_DOC" />
+                <ScalarProperty Name="PROGRAMA" ColumnName="PROGRAMA" />
+                <ScalarProperty Name="FILIAL" ColumnName="FILIAL" />
+                <ScalarProperty Name="CAL_LIQ_PAGABLE" ColumnName="CAL_LIQ_PAGABLE" />
+                <ScalarProperty Name="CAL_TOTAL_DESCUENTO" ColumnName="CAL_TOTAL_DESCUENTO" />
+                <ScalarProperty Name="MOD_AMIGOSOS" ColumnName="MOD_AMIGOSOS" />
+                <ScalarProperty Name="MOD_OTROS_INGRESOS" ColumnName="MOD_OTROS_INGRESOS" />
+                <ScalarProperty Name="MOD_OTRS_DESCUENTOS" ColumnName="MOD_OTRS_DESCUENTOS" />
+                <ScalarProperty Name="MOD_PRESTAMOS" ColumnName="MOD_PRESTAMOS" />
+                <ScalarProperty Name="CAL_APONALSOL" ColumnName="CAL_APONALSOL" />
+                <ScalarProperty Name="CAL_APO_SOL_ASEG" ColumnName="CAL_APO_SOL_ASEG" />
+                <ScalarProperty Name="CAL_AFP" ColumnName="CAL_AFP" />
+                <ScalarProperty Name="RC_IVA" ColumnName="RC_IVA" />
+                <ScalarProperty Name="MOD_RC_IVA" ColumnName="MOD_RC_IVA" />
+                <ScalarProperty Name="CAL_TOTAL_GANADO" ColumnName="CAL_TOTAL_GANADO" />
+                <ScalarProperty Name="MOD_COMISION" ColumnName="MOD_COMISION" />
+                <ScalarProperty Name="MOD_ASIGSOS" ColumnName="MOD_ASIGSOS" />
+                <ScalarProperty Name="CAL_BONO_ANTIGUEDAD" ColumnName="CAL_BONO_ANTIGUEDAD" />
+                <ScalarProperty Name="BASICO_GANADO" ColumnName="BASICO_GANADO" />
+                <ScalarProperty Name="HABER_BASICO" ColumnName="HABER_BASICO" />
+                <ScalarProperty Name="DIAS_PAG" ColumnName="DIAS_PAG" />
+                <ScalarProperty Name="FECHA_INGRESO" ColumnName="FECHA_INGRESO" />
+                <ScalarProperty Name="CARGO" ColumnName="CARGO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANILLA_RCIVA">
+            <EntityTypeMapping TypeName="PlanillasSosModel.PLANILLA_RCIVA">
+              <MappingFragment StoreEntitySet="PLANILLA_RCIVA">
+                <ScalarProperty Name="FEC_CIERRE" ColumnName="FEC_CIERRE" />
+                <ScalarProperty Name="MES_CIERRE" ColumnName="MES_CIERRE" />
+                <ScalarProperty Name="MOD_OTR_INGRESOS" ColumnName="MOD_OTR_INGRESOS" />
+                <ScalarProperty Name="TOTAL_GANADO" ColumnName="TOTAL_GANADO" />
+                <ScalarProperty Name="CAL_SLD_FAVOR_PROX_MES" ColumnName="CAL_SLD_FAVOR_PROX_MES" />
+                <ScalarProperty Name="CAL_IMP_RETENIDO" ColumnName="CAL_IMP_RETENIDO" />
+                <ScalarProperty Name="CAL_SLD_UTILIZADO" ColumnName="CAL_SLD_UTILIZADO" />
+                <ScalarProperty Name="CAL_SLD_TOTAL_DEP" ColumnName="CAL_SLD_TOTAL_DEP" />
+                <ScalarProperty Name="CAL_VALOR_ACT" ColumnName="CAL_VALOR_ACT" />
+                <ScalarProperty Name="CAL_ACT_MES_ANT" ColumnName="CAL_ACT_MES_ANT" />
+                <ScalarProperty Name="CAL_SLD_MES_ANT" ColumnName="CAL_SLD_MES_ANT" />
+                <ScalarProperty Name="CAL_A_FAVOR_DEP" ColumnName="CAL_A_FAVOR_DEP" />
+                <ScalarProperty Name="CAL_SALDO_FISCO" ColumnName="CAL_SALDO_FISCO" />
+                <ScalarProperty Name="CAL_POR_NRO_SMN" ColumnName="CAL_POR_NRO_SMN" />
+                <ScalarProperty Name="MOD_COMPUTO_IVA" ColumnName="MOD_COMPUTO_IVA" />
+                <ScalarProperty Name="CAL_IMPUESTO" ColumnName="CAL_IMPUESTO" />
+                <ScalarProperty Name="CAL_SUJETO_IMP" ColumnName="CAL_SUJETO_IMP" />
+                <ScalarProperty Name="CAL_MIN_NO_IMPONIBLE" ColumnName="CAL_MIN_NO_IMPONIBLE" />
+                <ScalarProperty Name="CAL_SUELDO_NETO" ColumnName="CAL_SUELDO_NETO" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="GESTION" ColumnName="GESTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VPLANILLA_RCIVA">
+            <EntityTypeMapping TypeName="PlanillasSosModel.VPLANILLA_RCIVA">
+              <MappingFragment StoreEntitySet="VPLANILLA_RCIVA">
+                <ScalarProperty Name="MES_CIERRE" ColumnName="MES_CIERRE" />
+                <ScalarProperty Name="SECCION" ColumnName="SECCION" />
+                <ScalarProperty Name="PROGRAMA" ColumnName="PROGRAMA" />
+                <ScalarProperty Name="FILIAL" ColumnName="FILIAL" />
+                <ScalarProperty Name="NROCUENTA" ColumnName="NROCUENTA" />
+                <ScalarProperty Name="EXTENDIDO" ColumnName="EXTENDIDO" />
+                <ScalarProperty Name="CI" ColumnName="CI" />
+                <ScalarProperty Name="TOTAL_GANADO" ColumnName="TOTAL_GANADO" />
+                <ScalarProperty Name="CAL_SLD_FAVOR_PROX_MES" ColumnName="CAL_SLD_FAVOR_PROX_MES" />
+                <ScalarProperty Name="CAL_IMP_RETENIDO" ColumnName="CAL_IMP_RETENIDO" />
+                <ScalarProperty Name="CAL_SLD_UTILIZADO" ColumnName="CAL_SLD_UTILIZADO" />
+                <ScalarProperty Name="CAL_SLD_TOTAL_DEP" ColumnName="CAL_SLD_TOTAL_DEP" />
+                <ScalarProperty Name="CAL_VALOR_ACT" ColumnName="CAL_VALOR_ACT" />
+                <ScalarProperty Name="CAL_ACT_MES_ANT" ColumnName="CAL_ACT_MES_ANT" />
+                <ScalarProperty Name="CAL_SLD_MES_ANT" ColumnName="CAL_SLD_MES_ANT" />
+                <ScalarProperty Name="CAL_A_FAVOR_DEP" ColumnName="CAL_A_FAVOR_DEP" />
+                <ScalarProperty Name="CAL_SALDO_FISCO" ColumnName="CAL_SALDO_FISCO" />
+                <ScalarProperty Name="CAL_POR_NRO_SMN" ColumnName="CAL_POR_NRO_SMN" />
+                <ScalarProperty Name="MOD_COMPUTO_IVA" ColumnName="MOD_COMPUTO_IVA" />
+                <ScalarProperty Name="CAL_IMPUESTO" ColumnName="CAL_IMPUESTO" />
+                <ScalarProperty Name="CAL_SUJETO_IMP" ColumnName="CAL_SUJETO_IMP" />
+                <ScalarProperty Name="CAL_MIN_NO_IMPONIBLE" ColumnName="CAL_MIN_NO_IMPONIBLE" />
+                <ScalarProperty Name="CAL_SUELDO_TOTAL_NETO" ColumnName="CAL_SUELDO_TOTAL_NETO" />
+                <ScalarProperty Name="MOD_OTR_INGRESOS" ColumnName="MOD_OTR_INGRESOS" />
+                <ScalarProperty Name="CAL_SUELDO_NETO" ColumnName="CAL_SUELDO_NETO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ITEM" ColumnName="ITEM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERIODOS_PLANILLAS">
+            <EntityTypeMapping TypeName="PlanillasSosModel.PERIODOS_PLANILLAS">
+              <MappingFragment StoreEntitySet="PERIODOS_PLANILLAS">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="RetroactivoId" ColumnName="RetroactivoId" />
+                <ScalarProperty Name="EsRetroactivo" ColumnName="EsRetroactivo" />
+                <ScalarProperty Name="EstadoPlanillaId" ColumnName="EstadoPlanillaId" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Gestion" ColumnName="Gestion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RETROACTIVOS">
+            <EntityTypeMapping TypeName="PlanillasSosModel.RETROACTIVO">
+              <MappingFragment StoreEntitySet="RETROACTIVOS">
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="UsuarioModificacion" ColumnName="UsuarioModificacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
+                <ScalarProperty Name="EstadoPlanillaId" ColumnName="EstadoPlanillaId" />
+                <ScalarProperty Name="Mes" ColumnName="Mes" />
+                <ScalarProperty Name="Gestion" ColumnName="Gestion" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PARAMETROS_PLANILLAS">
+            <EntityTypeMapping TypeName="PlanillasSosModel.PARAMETROS_PLANILLAS">
+              <MappingFragment StoreEntitySet="PARAMETROS_PLANILLAS">
+                <ScalarProperty Name="VALOR" ColumnName="VALOR" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PORCENTAJE_APORTE_NACIONAL_SOL">
+            <EntityTypeMapping TypeName="PlanillasSosModel.PORCENTAJE_APORTE_NACIONAL_SOL">
+              <MappingFragment StoreEntitySet="PORCENTAJE_APORTE_NACIONAL_SOL">
+                <ScalarProperty Name="TIPO" ColumnName="TIPO" />
+                <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
+                <ScalarProperty Name="INTERVALO_FINAL" ColumnName="INTERVALO_FINAL" />
+                <ScalarProperty Name="INTERVALO_INICIAL" ColumnName="INTERVALO_INICIAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PORCENTAJE_BONO_ANTIGUEDAD">
+            <EntityTypeMapping TypeName="PlanillasSosModel.PORCENTAJE_BONO_ANTIGUEDAD">
+              <MappingFragment StoreEntitySet="PORCENTAJE_BONO_ANTIGUEDAD">
+                <ScalarProperty Name="PORCENTAJE" ColumnName="PORCENTAJE" />
+                <ScalarProperty Name="ANIOS_FINAL" ColumnName="ANIOS_FINAL" />
+                <ScalarProperty Name="ANIOS_INICIAL" ColumnName="ANIOS_INICIAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SALARIOS_MINIMOS">
+            <EntityTypeMapping TypeName="PlanillasSosModel.SALARIOS_MINIMOS">
+              <MappingFragment StoreEntitySet="SALARIOS_MINIMOS">
+                <ScalarProperty Name="FECHA_SALARIO_MINIMO" ColumnName="FECHA_SALARIO_MINIMO" />
+                <ScalarProperty Name="SALARIO_MINIMO" ColumnName="SALARIO_MINIMO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGISTRO_UFVS">
+            <EntityTypeMapping TypeName="PlanillasSosModel.REGISTRO_UFVS">
+              <MappingFragment StoreEntitySet="REGISTRO_UFVS">
+                <ScalarProperty Name="FECHA_UFV" ColumnName="FECHA_UFV" />
+                <ScalarProperty Name="UFV_ANTERIOR" ColumnName="UFV_ANTERIOR" />
+                <ScalarProperty Name="UFV_ACTUAL" ColumnName="UFV_ACTUAL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

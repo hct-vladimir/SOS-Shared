@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E92AEEFD-0BF4-4175-B4FB-C8153B421397}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cerberus.Sos.Accounting.BusinessLogic</RootNamespace>
+    <AssemblyName>Cerberus.Sos.Accounting.BusinessLogic</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Entities\AccionesNacionale.cs" />
+    <Compile Include="Entities\Aldeas\ListaAfp.cs" />
+    <Compile Include="Entities\Aldeas\ListaArea.cs" />
+    <Compile Include="Entities\Aldeas\ListaCargo.cs" />
+    <Compile Include="Entities\Aldeas\ListaCiudad.cs" />
+    <Compile Include="Entities\Aldeas\ListaDepartamento.cs" />
+    <Compile Include="Entities\Aldeas\ListaEscalaSalarial.cs" />
+    <Compile Include="Entities\Aldeas\ListaFacility.cs" />
+    <Compile Include="Entities\Aldeas\ListaFilial.cs" />
+    <Compile Include="Entities\Aldeas\ListaProfesion.cs" />
+    <Compile Include="Entities\Aldeas\ListaPrograma.cs" />
+    <Compile Include="Entities\Aldeas\ListaSeccion.cs" />
+    <Compile Include="Entities\Aldeas\SeguroMedico.cs" />
+    <Compile Include="Entities\Aldeas\TipoAfp.cs" />
+    <Compile Include="Entities\Aldeas\TipoContratacion.cs" />
+    <Compile Include="Entities\Aldeas\TipoDocumento.cs" />
+    <Compile Include="Entities\Aldeas\TipoEstadoCivil.cs" />
+    <Compile Include="Entities\Aldeas\TipoEstudio.cs" />
+    <Compile Include="Entities\Aldeas\TipoInicio.cs" />
+    <Compile Include="Entities\Aldeas\TipoRetiro.cs" />
+    <Compile Include="Entities\AnexosTributario.cs" />
+    <Compile Include="Entities\Banco.cs" />
+    <Compile Include="Entities\Cierre.cs" />
+    <Compile Include="Entities\CierreContable.cs" />
+    <Compile Include="Entities\CierreContableCiudad.cs" />
+    <Compile Include="Entities\Ciudad.cs" />
+    <Compile Include="Entities\CodigosAuditoria.cs" />
+    <Compile Include="Entities\CodigoMarcoLogico.cs" />
+    <Compile Include="Entities\Comprobante.cs" />
+    <Compile Include="Entities\Contraparte.cs" />
+    <Compile Include="Entities\CuentaAsiento.cs" />
+    <Compile Include="Entities\CuentaBanco.cs" />
+    <Compile Include="Entities\CuentaContable.cs" />
+    <Compile Include="Entities\CuentaNavision.cs" />
+    <Compile Include="Entities\EstadoCuenta.cs" />
+    <Compile Include="Entities\EstadoPlanilla.cs" />
+    <Compile Include="Entities\EstadoPresupuesto.cs" />
+    <Compile Include="Entities\EstadosCierre.cs" />
+    <Compile Include="Entities\EstadosComprobante.cs" />
+    <Compile Include="Entities\Facility.cs" />
+    <Compile Include="Entities\FacilityCuentaContable.cs" />
+    <Compile Include="Entities\FacilityPlanProgramatico.cs" />
+    <Compile Include="Entities\Factura.cs" />
+    <Compile Include="Entities\FacturaComprador.cs" />
+    <Compile Include="Entities\NivelProgramatico.cs" />
+    <Compile Include="Entities\Observacion.cs" />
+    <Compile Include="Entities\ParametrosPlanillas\AporteNacional.cs" />
+    <Compile Include="Entities\ParametrosPlanillas\BonoAntiguedad.cs" />
+    <Compile Include="Entities\ParametrosPlanillas\Parametro.cs" />
+    <Compile Include="Entities\ParametrosPlanillas\RegistroUfv.cs" />
+    <Compile Include="Entities\ParametrosPlanillas\SalarioMinimo.cs" />
+    <Compile Include="Entities\PeriodoCierre.cs" />
+    <Compile Include="Entities\PeriodoPlanilla.cs" />
+    <Compile Include="Entities\Personal.cs" />
+    <Compile Include="Entities\PersonalBaja.cs" />
+    <Compile Include="Entities\Planilla.cs" />
+    <Compile Include="Entities\PlanillaParametro.cs" />
+    <Compile Include="Entities\PlanillaRcIva.cs" />
+    <Compile Include="Entities\PlanillaSueldo.cs" />
+    <Compile Include="Entities\PlanProgramatico.cs" />
+    <Compile Include="Entities\PlanProgramaticoCuenta.cs" />
+    <Compile Include="Entities\PlantillaAsiento.cs" />
+    <Compile Include="Entities\PlantillaCuenta.cs" />
+    <Compile Include="Entities\Presupuesto.cs" />
+    <Compile Include="Entities\PresupuestoCiudad.cs" />
+    <Compile Include="Entities\PresupuestoFacility.cs" />
+    <Compile Include="Entities\PresupuestoFacilityCompartido.cs" />
+    <Compile Include="Entities\Recurso.cs" />
+    <Compile Include="Entities\RecursoMes.cs" />
+    <Compile Include="Entities\Reportes\Presupuesto\ReporteResumen.cs" />
+    <Compile Include="Entities\Reportes\ReporteBalanceComprobacion.cs" />
+    <Compile Include="Entities\Reportes\ReporteBalanceGeneral.cs" />
+    <Compile Include="Entities\Reportes\ReporteComprobante.cs" />
+    <Compile Include="Entities\Reportes\ReporteEstadoResultados.cs" />
+    <Compile Include="Entities\Reportes\ReporteLibroCompras.cs" />
+    <Compile Include="Entities\Reportes\ReporteLibroVentas.cs" />
+    <Compile Include="Entities\Reportes\ReporteMayores.cs" />
+    <Compile Include="Entities\Reportes\ReporteSumasSaldos.cs" />
+    <Compile Include="Entities\Resultado.cs" />
+    <Compile Include="Entities\Retencion.cs" />
+    <Compile Include="Entities\RetencionVista.cs" />
+    <Compile Include="Entities\Retroactivo.cs" />
+    <Compile Include="Entities\RptPlanillaAfpFuturo.cs" />
+    <Compile Include="Entities\RptPlanillaAfpPrevision.cs" />
+    <Compile Include="Entities\RptPlanillaAportesSalud.cs" />
+    <Compile Include="Entities\RptPlanillaRcIva.cs" />
+    <Compile Include="Entities\RptPlanillaSueldos.cs" />
+    <Compile Include="Entities\RptPlanillaSueldosGeneral.cs" />
+    <Compile Include="Entities\Territorio.cs" />
+    <Compile Include="Entities\TipoCambio.cs" />
+    <Compile Include="Entities\TipoMoneda.cs" />
+    <Compile Include="Entities\TipoObservacion.cs" />
+    <Compile Include="Entities\TiposCierre.cs" />
+    <Compile Include="Entities\TiposComprobante.cs" />
+    <Compile Include="Entities\TiposCuenta.cs" />
+    <Compile Include="Entities\TiposPresupuesto.cs" />
+    <Compile Include="Entities\TiposRetencion.cs" />
+    <Compile Include="Entities\Traspaso.cs" />
+    <Compile Include="Entities\TraspasosPrograma.cs" />
+    <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Entities\VPresupuestoCiudad.cs" />
+    <Compile Include="Managers\AccionesNacionalesManager.cs" />
+    <Compile Include="Managers\AldeasParametrosManager.cs" />
+    <Compile Include="Managers\AnexosTributariosManager.cs" />
+    <Compile Include="Managers\BancosManager.cs" />
+    <Compile Include="Managers\CierresContablesManager.cs" />
+    <Compile Include="Managers\CierresManager.cs" />
+    <Compile Include="Managers\CiudadesManager.cs" />
+    <Compile Include="Managers\CodigosAuditoriasManager.cs" />
+    <Compile Include="Managers\ComprobantesManager.cs" />
+    <Compile Include="Managers\ContrapartesManager.cs" />
+    <Compile Include="Managers\CuentasAsientosManager.cs" />
+    <Compile Include="Managers\CuentasBancosManager.cs" />
+    <Compile Include="Managers\CuentasContablesManager.cs" />
+    <Compile Include="Managers\EstadosCuentasManager.cs" />
+    <Compile Include="Managers\FacilitiesManager.cs" />
+    <Compile Include="Managers\FacturasManager.cs" />
+    <Compile Include="Managers\MapperManager.cs" />
+    <Compile Include="Managers\ObservacionesManager.cs" />
+    <Compile Include="Managers\ParametrosPlanillasManager.cs" />
+    <Compile Include="Managers\PeriodosPlanillasManager.cs" />
+    <Compile Include="Managers\PersonalManager.cs" />
+    <Compile Include="Managers\PlanillasManager.cs" />
+    <Compile Include="Managers\PlanProgramaticoManager.cs" />
+    <Compile Include="Managers\PlantillasAsientosManager.cs" />
+    <Compile Include="Managers\PlantillasCuentasManager.cs" />
+    <Compile Include="Managers\PresupuestosManager.cs" />
+    <Compile Include="Managers\RecursosManager.cs" />
+    <Compile Include="Managers\RecursosMesesManager.cs" />
+    <Compile Include="Managers\ReportesManager.cs" />
+    <Compile Include="Managers\RetencionesManager.cs" />
+    <Compile Include="Managers\RetroactivosManager.cs" />
+    <Compile Include="Managers\TerritoriosManager.cs" />
+    <Compile Include="Managers\TiposCambioManager.cs" />
+    <Compile Include="Managers\TraspasosProgramasManager.cs" />
+    <Compile Include="Managers\UsuariosManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{08c438c5-bad8-40ae-9b38-8c17ca8e558a}</Project>
+      <Name>DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Log\Log.csproj">
+      <Project>{0713fa72-e0ad-47b4-9e9d-c0a6341ffc4e}</Project>
+      <Name>Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Security\Security.csproj">
+      <Project>{a0f75cef-ccf1-4014-a868-ec05b68f4bb9}</Project>
+      <Name>Security</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

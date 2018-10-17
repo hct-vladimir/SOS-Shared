@@ -1,0 +1,115 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.Reportes.Presupuesto.ReporteResumen>
+
+@{
+    ViewBag.Title = "Resumen Presupuesto";
+}
+
+<h2 class="page-header">Resumen de presupuesto. <strong>@ViewBag.FacilityActual.Codigo - @ViewBag.FacilityActual.Nombre</strong></h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Filtro por niveles
+            </div>
+            <div id="panel-busqueda" class="panel-body collapse in">
+                @using (Html.BeginForm("Resumen", "Recursos", FormMethod.Get))
+                {
+                    @Html.ValidationSummary(true)
+
+                    <input type="hidden" name="FacilityId" value="@ViewBag.FacilityActual.Id" />
+                    <input type="hidden" name="CiudadId" value="@ViewBag.CiudadOrigenId" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="NivelId">Elegir nivel de detalle de información</label>
+                                <select id="NivelId" name="NivelId" class="form-control">
+                                    <option value="-1">-- Todos --</option>
+                                    <option value="1">Grupo</option>
+                                    <option value="2">Titulo</option>
+                                    <option value="3">Subtítulo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ver</button>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Totales
+            </div>
+            <div id="panel-totales" class="panel-body collapse in">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                            <tr>
+                                <th>Total Gasto Bs.</th>
+                                <td class="text-right">@ViewBag.TotalGasto.ToString("N2")</td>
+                            </tr>
+                            <tr>
+                                <th>Total Ingreso Bs.</th>
+                                <td class="text-right">@ViewBag.TotalIngreso.ToString("N2")</td>
+                            </tr>
+                            <tr>
+                                <th>Necesidad Subsidio Bs.</th>
+                                <td class="text-right">@ViewBag.TotalSubsidio.ToString("N2")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.Any())
+{
+    <p>
+        @Html.ActionLink("Regresar", "Index", "Recursos", new { facilityId = ViewBag.FacilityActual.Id, ciudadId = ViewBag.CiudadOrigenId }, null)
+    </p>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Descripción</th>
+                    <th class="text-center">SOS</th>
+                    <th class="text-center">RRFF</th>
+                    <th class="text-center">GOB</th>
+                    <th class="text-center">MUN</th>
+                    <th class="text-center">COM</th>
+                    <th class="text-center">IPD</th>
+                    <th class="text-center">Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="grupo-@item.NivelProgramaticoId">
+                        <td>@item.Codigo</td>
+                        <td>@item.Descripcion</td>
+                        <td class="text-right">@item.SOS.Value.ToString("N2")</td>
+                        <td class="text-right">@item.RRFF.Value.ToString("N2")</td>
+                        <td class="text-right">@item.GOB.Value.ToString("N2")</td>
+                        <td class="text-right">@item.MUN.Value.ToString("N2")</td>
+                        <td class="text-right">@item.COM.Value.ToString("N2")</td>
+                        <td class="text-right">@item.IPD.Value.ToString("N2")</td>
+                        <td class="text-right">@item.Total.Value.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+}
+<p>
+    @Html.ActionLink("Regresar", "Index", "Recursos", new { facilityId = ViewBag.FacilityActual.Id, ciudadId = ViewBag.CiudadOrigenId }, null)
+</p>
+

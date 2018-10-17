@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.CierreContableCiudad>
+@{
+    ViewBag.Title = "Cierres Contables";
+}
+<h2 class="page-header">Revisión de Comprobantes</h2>
+<h4 class="text-right">Periodo Actual: @ViewBag.PeriodoActivo</h4>
+
+@if (Context.User.IsInRole("CTBD-CLR"))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="btn-group " role="group" aria-label="..." style="margin-bottom: 20px;">
+                <a href="@Url.Action("Habilitar", "Presupuestos", new {gestion = ViewBag.GestionActual})" class="btn btn-success btn-action" role="button" onclick="return confirm('Esta seguro de habilitar los presupuestos para las ciudades seleccionadas?')"><i class="glyphicon glyphicon-list-alt"></i> Habilitar Periodos</a>
+                <a href="@Url.Action("Cerrar", "Presupuestos", new {gestion = ViewBag.GestionActual})" class="btn btn-primary btn-action" role="button" onclick="return confirm('Esta seguro de cerrar todos los presupuestos para la Gestión actual?')"><i class="glyphicon glyphicon-list-alt"></i> Finalizar Periodos</a>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Any())
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Contabilidad por Ciudad
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Seleccionar</th>
+                                    <th>Ciudad</th>
+                                    <th>Comprobantes</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><input type="checkbox" id="@item.CierreContableId" class="check-presupuesto" /></td>
+                                        <td>@item.Ciudad </td>
+                                        @if (item.Cantidad.HasValue)
+                                        {
+                                            <td>@item.Cantidad.Value</td>
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                        }
+                                        <td>@item.Estado</td>
+                                        <td>
+                                            @Html.ActionLink("Detalle", "Facilities", "Comprobantes", new { ciudadId = @item.CiudadId }, null)
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @*<div class="panel-footer">Total Bs.: @ViewBag.TotalPresupuesto.ToString("N2")</div>*@
+            </div>
+        </div>
+    </div>
+}
+
+
+

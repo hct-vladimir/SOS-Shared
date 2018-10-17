@@ -1,0 +1,146 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.Comprobante>
+
+@{
+    ViewBag.Title = "Comprobantes";
+}
+
+<h2 class="page-header">Comprobantes - Unidad de Programa <strong>@ViewBag.FacilityActual.Codigo - @ViewBag.FacilityActual.Nombre</strong></h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="#panel-busqueda" role="button" data-toggle="collapse" class="collapsed">Búsqueda de comprobantes <span class="fa fa-chevron" aria-hidden="true"></span></a>
+    </div>
+    <div id="panel-busqueda" class="panel-body collapse">
+        @using (Html.BeginForm("Index", "Comprobantes", FormMethod.Get))
+            {
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="Numero">Comprobante</label>
+                        @Html.TextBox("Numero", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="Mes">Mes</label>
+                        <select id="Mes" name="Mes" class="form-control">
+                            <option value="-1">-- Seleccionar --</option>
+                            <option value="1">Enero</option>
+                            <option value="2">Febrero</option>
+                            <option value="3">Marzo</option>
+                            <option value="4">Abril</option>
+                            <option value="5">Mayo</option>
+                            <option value="6">Junio</option>
+                            <option value="7">Julio</option>
+                            <option value="8">Agosto</option>
+                            <option value="9">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="Gestion">Gestión</label>
+                        @Html.TextBox("Gestion", null, new { @class = "form-control", @type = "number" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Beneficiario">Beneficiario</label>
+                        @Html.TextBox("Beneficiario", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="Glosa">Glosa</label>
+                        @Html.TextBox("Glosa", null, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+                <button type="submit" class="btn btn-default">Buscar</button>
+        }
+    </div>
+</div>
+
+@if (Context.User.IsInRole("CTBD-CLR") || (Context.User.IsInRole("ADMN-PRG") && ViewBag.EstadoCierreContableId != 5))
+{
+    <p class="btn-action">
+        <a href="@Url.Action("Create", new {facilityId = @ViewBag.FacilityActual.Id, ciudadId = ViewBag.CiudadOrigenId})" class="btn btn-primary btn-action" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus-sign"></i> Agregar Comprobante</a>
+    </p>
+}
+
+@if (Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Numero</th>
+                    <th>Tipo</th>
+                    @*<th>Facility</th>*@
+                    <th>Glosa</th>
+                    <th>Beneficiario</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    @if (!Context.User.IsInRole("CORD-PRG"))
+                    {
+                        <th>Acciones</th>
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.ActionLink(item.NumeroComprobante, "Index", "CuentasAsientos", new { id = item.Id }, null)
+                        </td>
+                        <td>@item.TiposComprobante.Descripcion</td>
+                        @*<td>@item.Facility.Codigo - @item.Facility.Nombre</td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Glosa)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Beneficiario)
+                        </td>
+                        <td>@item.FechaComprobante.ToString("dd'/'MM'/'yyyy")</td>
+                        <td>@item.EstadosComprobante.Nombre</td>
+                        @if (!Context.User.IsInRole("CORD-PRG"))
+                        {
+                            <td>
+                                @Html.ActionLink("Detalle", "Index", "CuentasAsientos", new { id = item.Id }, null)
+                                @if (item.EstadosComprobante.Nombre != "FINALIZADO" && item.EstadosComprobante.Nombre != "ANULADO")
+                                {
+                                    <span>|</span>
+                                    <a href="@Url.Action("Edit", new {id = item.Id, facilityId = ViewBag.FacilityActual.Id})"> Modificar</a>
+                                    <span>|</span>
+                                    <a href="@Url.Action("Delete", new {id = item.Id, facilityId = ViewBag.FacilityActual.Id})" onclick="return confirm('Esta seguro de Borrar el Comprobante?');"> Borrar</a>
+                                }
+                                @if (Context.User.IsInRole("CTBD-CLR") && item.EstadosComprobante.Nombre != "ANULADO")
+                                {
+                                    <span>|</span>
+                                    <a href="@Url.Action("Anular", new {id = item.Id, facilityId = ViewBag.FacilityActual.Id})" onclick="return confirm('Esta seguro de Anular el Comprobante?');"> Anular</a>
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Facilities", "Comprobantes", new { ciudadId = @ViewBag.CiudadOrigenId }, null)
+</div>

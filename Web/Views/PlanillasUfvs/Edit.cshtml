@@ -1,0 +1,53 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.ParametrosPlanillas.RegistroUfv
+
+@{
+    ViewBag.Title = "Registro de UFV's";
+}
+
+<h2>Editar Registro de UFV's</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Modificar datos de UFV's
+                </div>
+                <div class="panel-body collapse in">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FECHA_UFV, "Fecha de UFV (Formato: yyyymmdd)")
+                        @Html.TextBoxFor(model => model.FECHA_UFV, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FECHA_UFV)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UFV_ANTERIOR, "UFV Anterior")
+                        @Html.TextBoxFor(model => model.UFV_ANTERIOR, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UFV_ANTERIOR)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UFV_ACTUAL, "UFV Actual")
+                        @Html.TextBoxFor(model => model.UFV_ACTUAL, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UFV_ACTUAL)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-default">Modificar</button>
+    </div>
+}
+
+<div class="form-links">
+    @Html.ActionLink("Regresar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

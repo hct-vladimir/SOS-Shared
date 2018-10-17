@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="76f90f260d0f43a995b5aca49b48887d" Name="Diagram1" ZoomLevel="38" >
+        <EntityTypeShape EntityType="PlanillasSosModel.PARAMETRO" Width="1.5" PointX="13.5" PointY="6" />
+        <EntityTypeShape EntityType="PlanillasSosModel.PLANILLA_SUELDOS" Width="1.75" PointX="11" PointY="0.5" />
+        <EntityTypeShape EntityType="PlanillasSosModel.ESTADOS_PLANILLAS" Width="2.125" PointX="3.125" PointY="7.75" />
+        <EntityTypeShape EntityType="PlanillasSosModel.VPERSONAL" Width="2.25" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="PlanillasSosModel.VPLANILLA_SUELDOS_GENERAL" Width="2.25" PointX="8" PointY="0.5" />
+        <EntityTypeShape EntityType="PlanillasSosModel.VPLANILLA_AFP_FUTURO" Width="1.5" PointX="8.375" PointY="10.75" />
+        <EntityTypeShape EntityType="PlanillasSosModel.VPLANILLA_AFP_PREVISION" Width="1.5" PointX="10.375" PointY="10.75" />
+        <EntityTypeShape EntityType="PlanillasSosModel.VPLANILLA_APORTES_SALUD" Width="1.875" PointX="3.375" PointY="11.75" />
+        <EntityTypeShape EntityType="PlanillasSosModel.VPLANILLA_MINISTERIO" Width="2.125" PointX="5.875" PointY="11.75" />
+        <EntityTypeShape EntityType="PlanillasSosModel.VPLANILLA_SUELDOS" Width="2.25" PointX="3" PointY="0.5" />
+        <EntityTypeShape EntityType="PlanillasSosModel.PLANILLA_RCIVA" Width="1.5" PointX="13.625" PointY="0.5" />
+        <EntityTypeShape EntityType="PlanillasSosModel.VPLANILLA_RCIVA" Width="1.5" PointX="15.625" PointY="0.5" />
+        <EntityTypeShape EntityType="PlanillasSosModel.PERIODOS_PLANILLAS" Width="1.875" PointX="5.875" PointY="4.5" />
+        <AssociationConnector Association="PlanillasSosModel.FK_PERIODOS_PLANILLAS_ESTADOS_PLANILLAS" />
+        <EntityTypeShape EntityType="PlanillasSosModel.RETROACTIVO" Width="1.875" PointX="5.875" PointY="8.375" />
+        <AssociationConnector Association="PlanillasSosModel.FK_RETROACTIVOS_ESTADOS_PLANILLAS" />
+        <AssociationConnector Association="PlanillasSosModel.FK_PERIODOS_PLANILLAS_RETROACTIVOS" />
+        <EntityTypeShape EntityType="PlanillasSosModel.PARAMETROS_PLANILLAS" Width="1.5" PointX="12.375" PointY="10.75" />
+        <EntityTypeShape EntityType="PlanillasSosModel.PORCENTAJE_APORTE_NACIONAL_SOL" Width="1.5" PointX="12.375" PointY="13.75" />
+        <EntityTypeShape EntityType="PlanillasSosModel.PORCENTAJE_BONO_ANTIGUEDAD" Width="1.5" PointX="14.375" PointY="10.75" />
+        <EntityTypeShape EntityType="PlanillasSosModel.SALARIOS_MINIMOS" Width="1.5" PointX="14.375" PointY="13.75" />
+        <EntityTypeShape EntityType="PlanillasSosModel.REGISTRO_UFVS" Width="1.5" PointX="16.375" PointY="7.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

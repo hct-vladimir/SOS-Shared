@@ -1,0 +1,130 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.Facility>
+@{
+    ViewBag.Title = "LLenado de Presupuesto";
+}
+<h2 class="page-header">Llenado de Presupuesto</h2>
+@*<h4 class="text-right">Estado: @ViewBag.EstadoPresupuesto</h4>*@
+<div class="row">
+    <div class="col-md-6">
+        <div class="btn-group " role="group" aria-label="..." style="margin-bottom: 20px;">
+            @if (ViewBag.EstadoPresupuestoId == 5)
+            {
+                <a href="@Url.Action("ReporteBet", "Recursos")" class="btn btn-success btn-action" role="button"><i class="glyphicon glyphicon-list-alt"></i> Reporte BEF/BET</a>
+            }
+            @*<a href="#" class="btn btn-success btn-action" role="button"><i class="glyphicon glyphicon-print"></i> Imprimir Presupuesto</a>*@
+        </div>
+    </div>
+    @*<div class="col-md-6">
+            @if ((ViewBag.EstadoPresupuestoId == 2 || ViewBag.EstadoPresupuestoId == 4) && @Context.User.IsInRole("ADMN-PRG"))
+            {
+                <div class="btn-group pull-right">
+                    <a href="@Url.Action("CambiarEstado", "Presupuestos", new {ciudadId = ViewBag.CiudadOrigenId, gestion = 2019, estadoId = 3})" class="btn btn-success btn-action" role="button" onclick="return confirm('Esta seguro de enviar para revisión el Presupuesto actual?')"><i class="glyphicon glyphicon-circle-arrow-right"></i> Enviar a Revisión</a>
+                </div>
+            }
+
+            @if (@Context.User.IsInRole("CORD-PRG") && ViewBag.EstadoPresupuestoId == 3)
+            {
+                <div class="btn-group pull-right">
+                    <a href="@Url.Action("CambiarEstado", "Presupuestos", new {ciudadId = ViewBag.CiudadOrigenId, gestion = 2019, estadoId = 4})" class="btn btn-primary btn-action" role="button" onclick="return confirm('Esta seguro de enviar para revisión el Presupuesto actual?')"><i class="glyphicon glyphicon-circle-arrow-left"></i> Enviar Observaciones</a>
+                    <a href="@Url.Action("CambiarEstado", "Presupuestos", new {ciudadId = ViewBag.CiudadOrigenId, gestion = 2019, estadoId = 7})" class="btn btn-success btn-action" role="button" onclick="return confirm('Esta seguro de aprobar el Presupuesto actual?')"><i class="glyphicon glyphicon-circle-arrow-right"></i> Enviar a ON</a>
+                </div>
+            }
+        </div>*@
+</div>
+<br />
+@if (@ViewBag.ExistePresupuestoActivo)
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Presupuesto
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="recursos" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Unidad de Programa</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
+                                    <th>Subsidio Total Anual</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <tr class="alert-info">
+                                    <th>Total Presupuesto Bs.</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="text-right">@ViewBag.TotalPresupuesto.ToString("N2")</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Codigo - @item.Nombre</td>
+                                        <td>@item.Descripcion</td>
+                                        <td>@item.EstadoFacilityNombre</td>
+                                        @if (@item.TotalRecursos.HasValue)
+                                        {
+                                            <td class="text-right">@item.TotalRecursos.Value.ToString("N2")</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-right">0,00</td>
+                                        }
+                                        <td>
+                                            @if (@Context.User.IsInRole("CORD-PRG") || @Context.User.IsInRole("PPTO-CLR"))
+                                            {
+                                                @(item.Compartido ? 
+                                                    Html.ActionLink("Ver presupuesto", "Revision", new {facilityId = item.Id, ciudadId = item.CiudadCompartidaActualId, esCompartido = item.Compartido, ciudadOrigenId = item.CiudadId}) : 
+                                                    Html.ActionLink("Ver presupuesto", "Revision", new {facilityId = item.Id, ciudadId = item.CiudadId, esCompartido = item.Compartido, ciudadOrigenId = ViewBag.CiudadOrigenId}))
+                                            }
+
+                                            @if (@Context.User.IsInRole("ADMN-PRG"))
+                                            {
+                                                @Html.ActionLink("Ver presupuesto", "Index", new { facilityId = item.Id, ciudadId = ViewBag.CiudadOrigenId })
+                                            }
+
+                                            @if (User.IsInRole("PPTO-CLR") && item.EstadoFacilityNombre == "APROBADO")
+                                            {
+                                                @("|")
+                                                if (item.Compartido)
+                                                {
+                                                    <a href="@Url.Action("CambiarEstadoFacility", "Presupuestos", new {presupuestoId = ViewBag.PresupuestoActual.Id, ciudadId = item.CiudadCompartidaActualId, facilityId = item.Id, estadoId = 2})" onclick="return confirm('Esta seguro de habilitar esta Unidad de Programa?')">Habilitar Presupuesto</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="@Url.Action("CambiarEstadoFacility", "Presupuestos", new {presupuestoId = ViewBag.PresupuestoActual.Id, ciudadId = item.CiudadId, facilityId = item.Id, estadoId = 2})" onclick="return confirm('Esta seguro de habilitar esta Unidad de Programa?')">Habilitar Presupuesto</a>
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        No Existe un Presupuesto Activo
+    </div>
+}
+
+@if (@Context.User.IsInRole("PPTO-CLR") || @Context.User.IsInRole("CORD-PRG"))
+{
+    <div>
+        @Html.ActionLink("Regresar", "Ciudades", "Presupuestos", new { presupuestoId = ViewBag.PresupuestoActual.Id }, null)
+    </div>
+}

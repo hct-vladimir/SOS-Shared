@@ -1,0 +1,108 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.Comprobante
+
+@{
+    ViewBag.Title = "Registrar comprobante";
+}
+
+<h2>Editar comprobante (Facility <strong>@ViewBag.FacilityActual.Codigo - @ViewBag.FacilityActual.Nombre</strong>)</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <a href="#panel-comprobante" role="button" data-toggle="collapse">Modificar datos del Comprobante <span class="fa fa-chevron" aria-hidden="true"></span></a>
+            </div>
+            <div id="panel-comprobante" class="panel-body collapse in">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <input type="hidden" id="FacilityId" name="FacilityId" value="@ViewBag.FacilityActual.Id" />
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.FechaComprobante, "Fecha")
+                                <div class='input-group date' id='datetimepicker-comprobante'>
+                                    @Html.TextBoxFor(model => model.FechaComprobante, null, new { @class = "form-control" })
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.FechaComprobante)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TipoComprobanteId, "Tipo")
+                                <select id="TipoComprobanteId" name="TipoComprobanteId" class="form-control">
+                                    <option value="-1">-- Seleccionar --</option>
+                                    <option value="1">Ingreso</option>
+                                    <option value="2">Egreso</option>
+                                    <option value="3">Traspaso</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Beneficiario, "Beneficiario")
+                                @Html.TextBoxFor(model => model.Beneficiario, null, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Beneficiario)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Glosa, "Glosa")
+                        @Html.TextAreaFor(model => model.Glosa, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Glosa)
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TipoMonedaId, "Moneda")
+                                <select id="TipoMonedaId" name="TipoMonedaId" class="form-control">
+                                    <option value="1">Bolivianos</option>
+                                    <option value="2">Dólares</option>
+                                    <option value="3">Euros</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-md-offset-2">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CuentaBancoId, "Ficha de Banco")
+                                <select id="CuentaBancoId" name="CuentaBancoId" class="form-control">
+                                    <option value="-1">-- Seleccionar --</option>
+                                    <option value="1">4020BK1177-C1108001-MAESTRO CARE EL ALTO</option>
+                                    <option value="2">4020BK1048-R0031514-CV ALDEA MALLASA</option>
+                                    <option value="3">4020BK1051-R0031514-CAJA CHICA ALDEA LPZ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NumeroCheque, "Nro. Cheque")
+                                @Html.TextBoxFor(model => model.NumeroCheque, null, new {@class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.NumeroCheque)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-default">Modificar</button>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Regresar", "Index", new { facilityId = @ViewBag.FacilityActual.Id })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

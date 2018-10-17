@@ -1,0 +1,184 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.RecursoMes
+@{
+    ViewBag.Title = "LLenado de Presupuesto";
+}
+<h2 class="page-header">Llenado de Presupuesto mensual</h2>
+<h4 class="text-right">Estado: @ViewBag.EstadoPresupuesto</h4>
+<div class="row">
+    <div class="col-md-6">
+        <div class="btn-group " role="group" aria-label="..." style="margin-bottom: 20px;">
+            <a href="@Url.Action("ReporteBet", "Recursos")" class="btn btn-success btn-action" role="button"><i class="glyphicon glyphicon-list-alt"></i> Reporte para BET</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="btn-group pull-right">
+            <a href="@Url.Action("CambiarEstado", "Presupuestos", new {gestion = 2019, estadoId = 3})" class="btn btn-success btn-action" role="button"><i class="glyphicon glyphicon-circle-arrow-right"></i> Enviar a Revisión</a>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <a href="#panel-asiento" role="button" data-toggle="collapse" ><i class="glyphicon glyphicon-file"></i> Modificar Recurso <span class="fa fa-chevron" aria-hidden="true"></span></a>
+    </div>
+    <div id="panel-asiento" class="panel-body collapse in">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Enero", "Enero")
+                            @Html.TextBoxFor(m => m.Enero, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Febrero", "Febrero")
+                            @Html.TextBoxFor(m => m.Febrero, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Marzo", "Marzo")
+                            @Html.TextBoxFor(m => m.Marzo, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Abril", "Abril")
+                            @Html.TextBoxFor(m => m.Abril, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Mayo", "Mayo")
+                            @Html.TextBoxFor(m => m.Mayo, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Junio", "Junio")
+                            @Html.TextBoxFor(m => m.Junio, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Julio", "Julio")
+                            @Html.TextBoxFor(m => m.Julio, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Agosto", "Agosto")
+                            @Html.TextBoxFor(m => m.Agosto, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Septiembre", "Septiembre")
+                            @Html.TextBoxFor(m => m.Septiembre, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Octubre", "Octubre")
+                            @Html.TextBoxFor(m => m.Octubre, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Noviembre", "Noviembre")
+                            @Html.TextBoxFor(m => m.Noviembre, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group">
+                            @Html.Label("Diciembre", "Diciembre")
+                            @Html.TextBoxFor(m => m.Diciembre, null, new {@class = "form-control"})
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                <a href="@Url.Action("Index", "RecursosMeses")" class="btn btn-warning btn-action">Cancelar</a>
+            </div>
+        }
+    </div>
+</div>
+
+@if (true)
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Presupuesto mensual
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Plan Programático</th>
+                                    <th>Facility</th>
+                                    <th>Cuenta</th>
+                                    <th>Descripción</th>
+                                    <th>Total</th>
+                                    <th>Enero</th>
+                                    <th>Febrero</th>
+                                    <th>Marzo</th>
+                                    <th>Abril</th>
+                                    <th>Mayo</th>
+                                    <th>Junio</th>
+                                    <th>Julio</th>
+                                    <th>Agosto</th>
+                                    <th>Septiembre</th>
+                                    <th>Octubre</th>
+                                    <th>Noviembre</th>
+                                    <th>Diciembre</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in ViewBag.RecursosMeses)
+                                {
+                                    <tr>
+                                        <td>@item.Recurso.PlanProgramatico.Codigo - @item.Recurso.PlanProgramatico.Descripcion</td>
+                                        <td>@item.Recurso.Facility.Codigo - @item.Recurso.Facility.Nombre</td>
+                                        <td>@item.Recurso.CuentaContable.Numero - @item.Recurso.CuentaContable.Nombre</td>
+                                        <td>@item.Recurso.Descripcion</td>
+                                        <td>@item.Recurso.Monto.ToString("N2")</td>
+                                        <td>@(item.Enero !=  null ? item.Enero.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Febrero != null ? item.Febrero.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Marzo != null ? item.Marzo.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Abril != null ? item.Abril.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Mayo != null ? item.Mayo.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Junio != null ? item.Junio.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Julio != null ? item.Julio.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Agosto != null ? item.Agosto.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Septiembre != null ? item.Septiembre.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Octubre != null ? item.Octubre.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Noviembre != null ? item.Noviembre.ToString("N2") : string.Empty )</td>
+                                        <td>@(item.Diciembre != null ? item.Diciembre.ToString("N2") : string.Empty )</td>
+                                        <td>
+                                            @Html.ActionLink("Modificar", "Edit", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel-footer">Total Bs.: @ViewBag.TotalPresupuesto.ToString("N2")</div>
+            </div>
+        </div>
+    </div>
+}
+

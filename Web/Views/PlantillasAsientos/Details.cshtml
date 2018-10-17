@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.PlantillaCuenta>
+@{
+    ViewBag.Title = "Biblioteca de Asientos";
+}
+<h2 class="page-header">Detalle de la PLantilla de Asiento</h2>
+
+<div id="panelAsiento" class="panel panel-default">
+    <div class="panel-heading">
+        Plantilla del Asiento
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="NumeroComprobante">Nombre</label>
+                    <input type="text" class="form-control" value="@ViewBag.NombrePlantilla" readonly="readonly" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="Tipo">Descripcion</label>
+                    <input type="text" class="form-control" value="@ViewBag.DescripcionPlantilla" readonly="readonly" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (Model.Any())
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Detalle de Plantilla
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Número de Cuenta</th>
+                                    <th>Glosa</th>
+                                    <th>Código Programático</th>
+                                    <th>Debe</th>
+                                    <th>Haber</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.CuentaContable.NombreDespliegue</td>
+                                        <td>@item.Glosa</td>
+                                        <td class="CodigoProgramatico">@(string.Format("{0}{1}{2}{3}-{4}/*{5}", "LP", item.PlanProgramatico.Codigo, item.Territorio.Codigo, item.Contraparte.Codigo, item.AccionesNacionale != null ? item.AccionesNacionale.Codigo : "", item.NotasAdicionales))</td>
+                                        <td class="Debe text-right">
+                                            @if (item.Debe > 0)
+                                            {@item.Debe.ToString("N2")}
+                                        </td>
+                                        <td class="Haber text-right">
+                                            @if (item.Haber > 0)
+                                            {@item.Haber.ToString("N2")}
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>

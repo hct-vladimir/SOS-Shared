@@ -1,0 +1,75 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.CuentaBanco
+
+@{
+    ViewBag.Title = "Ver Cuentas Banco";
+}
+
+<h2>Cuentas Banco</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Datos Cuentas Banco
+            </div>
+            <div class="panel-body collapse in">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BancoId, "Banco")
+                    @Html.DropDownListFor(model => model.BancoId, new SelectList(ViewBag.BancoList, "Id", "Nombre"), new { @class = "form-control" , @disabled = "disabled" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FacilityId, "Facility")
+                    @Html.DropDownListFor(model => model.FacilityId, new SelectList(ViewBag.FacilityList, "Id", "Nombre"), new { @class = "form-control", @disabled = "disabled" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FichaBanco, "Ficha Banco")
+                    @Html.TextBoxFor(model => model.FichaBanco, null, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.FichaBanco)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Contacto, "Contacto")
+                    @Html.TextBoxFor(model => model.Contacto, null, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Contacto)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SaldoBs, "Saldo Bs")
+                    @Html.TextBoxFor(model => model.SaldoBs, null, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.SaldoBs)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SaldoDl, "Saldo Sus")
+                    @Html.TextBoxFor(model => model.SaldoDl, null, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.SaldoDl)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NumeroCuenta, "NumeroCuenta")
+                    @Html.TextBoxFor(model => model.NumeroCuenta, null, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.NumeroCuenta)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Alias, "Alias")
+                    @Html.TextBoxFor(model => model.Alias, null, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.ValidationMessageFor(model => model.Alias)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="form-links">
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Regresar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+

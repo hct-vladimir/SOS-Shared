@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Reportes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Reportes Gerenciales</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="lista-reportes list-group">
+            <a href="@Url.Action("ReporteAnual", "Recursos")" class="list-group-item "><i class="glyphicon glyphicon-level-up"></i> R1 - Reporte Anual</a>
+            <a href="@Url.Action("ReporteMensual", "Recursos")" class="list-group-item"><i class="glyphicon glyphicon-level-up"></i> R2 - Reporte Mensual</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-level-up"></i> R3 - Reporte Contrapartes</a>
+            <a href="#" class="list-group-item"><i class="glyphicon glyphicon-level-up"></i> R4 - Reporte IPD</a>
+        </div>
+    </div>
+</div>

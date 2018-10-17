@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.AnexosTributario>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="page-header">Anexos Tributarios</h1>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="#panel-busqueda" role="button" data-toggle="collapse">Búsqueda de Anexo Tributario<span class="fa fa-chevron" aria-hidden="true"></span></a>
+    </div>
+    <div id="panel-busqueda" class="panel-body collapse in">
+        @using (Html.BeginForm("Index", "AnexosTributarios", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Numero">Codigo</label>
+                        @Html.TextBox("txtCodigo", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Beneficiario">Descripcion</label>
+                        @Html.TextBox("txtDescripcion", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Beneficiario">Grupo</label>
+                        @Html.TextBox("txtGrupo", null, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        }
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Nuevo anexo tributario", "Create")
+</p>
+@if (Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Codigo</th>
+                    <th>Descripcion</th>
+                    <th>Grupo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Descripcion)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Grupo)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Detalle", "Details", "AnexosTributarios", new { id = item.Id }, null) |
+                            @Html.ActionLink("Modificar", "Edit", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+}

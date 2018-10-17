@@ -1,0 +1,156 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList<Cerberus.Sos.Accounting.BusinessLogic.Entities.Personal>
+@{
+    ViewBag.Title = "Lista de Colaboradores";
+}
+<h2 class="page-header">Retiros del Mes @DateTime.Now.ToString("MM/yyyy")</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="btn-group " role="group" aria-label="..." style="margin-bottom: 20px;">
+            @*<a href="#" class="btn btn-primary btn-action" role="button"><i class="glyphicon glyphicon-print"></i> Imprimir Reporte</a>*@
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="#panel-busqueda" role="button" data-toggle="collapse">Búsqueda <span class="fa fa-chevron" aria-hidden="true"></span></a>
+    </div>
+    <div id="panel-busqueda" class="panel-body collapse in">
+        @using (Html.BeginForm("Index", "Personal", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="Documento">Documento</label>
+                        @Html.TextBox("Documento", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="Nombre">Nombre</label>
+                        @Html.TextBox("Nombre", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="item">Item</label>
+                        @Html.TextBox("item", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.Label("FechaDesde", "Fecha Ingreso desde")
+                        <div class='input-group date' id='datetimepicker-bajaretiro'>
+                            @Html.TextBox("FechaDesde", null, new { @class = "form-control" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.Label("FechaHasta", "Fecha Ingreso hasta")
+                        <div class='input-group date' id='datetimepicker-bajaretiro'>
+                            @Html.TextBox("FechaHasta", null, new { @class = "form-control" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="Estado">Estado</label>
+                        <select id="Estado" name="Estado" class="form-control">
+                            <option value="">-- Seleccionar --</option>
+                            <option value="A">ALTA</option>
+                            <option value="B">BAJA</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        }
+    </div>
+</div>
+
+@if (Model.Any())
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Colaboradores
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="recursos" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    @*<th>Facility</th>*@
+                                    <th>Nombre</th>
+                                    <th>Documento</th>
+                                    <th>Filial</th>
+                                    <th>Programa</th>
+                                    <th>Cargo</th>
+                                    <th>Fecha Ingreso</th>
+                                    <th>Fecha Inicio de Cargo</th>
+                                    <th>Fecha Fin de Contrato</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.item</td>
+                                        @*<td>@item.codigoFacility</td>*@
+                                        <td>@item.nombres @item.apellidoPaterno @item.apellidoMaterno</td>
+                                        <td>@item.numeroDocumento</td>
+                                        <td>@item.codigoFilial</td>
+                                        <td>@item.codigoPrograma</td>
+                                        <td>@item.ListaCargo.descripcion</td>
+                                        <td>
+                                            @if (item.fechaIngreso.HasValue)
+                                            {
+                                                @item.fechaIngreso.Value.ToString("dd/MM/yyyy")
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.fechaInicioCargo.HasValue)
+                                            {
+                                                @item.fechaInicioCargo.Value.ToString("dd/MM/yyyy")
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.fechaFinContrato.HasValue)
+                                            {
+                                                @item.fechaFinContrato.Value.ToString("dd/MM/yyyy")
+                                            }
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Modificar", "Edit", new { item = item.item })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @if (@Model.PageCount > 1)
+                    {
+                        @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="afecf47f455c44b99f02d4445863dd89" Name="Diagram1" ZoomLevel="53" >
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaArea" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaCiudad" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaFacility" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaFilial" Width="1.5" PointX="5.375" PointY="3.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaPrograma" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaSeccion" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.TipoDocumento" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaProfesion" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.TipoEstadoCivil" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaDepartamento" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.TipoEstudio" Width="1.5" PointX="9.375" PointY="3.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaCargo" Width="1.5" PointX="3.375" PointY="9.375" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.Seguro" Width="1.5" PointX="5.375" PointY="9.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.TipoAFP" Width="1.5" PointX="9.375" PointY="6.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.TipoInicio" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.TipoContratacion" Width="1.5" PointX="9.375" PointY="9.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaEscalaSalarial" Width="1.5" PointX="11.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.ListaAFP" Width="1.5" PointX="11.375" PointY="3.75" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.Personal" Width="1.5" PointX="0.875" PointY="0.5" />
+        <AssociationConnector Association="AldeasInfantilesModel.FK_Personal_ListaCargo" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.BajaPersonal" Width="1.5" PointX="3.125" PointY="12.875" />
+        <AssociationConnector Association="AldeasInfantilesModel.FK_BajaPersonal_Personal" />
+        <EntityTypeShape EntityType="AldeasInfantilesModel.TipoRetiro" Width="1.5" PointX="11.375" PointY="6.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

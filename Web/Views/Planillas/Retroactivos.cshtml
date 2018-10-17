@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Retroactivos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Retroactivo 05/2018</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="btn-group " role="group" aria-label="..." style="margin-bottom: 20px;">
+            <a href="@Url.Action("PlanillaSueldosGeneral", "Planillas")" class="btn btn-primary btn-action" role="button"><i class="glyphicon glyphicon-print"></i> Planilla Consolidada</a>
+            @*<a href="@Url.Action("PlanillaSueldos", "Planillas")" class="btn btn-primary btn-action" role="button"><i class="glyphicon glyphicon-print"></i> Planilla Sueldos</a>*@
+        </div>
+    </div>
+</div>
+
+<div class="form-links">
+    @Html.ActionLink("Regresar", "Gestion")
+</div>
+
+<div class="row">
+
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Retroactivos generados
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table id="recursos" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>Gestion</th>
+                                <th>Mes del Retroactivo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @*@foreach (var item in ViewBag.Retroactivos)
+                                {*@
+                            <tr>
+                                <td>2018</td>
+                                <td>01</td>
+                                <td>
+                                    @*@if (@item.EstadoPlanillaId == 1)
+                                        {*@
+                                    <a href="@Url.Action("Index", "Planillas", new { gestion = 2018, mes = 5 })" class="btn btn-primary btn-action">Detalle de Planilla</a>                                        @*}*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2018</td>
+                                <td>02</td>
+                                <td>
+                                    @*@if (@item.EstadoPlanillaId == 1)
+                                        {*@
+                                    <a href="@Url.Action("Index", "Planillas", new { gestion = 2018, mes = 5 })" class="btn btn-primary btn-action">Detalle de Planilla</a>                                        @*}*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2018</td>
+                                <td>03</td>
+                                <td>
+                                    @*@if (@item.EstadoPlanillaId == 1)
+                                        {*@
+                                    <a href="@Url.Action("Index", "Planillas", new { gestion = 2018, mes = 5 })" class="btn btn-primary btn-action">Detalle de Planilla</a>                                        @*}*@
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2018</td>
+                                <td>04</td>
+                                <td>
+                                    @*@if (@item.EstadoPlanillaId == 1)
+                                        {*@
+                                    <a href="@Url.Action("Index", "Planillas", new { gestion = 2018, mes = 5 })" class="btn btn-primary btn-action">Detalle de Planilla</a>                                        @*}*@
+                                </td>
+                            </tr>
+                            @*}*@
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

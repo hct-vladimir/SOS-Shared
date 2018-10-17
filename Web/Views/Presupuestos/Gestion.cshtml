@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.Presupuesto>
+@{
+    ViewBag.Title = "Gestión de Presupuestos";
+}
+<h2 class="page-header">Gestión de Presupuestos</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="#panel-asiento" role="button" data-toggle="collapse" class="collapsed" ><i class="glyphicon glyphicon-file"></i> Seleccionar Gestión <span class="fa fa-chevron" aria-hidden="true"></span></a>
+    </div>
+    <div id="panel-asiento" class="panel-body collapse">
+        @using (Html.BeginForm("Create", "Presupuestos", FormMethod.Post))
+            {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <fieldset>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="plan-filter form-group">
+                            @Html.Label("Gestion", "Gestión")
+                            <select id="Gestion" name="Gestion" class="form-control">
+                                <option value="-1">-- Seleccionar --</option>
+                                <option value="2019">2019</option>
+                                <option value="2018">2018</option>
+                                <option value="2017">2017</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary">Ir a Presupuesto</button>
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('Se creará el presupuesto para la gestión seleccionada.\nEstá seguro de continuar?')">Crear Presupuesto</button>
+                </div>
+        }
+    </div>
+</div>
+
+@if (Model.Any())
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Presupuestos de la Gestión
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="recursos" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Gestion</th>
+                                    <th>Nro. Versión</th>
+                                    <th>Nombre Versión</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Gestion</td>
+                                        <td>@item.Version</td>
+                                        <td>@item.NombreVersion</td>
+                                        <td>@item.EstadoPresupuesto.Nombre</td>
+                                        <td>
+                                            @if (@item.EstadoPresupuestoId == 2)
+                                            {
+                                                <a href="@Url.Action("Ciudades", "Presupuestos", new { presupuestoId = item.Id })" class="btn btn-primary btn-action">Ver Detalle</a>
+                                                <a href="#" class="btn btn-warning btn-action" onclick="return confirm('Esta seguro de cerrar el presupuesto actual?');">Cerrar Presupuesto</a>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

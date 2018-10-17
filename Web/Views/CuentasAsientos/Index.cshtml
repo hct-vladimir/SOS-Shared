@@ -1,0 +1,800 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.CuentaAsiento>
+@{
+    ViewBag.Title = "Comprobante Detalle";
+}
+
+<h2>Detalle de Comprobante @ViewBag.CodigoComprobante - Facility <strong>@ViewBag.FacilityActual.Codigo - @ViewBag.FacilityActual.Nombre</strong></h2>
+<h4 class="text-right">Estado del Comprobante: @ViewBag.EstadoComprobante</h4>
+@if (@ViewBag.EstadoComprobante != "FINALIZADO" && @ViewBag.EstadoComprobante != "ANULADO" && !Context.User.IsInRole("CORD-PRG"))
+{
+    <div class="row">
+        <div class="col-md-10">
+            <div class="btn-group " role="group" aria-label="..." style="margin-bottom: 20px;">
+                <a href="#addCuentaAsientoModal" class="btn btn-primary btn-action" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus-sign"></i> Agregar Línea</a>
+                <div class="btn-group " role="group" aria-label="...">
+                    <button id="lcvRetenciones" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="glyphicon glyphicon-list-alt"></i> LCV/Retenciones <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#facturaModal" role="button" data-toggle="modal">Registrar Factura</a></li>
+                        <li><a href="#retencionModal" role="button" data-toggle="modal">Retenciones</a></li>
+                    </ul>
+                </div>
+                <div class="btn-group " role="group" aria-label="..." >
+                    <button id="tipoTransferencia" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="glyphicon glyphicon-list-alt"></i> Estados de Cuentas SOS <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("EstadosCuentas", "CuentasAsientos", new {comprobanteId = ViewBag.ComprobanteId, tipoEstado = 1 })" role="button" data-toggle="modal">Transferencias - 88000</a></li>
+                        <li><a href="@Url.Action("EstadosCuentas", "CuentasAsientos", new {comprobanteId = ViewBag.ComprobanteId, tipoEstado = 2 })" role="button" data-toggle="modal">Cuentas por Pagar - 90000</a></li>
+                        <li><a href="@Url.Action("EstadosCuentas", "CuentasAsientos", new {comprobanteId = ViewBag.ComprobanteId, tipoEstado = 3 })" role="button" data-toggle="modal">Cuentas por Cobrar - 06000</a></li>
+                        @*<li><a href="#transferenciaConstruccionModal" role="button" data-toggle="modal">Transferencia Construcción</a></li>*@
+                    </ul>
+                </div>
+                @*}*@
+                <a id="adjuntarRespaldos" href="#respaldosModal" class="btn btn-primary btn-action" role="button" data-toggle="modal"><i class="glyphicon glyphicon-level-up"></i> Adjuntar Respaldos</a>
+                <a href="@Url.Action("ReporteComprobante", "Comprobantes", new {id = ViewBag.ComprobanteId})" class="btn btn-success btn-action" role="button"><i class="glyphicon glyphicon-print"></i> Imprimir Comprobante</a>
+                <a href="@Url.Action("Finalizar", "Comprobantes", new {id = ViewBag.ComprobanteId, facilityId = @ViewBag.FacilityId})" class="btn btn-success btn-action" role="button" onclick="return confirm('Esta seguro de Finalizar el Comprobante?')"><i class="glyphicon glyphicon-saved"></i> Finalizar Comprobante</a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group pull-right">
+                <button id="asientosTipo" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Plantillas Asientos <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+
+                    @foreach (var item in ViewBag.PlantillasAsientos)
+                    {
+                        <li>
+                            <a href="@Url.Action("Generate", "PlantillasAsientos", new {plantillaAsientoId = item.Id, comprobanteId = ViewBag.ComprobanteId})" class="dropdown-menu-action" onclick="return confirm('Está seguro de aplicar la Plantilla seleccionada?');">
+                                <div>
+                                    <strong>@item.Nombre</strong>
+                                </div>
+                                <div class="text-muted">@item.Descripcion</div>
+                            </a>
+                        </li>
+                        <li role="separator" class="divider"></li>
+                    }
+
+                    <li class="text-center"><a href="@Url.Action("Index", "PlantillasAsientos")" role="button">Biblioteca de Asientos</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Context.User.IsInRole("CORD-PRG") || Context.User.IsInRole("CTBD-CLR") || ViewBag.ExisteObservacion)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <a href="#"><i class="glyphicon glyphicon-file"></i> Observaciones</a>
+        </div>
+        <div id="panel-observaciones" class="panel-body">
+            @using (Html.BeginForm("CreateObservacion", "CierresContables"))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <input type="hidden" id="EntidadId" name="EntidadId" value="@ViewBag.ComprobanteId"/>
+                <input type="hidden" id="FacilityId" name="FacilityId" value="@ViewBag.FacilityId"/>
+
+                <fieldset>
+                    <div class="row">
+                        @if (!Context.User.IsInRole("ADMN-PRG"))
+                        {
+                            <div class="col-md-6">
+                                <div class="plan-filter form-group">
+                                    @Html.Label("Descripcion", "Observación")
+                                    @Html.TextArea("Descripcion", null, new {@class = "form-control"})
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="plan-filter form-group">
+                                    @Html.Label("ObservacionesAnteriores", "Historial de Observaciones")
+                                    @{ string historialObservaciones = ViewBag.HistorialObservaciones != null ? ViewBag.HistorialObservaciones.ToString() : string.Empty; }
+                                    @Html.TextArea("ObservacionesAnteriores", historialObservaciones, new {@class = "form-control", @readonly = "readonly"})
+                                </div>
+                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-12">
+                                                <div class="plan-filter form-group">
+                                                    @Html.Label("ObservacionesAnteriores", "Historial de Observaciones")
+                                                    @{ string historialObservaciones = ViewBag.HistorialObservaciones != null ? ViewBag.HistorialObservaciones.ToString() : string.Empty; }
+                                                    @Html.TextArea("ObservacionesAnteriores", historialObservaciones, new { @class = "form-control", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                                        }
+
+                    </div>
+                </fieldset>
+                if (!Context.User.IsInRole("ADMN-PRG"))
+                 {
+                     <div class="form-actions">
+                         <button type="submit" class="btn btn-primary">Agregar Observación.</button>
+                     </div>
+                 }
+            }
+        </div>
+    </div>
+}
+
+
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="form-group">
+            <label for="NumeroComprobante">Número</label>
+            <input type="text" class="form-control" value="@ViewBag.NumeroComprobante" readonly="readonly" />
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label for="Tipo">Tipo</label>
+            <input type="text" class="form-control" value="@ViewBag.TipoComprobante" readonly="readonly" />
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group">
+            <label for="Fecha">Fecha</label>
+            <input type="text" class="form-control" value="@ViewBag.FechaComprobante" readonly="readonly" />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="NumeroComprobante">Moneda</label>
+            <input type="text" class="form-control" value="@ViewBag.TipoMoneda" readonly="readonly" />
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label for="Tipo">Tipo de Cambio</label>
+            <input type="text" class="form-control text-right" value="@ViewBag.TipoCambio" readonly="readonly" />
+        </div>
+    </div>
+    @*<div class="col-md-3">
+            <div class="form-group">
+                <label for="Facility">Facility</label>
+                <input type="text" class="form-control" value="@ViewBag.Facility" readonly="readonly" />
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="FichaBanco">Ficha de Banco</label>
+                <input type="text" class="form-control" value="@ViewBag.FichaBanco" readonly="readonly" />
+            </div>
+        </div>*@
+</div>
+
+@if (Model.Any())
+{
+    <div class="row">
+
+        <div class="col-md-12">
+            <div id="panelAsiento" class="panel panel-success">
+                <div class="panel-heading">
+                    Asiento contable
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Cuenta</th>
+                                    <th>Glosa</th>
+                                    <th>Cód. Auditoría</th>
+                                    <th>Código Programático</th>
+                                    <th>Debe</th>
+                                    <th>Haber</th>
+                                    @if (@ViewBag.EstadoComprobante != "FINALIZADO" && @ViewBag.EstadoComprobante != "ANULADO")
+                                    {
+                                        <th>Acciones</th>
+                                    }
+                                </tr>
+                            </thead>
+                            <tfoot class="bg-success">
+                                <tr>
+                                    <td>Totales</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="total-debe text-right">@ViewBag.TotalDebe.ToString("N2")</td>
+                                    <td class="total-haber text-right">@ViewBag.TotalHaber.ToString("N2")</td>
+                                    @if (@ViewBag.EstadoComprobante != "FINALIZADO" && @ViewBag.EstadoComprobante != "ANULADO")
+                                    {
+                                        <td></td>
+                                    }
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="item-@item.Id">
+                                        <td>
+                                            <div class="CuentaContableNombre"> @item.CuentaContable.NombreDespliegue</div>
+                                            <div class="hidden Id">@item.Id</div>
+                                            <div class="hidden PlanProgramaticoId">@item.PlanProgramaticoId</div>
+                                            <div class="hidden CuentaContableId">@item.CuentaContableId</div>
+                                            <div class="hidden TerritorioId">@item.TerritorioId</div>
+                                            <div class="hidden ContraparteId">@item.ContraparteId</div>
+                                            <div class="hidden CodigoAuditoriaId">@item.CodigoAuditoriaId</div>
+                                            <div class="hidden AccionNacionalId">@item.AccionNacionalId</div>
+                                            <div class="hidden AnexoTributarioId">@item.AnexoTributarioId</div>
+                                            <div class="hidden MarcoLogicoId">@item.MarcoLogicoId</div>
+
+                                            <!-- Códigos para generar el Código Programático en el componente AJAX -->
+                                            <div class="hidden PlanProgramaticoCodigo">@item.PlanProgramatico.Codigo</div>
+                                            <div class="hidden CiudadCodigo">@item.Comprobante.Ciudad.Codigo</div>
+                                            <div class="hidden TerritorioCodigo">@item.Territorio.Codigo</div>
+                                            <div class="hidden ContraparteCodigo">@item.Contraparte.Codigo</div>
+                                            <div class="hidden AccionesNacionaleCodigo">@(item.AccionesNacionale != null ? item.AccionesNacionale.Codigo : string.Empty)</div>
+                                            <div class="hidden NotasAdicionales">@item.NotasAdicionales</div>
+                                        </td>
+                                        <td class="Glosa">@item.Glosa</td>
+                                        <td class="CodigoAuditoriaDescripcion">@(item.CodigosAuditoria != null ? item.CodigosAuditoria.Descripcion : string.Empty)</td>
+                                        <td class="CodigoProgramatico">@item.CodigoProgramatico</td>
+                                        <td class="Debe text-right">
+                                            @if (item.Debe > 0)
+                                            {@item.Debe.ToString("N2")}
+                                        </td>
+                                        <td class="Haber text-right">
+                                            @if (item.Haber > 0)
+                                            {@item.Haber.ToString("N2")}
+                                        </td>
+                                        @if (@ViewBag.EstadoComprobante != "FINALIZADO" && @ViewBag.EstadoComprobante != "ANULADO")
+                                        {
+                                            <td>
+                                                <a href="#editCuentaAsientoModal" role="button" data-toggle="modal" onclick="loadRowDataIntoModal($(this).parent().parent().attr('id'));">Modificar</a> |
+                                                @Html.ActionLink("Duplicar", "Duplicar", new { id = item.Id }, new { onclick = "return confirm('Esta seguro de duplicar la línea actual?');" }) |
+                                                @Html.ActionLink("Borrar", "Delete", new { id = item.Id }, new { onclick = "return confirm('Esta seguro de borrar el registro?');" })
+                                            </td>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-10">
+        @Html.ActionLink("Regresar", "Index", "Comprobantes", new { facilityId = @ViewBag.FacilityId, ciudadId = @ViewBag.CiudadIdComprobante }, null)
+    </div>
+    <div class="col-md2">
+        @if (Model.Any() && !Context.User.IsInRole("CORD-PRG"))
+        {
+            <div class="btn-group pull-right">
+                <a href="#addPlantillaAsientoModal" class="btn btn-success btn-action" role="button" data-toggle="modal"><i class="glyphicon glyphicon-save"></i> Guardar Asiento como Plantilla</a>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Modal Dialogs -->
+<div id="addCuentaAsientoModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myAddModalLabel">Nueva Línea</h4>
+            </div>
+            <div class="modal-body">
+                <div id="panelNuevaLinea" class="panel panel-default">
+                    <div id="panel-asiento" class="panel-body ">
+                        @using (Html.BeginForm("Create", "CuentasAsientos", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            <input type="hidden" id="ComprobanteId" name="ComprobanteId" value="@ViewBag.ComprobanteId" />
+                            <fieldset>
+                                <div class="cuenta-filter form-group">
+                                    @Html.Label("CuentaContableId", "Cuenta")
+                                    @Html.DropDownList("CuentaContableId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Glosa">Glosa</label>
+                                            @Html.TextBox("Glosa", null, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="Debe">Debe</label>
+                                            @Html.TextBox("Debe", null, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="Haber">Haber</label>
+                                            @Html.TextBox("Haber", null, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="NotasAdicionales">Notas Adicionales</label>
+                                    @Html.TextBox("NotasAdicionales", null, new { @class = "form-control", @maxlength = 30 })
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Datos Complementarios</legend>
+                                <div class="plan-filter form-group">
+                                    @Html.Label("PlanProgramaticoId", "Plan Programático")
+                                    @Html.DropDownList("PlanProgramaticoId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("TerritorioId", "Territorio")
+                                            @Html.DropDownList("TerritorioId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                            @Html.ValidationMessage("TerritorioId", "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("ContraparteId", "Contraparte")
+                                            @Html.DropDownList("ContraparteId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("CodigoAuditoriaId", "Código de Auditoría")
+                                            @Html.DropDownList("CodigoAuditoriaId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("AnexoTributarioId", "Anexo Tributario")
+                                            @Html.DropDownList("AnexoTributarioId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("AccionNacionalId", "Acciones Nacionales")
+                                            @Html.DropDownList("AccionNacionalId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("MarcoLogicoId", "Marco Lógico")
+                                            @Html.DropDownList("MarcoLogicoId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-actions">
+                                <button id="AddCuentaAsiento" type="submit" class="btn btn-primary">Guardar</button>
+                                <button id="CloseAddCuentaAsientoModal" type="button" class="btn btn-warning btn-action">Cerrar</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="editCuentaAsientoModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myEditModalLabel">Editar Línea</h4>
+            </div>
+            <div class="modal-body">
+                <div id="panelNuevaLinea" class="panel panel-default">
+                    <div id="panel-asiento" class="panel-body ">
+                        @using (Html.BeginForm("Edit", "CuentasAsientos", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            <input type="hidden" id="Id" name="Id" value="" />
+                            <input type="hidden" id="ComprobanteId" name="ComprobanteId" value="@ViewBag.ComprobanteId"/>
+
+                            <input type="hidden" id="CiudadCodigo" name="CiudadCodigo" />
+                            <input type="hidden" id="PlanProgramaticoCodigo" name="PlanProgramaticoCodigo" />
+                            <input type="hidden" id="TerritorioCodigo" name="TerritorioCodigo" />
+                            <input type="hidden" id="ContraparteCodigo" name="ContraparteCodigo" />
+                            <input type="hidden" id="AccionesNacionaleCodigo" name="AccionesNacionaleCodigo" />
+                            <fieldset>
+                                <div class="cuenta-filter form-group">
+                                    @Html.Label("CuentaContableId", "Cuenta")
+                                    @Html.DropDownList("CuentaContableId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="Glosa">Glosa</label>
+                                            @Html.TextBox("Glosa", null, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="Debe">Debe</label>
+                                            @Html.TextBox("Debe", null, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="Haber">Haber</label>
+                                            @Html.TextBox("Haber", null, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="NotasAdicionales">Notas Adicionales</label>
+                                    @Html.TextBox("NotasAdicionales", null, new { @class = "form-control", @maxlength = 30 })
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Datos Complementarios</legend>
+                                <div class="plan-filter form-group">
+                                    @Html.Label("PlanProgramaticoId", "Plan Programático")
+                                    @Html.DropDownList("PlanProgramaticoId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("TerritorioId", "Territorio")
+                                            @Html.DropDownList("TerritorioId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                            @Html.ValidationMessage("TerritorioId", "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("ContraparteId", "Contraparte")
+                                            @Html.DropDownList("ContraparteId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("CodigoAuditoriaId", "Código de Auditoría")
+                                            @Html.DropDownList("CodigoAuditoriaId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("AnexoTributarioId", "Anexo Tributario")
+                                            @Html.DropDownList("AnexoTributarioId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("AccionNacionalId", "Acciones Nacionales")
+                                            @Html.DropDownList("AccionNacionalId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            @Html.Label("MarcoLogicoId", "Marco Lógico")
+                                            @Html.DropDownList("MarcoLogicoId", null, "-- Seleccionar --", new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <div class="form-actions">
+                                <button id="EditCuentaAsiento" type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                <button id="CloseEditCuentaAsientoModal" type="button" class="btn btn-warning btn-action">Cerrar</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="facturaModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Registro de Factura</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Create", "Facturas", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <input type="hidden" id="ComprobanteId" name="ComprobanteId" value="@ViewBag.ComprobanteId" />
+
+                            <div class="form-group">
+                                <label for="LibroCV">Compra/Venta</label>
+                                <select id="LibroCV" name="LibroCV" class="form-control">
+                                    <option value="">-- Seleccionar --</option>
+                                    <option value="C">Libro de Compras</option>
+                                    <option value="V">Libro de Ventas</option>
+                                </select>
+                            </div>
+                            <div class="cuenta-filter form-group">
+                                @Html.Label("CuentaContableId", "Cuenta")
+                                @Html.DropDownList("CuentaContableId", null, "-- Seleccionar --", new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="Glosa">Glosa</label>
+                                @Html.TextBox("Glosa", null, new { @class = "form-control", @maxlength = "200", @required = "required" })
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="FechaFactura">Fecha</label>
+                                        <div class='input-group date' id='datetimepicker-comprobante'>
+                                            @Html.TextBox("FechaFactura", null, new { @class = "form-control", @maxlength = "200", @required = "required" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="NitComprador">NIT/CI</label>
+                                        @Html.TextBox("FacturaComprador.Nit", null, new { @class = "form-control", @maxlength = "200", @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="NombreComprador">Nombre o Razón Social</label>
+                                @Html.TextBox("FacturaComprador.Nombre", null, new { @class = "form-control", @maxlength = "200", @required = "required" })
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="NumeroFactura">Nro. Factura/DUI</label>
+                                        @Html.TextBox("NumeroFactura", null, new { @class = "form-control", @maxlength = "200", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="NumeroAutorizacion">Nro. Autorización</label>
+                                        @Html.TextBox("NumeroAutorizacion", null, new { @class = "form-control", @maxlength = "200", @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Importe">Importe</label>
+                                        @Html.TextBox("Importe", null, new { @class = "form-control text-right", @maxlength = "200", @required = "required" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="CodigoControl">Código de Control</label>
+                                        @Html.TextBox("CodigoControl", null, new { @class = "form-control", @maxlength = "200" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Descuento">Descuento</label>
+                                        @Html.TextBox("Descuento", 0, new { @class = "form-control text-right", @maxlength = "200" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="checkbox" style="margin-top: 40px;">
+                                        <label>
+                                            @Html.CheckBox("NoGravada", false)
+                                            Factura No Gravada
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <input id="FacturaGasolina" type="checkbox"> Factura de Gasolina
+                                </label>
+                            </div>
+                            <div id="FacturaGasolinaRow" class="row hidden">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Placa">Placa</label>
+                                        @Html.TextBox("Placa", null, new { @class = "form-control", @maxlength = "200" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="ImporteCF">Importe válido para CF (70%)</label>
+                                        @Html.TextBox("ImporteCF", null, new { @class = "form-control text-right", @maxlength = "200", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input id="FacturaVentas" type="checkbox"> Otros Importes
+                                </label>
+                            </div>
+                            <div id="FacturaVentasRow" class="row hidden">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ImporteImpuestoEsp">Importe ICE/IEHD/TASAS</label>
+                                        @Html.TextBox("ImporteImpuestoEsp", 0, new { @class = "form-control", @maxlength = "200" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ImporteExento">Exportaciones y Operaciones Exentas</label>
+                                        @Html.TextBox("ImporteExento", 0, new { @class = "form-control text-right", @maxlength = "200" })
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="ImporteTasaCero">Ventas Gravadas a Tasa Cero</label>
+                                        @Html.TextBox("ImporteTasaCero", 0, new { @class = "form-control text-right", @maxlength = "200" })
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <p class="help-block">Al guardar los datos de la factura se generará el asiento correspondiente.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="retencionModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Retenciones</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Retencion", "Facturas", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            <input type="hidden" id="ComprobanteId" name="ComprobanteId" value="@ViewBag.ComprobanteId" />
+
+                            <div class="cuenta-filter form-group">
+                                @Html.Label("CuentaContableId", "Abono a la Cuenta")
+                                @Html.DropDownList("CuentaContableId", null, "-- Seleccionar --", new { @class = "form-control" })
+                            </div>
+                            <div class="form-group">
+                                <label for="Glosa">Glosa</label>
+                                @Html.TextBox("Glosa", null, new { @class = "form-control", @maxlength = "200", @required = "required" })
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="TipoRetencionId">Tipo de retención</label>
+                                        <select id="TipoRetencionId" name="TipoRetencionId" class="form-control">
+                                            <option value="-1">-- Seleccionar --</option>
+                                            <option value="1">Retención IUE Servicios (12,5%) </option>
+                                            <option value="2">Retención IUE Bienes (5%)</option>
+                                            <option value="3">Retención RC-IVA Alquileres (13%)</option>
+                                            <option value="4">Retención RC-IVA Viáticos (13%)</option>
+                                            <option value="5">IUE-BE Beneficiarios en el Exterior (12,5%)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <p class="help-block">Ret IT (3%) + Ret IUE (12,5%)</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="TipoRetenidoId">Retenido/Asumido</label>
+                                        <select id="TipoRetenidoId" name="TipoRetenidoId" class="form-control">
+                                            <option value="-1">-- Seleccionar --</option>
+                                            <option value="1">Retenido</option>
+                                            <option value="2">Grossing up</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="Importe">Importe</label>
+                                        @Html.TextBox("Importe", null, new { @class = "form-control", @maxlength = "200", @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p class="help-block">Al guardar los datos se generará el asiento correspondiente.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="respaldosModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Adjuntar Respaldos</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("AdjuntarRespaldos", "CuentasAsientos", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            <div class="form-group">
+                                <input type="file" id="respaldos" name="file" multiple="multiple">
+                                <p class="help-block">Elija los archivos de respaldo.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <button type="submit" class="btn btn-default">Cerrar</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addPlantillaAsientoModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Guardar Asiento como Plantilla</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Create", "PlantillasAsientos", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+
+                            <input type="hidden" id="ComprobanteId" name="ComprobanteId" value="@ViewBag.ComprobanteId" />
+                            <div class="form-group">
+                                <label for="Nombre">Nombre de la Plantilla</label>
+                                @Html.TextBox("Nombre", null, new { @class = "form-control", @maxlength = "100", @required = "required" })
+                                <p class="help-block">Un nombre descriptivo para su Plantilla Personalizada.</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="Descripcion">Descripción (opcional)</label>
+                                @Html.TextArea("Descripcion", null, new { @class = "form-control", @maxlength = "200" })
+                                <p class="help-block">Breve descripción sobre la plantilla personalizada.</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary" onclick="return confirm('Esta seguro de Guardar el Asiento como Plantilla?');">Guardar como Plantilla</button>
+                            <button id="CloseAddPlantillaAsientoModal" type="button" class="btn btn-warning">Cerrar</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/Components/cuenta-asiento.component.js")"></script>
+}

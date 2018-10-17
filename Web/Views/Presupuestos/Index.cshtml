@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.PresupuestoCiudad>
+@{
+    ViewBag.Title = "Presupuesto";
+}
+<h2 class="page-header">Presupuestos</h2>
+<h4 class="text-right">Gestión Actual: @ViewBag.GestionActual</h4>
+@if (Context.User.IsInRole("PPTO-CLR"))
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="btn-group " role="group" aria-label="..." style="margin-bottom: 20px;">
+                <a href="@Url.Action("Habilitar", "Presupuestos", new {gestion = ViewBag.GestionActual})" class="btn btn-success btn-action" role="button" onclick="return confirm('Esta seguro de habilitar los presupuestos para las ciudades seleccionadas?')"><i class="glyphicon glyphicon-list-alt"></i> Habilitar Presupuestos</a>
+                <a href="@Url.Action("Cerrar", "Presupuestos", new {gestion = ViewBag.GestionActual})" class="btn btn-primary btn-action" role="button" onclick="return confirm('Esta seguro de cerrar todos los presupuestos para la Gestión actual?')"><i class="glyphicon glyphicon-list-alt"></i> Cerrar Presupuestos</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a href="#panel-asiento" role="button" data-toggle="collapse" class="collapsed"><i class="glyphicon glyphicon-file"></i> Cambiar Gestión <span class="fa fa-chevron" aria-hidden="true"></span></a>
+        </div>
+        <div id="panel-asiento" class="panel-body collapse">
+            @using (Html.BeginForm("Create", "Presupuestos", FormMethod.Get))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="plan-filter form-group">
+                                @Html.Label("Gestion", "Gestión")
+                                <select id="Gestion" name="Gestion" class="form-control">
+                                    <option value="-1">-- Seleccionar --</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary">Ir a Presupuesto</button>
+                    <button type="submit" class="btn btn-primary" onclick="return confirm('Se creará el presupuesto para la gestión seleccionada.\nEstá seguro de continuar?')">Crear Presupuesto</button>
+                </div>
+            }
+        </div>
+    </div>
+}
+
+
+
+

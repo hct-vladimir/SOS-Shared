@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.ParametrosPlanillas.Parametro>
+
+@{
+    ViewBag.Title = "Parámetros Generales";
+}
+
+<h1 class="page-header">Parámetros Generales</h1>
+
+@*<p>
+    @Html.ActionLink("Agregar", "Create")
+</p>*@
+@if (Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Valor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.NOMBRE</td>
+                        <td>@item.DESCRIPCION</td>
+                        <td>@item.VALOR</td>
+                        <td>
+                            @Html.ActionLink("Modificar", "Edit", new { id = item.ID }) @*|
+                            @Html.ActionLink("Eliminar", "Delete", new { id = item.ID }, new { @onclick = "return confirm('Esta seguro de borrar el registro?');" })*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+}

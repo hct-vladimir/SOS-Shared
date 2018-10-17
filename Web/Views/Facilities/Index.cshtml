@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.Facility>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>Facilities</h1>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="#panel-busqueda" role="button" data-toggle="collapse">Búsqueda de Facilities <span class="fa fa-chevron" aria-hidden="true"></span></a>
+    </div>
+    <div id="panel-busqueda" class="panel-body collapse in">
+        @using (Html.BeginForm("Index", "Facilities", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.TextBox("txtNombreFacility")
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+            @*@Html.TextBox("txtNombreTerritorio")
+                <input type="submit" value="Busqueda">*@
+        }
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Nuevo Facility", "Create")
+</p>
+@if (Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Ciudad</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codigo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @{
+                                //item.CiudadList = ViewBag.Ciudades;
+                                List<Cerberus.Sos.Accounting.BusinessLogic.Entities.Ciudad> listaCiudades = ViewBag.Ciudades;
+
+                                string NombreCiudad = listaCiudades.Where(p => p.Id == item.CiudadId).Select(x => x.Nombre).SingleOrDefault(); ;
+                            }
+                            @Html.DisplayFor(modelItem => NombreCiudad)
+                        </td>
+
+                        <td>
+                            @Html.ActionLink("Ver detalle", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Modificar", "Edit", new { id = item.Id })
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+}
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CiudadId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CiudadId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>*@

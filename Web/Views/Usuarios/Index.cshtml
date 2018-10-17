@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.Security.Entities.User>
+
+@{
+    ViewBag.Title = "Usuarios";
+}
+
+<h1 class="page-header">Usuarios</h1>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <a href="#panel-busqueda" role="button" data-toggle="collapse">Búsqueda de usuarios <span class="fa fa-chevron" aria-hidden="true"></span></a>
+    </div>
+    <div id="panel-busqueda" class="panel-body collapse in">
+        @using (Html.BeginForm("Index", "Usuarios", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Paterno">Paterno</label>
+                        @Html.TextBox("Paterno", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Materno">Materno</label>
+                        @Html.TextBox("Materno", null, new {@class = "form-control"})
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Nombres">Nombres</label>
+                        @Html.TextBox("Nombres", null, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        }
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Nuevo usuario", "Create")
+</p>
+@if (Model.Any())
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Ap. Paterno</th>
+                    <th>Ap. Materno</th>
+                    <th>Nombres</th>
+                    <th>Activo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Paterno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Materno)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombres)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Activo)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Ver detalle", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Modificar", "Edit", new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+}

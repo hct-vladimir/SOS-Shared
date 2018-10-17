@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{08C438C5-BAD8-40AE-9B38-8C17CA8E558A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cerberus.Sos.Accounting.DataAccess</RootNamespace>
+    <AssemblyName>Cerberus.Sos.Accounting.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\AccionesNacionale.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountingSosModel.Context.cs">
+      <DependentUpon>AccountingSosModel.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\AccountingSosModel.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\AccountingSosModel.Designer.cs">
+      <DependentUpon>AccountingSosModel.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Models\AldeasInfantilesModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AldeasInfantilesModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AldeasInfantilesModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AldeasInfantilesModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AldeasInfantilesModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AnexosTributario.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BajaPersonal.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BalanceComprobacion_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BalanceCuentasUnitarias_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BalanceGeneral_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BalanceRangoCuentas_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BalanceTotalRangos_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Banco.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cierre.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CierreContable.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ciudad.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CodigoMarcoLogico.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CodigosAuditoria.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Comprobante.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Contraparte.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CuentaAsiento.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CuentaBanco.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CuentaContable.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CuentaNavision.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadoCuenta.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadoPresupuesto.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadoResultado_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadosCierre.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstadosComprobante.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ESTADOS_PLANILLAS.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Facility.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FacilityCuentaContable.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FacilityPlanProgramatico.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Factura.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FacturaComprador.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibroCompras_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LibroVentas_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaAFP.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaArea.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaCargo.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaCiudad.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaDepartamento.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaEscalaSalarial.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaFacility.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaFilial.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaProfesion.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaPrograma.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListaSeccion.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mayores_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NivelProgramatico.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Observacion.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PARAMETRO.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PARAMETROS_PLANILLAS.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PeriodoCierre.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PERIODOS_PLANILLAS.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Personal.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanillasSosModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlanillasSosModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanillasSosModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanillasSosModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PlanillasSosModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PLANILLA_RCIVA.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PLANILLA_SUELDOS.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanProgramatico.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanProgramaticoCuenta.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlantillaAsiento.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlantillaCuenta.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PORCENTAJE_APORTE_NACIONAL_SOL.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PORCENTAJE_BONO_ANTIGUEDAD.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Presupuesto.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PresupuestoCiudad.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PresupuestoFacility.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PresupuestoFacilityCompartido.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Recurso.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecursoMes.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecursosExcel.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RecursosExcelLote.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\REGISTRO_UFVS.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Retencion.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RETROACTIVO.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Rol.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RptPresupuestoResumen_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SALARIOS_MINIMOS.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Seguro.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SumasSaldos_Result.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Territorio.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoAFP.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoCambio.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoContratacion.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoDocumento.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoEstadoCivil.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoEstudio.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoInicio.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoMoneda.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoObservacion.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TipoRetiro.cs">
+      <DependentUpon>AldeasInfantilesModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposCierre.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposComprobante.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposCuenta.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposEstadosCuenta.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposFacility.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposPresupuesto.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposRetencion.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TraspasosPrograma.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsuarioCiudad.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsuarioRol.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VCierreContable.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VComprobante.cs">
+      <DependentUpon>AccountingSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPERSONAL.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPLANILLA_AFP_FUTURO.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPLANILLA_AFP_PREVISION.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPLANILLA_APORTES_SALUD.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPLANILLA_MINISTERIO.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPLANILLA_RCIVA.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPLANILLA_SUELDOS.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VPLANILLA_SUELDOS_GENERAL.cs">
+      <DependentUpon>PlanillasSosModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Models\AccountingSosModel.edmx.diagram">
+      <DependentUpon>AccountingSosModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Models\AldeasInfantilesModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AldeasInfantilesModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\AldeasInfantilesModel.edmx.diagram">
+      <DependentUpon>AldeasInfantilesModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Models\PlanillasSosModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PlanillasSosModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Models\PlanillasSosModel.edmx.diagram">
+      <DependentUpon>PlanillasSosModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Models\AccountingSosModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AccountingSosModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\AccountingSosModel.Context.tt">
+      <DependentUpon>AccountingSosModel.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AccountingSosModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AccountingSosModel.tt">
+      <DependentUpon>AccountingSosModel.edmx</DependentUpon>
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>AccountingSosModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AldeasInfantilesModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AldeasInfantilesModel.edmx</DependentUpon>
+      <LastGenOutput>AldeasInfantilesModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AldeasInfantilesModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AldeasInfantilesModel.edmx</DependentUpon>
+      <LastGenOutput>AldeasInfantilesModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PlanillasSosModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PlanillasSosModel.edmx</DependentUpon>
+      <LastGenOutput>PlanillasSosModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PlanillasSosModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PlanillasSosModel.edmx</DependentUpon>
+      <LastGenOutput>PlanillasSosModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

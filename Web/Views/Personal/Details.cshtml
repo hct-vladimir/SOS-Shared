@@ -1,0 +1,376 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.Personal
+
+@{
+    ViewBag.Title = "Ver Detalle Colaborador";
+}
+
+<h2>Datos Colaborador - Item: @Model.item</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Datos de Localidad
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoFilial, "Lugar/Filial")
+                        @Html.DropDownListFor(model => model.codigoFilial, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoPrograma, "Programa")
+                        @Html.DropDownListFor(model => model.codigoPrograma, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoSeccion, "Área/Sección")
+                        @Html.DropDownListFor(model => model.codigoSeccion, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoFacility, "Facility")
+                        @Html.DropDownListFor(model => model.codigoFacility, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Datos Personales
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.apellidoPaterno, "Paterno")
+                        @Html.TextBoxFor(model => model.apellidoPaterno, null, new { @class = "form-control", @maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.apellidoPaterno)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.apellidoMaterno, "Materno")
+                        @Html.TextBoxFor(model => model.apellidoMaterno, null, new { @class = "form-control", @maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.apellidoMaterno)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.apellidoCasada, "Ap. Casada")
+                        @Html.TextBoxFor(model => model.apellidoCasada, null, new { @class = "form-control", @maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.apellidoCasada)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.nombres, "Nombres")
+                        @Html.TextBoxFor(model => model.nombres, null, new { @class = "form-control", @maxlength = "50" })
+                        @Html.ValidationMessageFor(model => model.nombres)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoTipoDocumento, "Tipo Documento")
+                        @Html.DropDownListFor(model => model.codigoTipoDocumento, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.numeroDocumento, "Nro. Documento")
+                        @Html.TextBoxFor(model => model.numeroDocumento, null, new { @class = "form-control", @maxlength = "50" })
+                        @Html.ValidationMessageFor(model => model.numeroDocumento)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoDepartamento, "Expedido")
+                        @Html.DropDownListFor(model => model.codigoDepartamento, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.estadoCivil, "Estado Civil")
+                        @Html.DropDownListFor(model => model.estadoCivil, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.sexo, "Género")
+                        @Html.DropDownListFor(model => model.sexo, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoEstudio, "Nivel de Estudios")
+                        @Html.DropDownListFor(model => model.codigoEstudio, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoProfesion, "Profesión")
+                        @Html.DropDownListFor(model => model.codigoProfesion, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fechaNacimiento, "Fecha Nacimiento")
+                        <div class='input-group date' id='datetimepicker'>
+                            @Html.TextBoxFor(model => model.fechaNacimiento, null, new { @class = "form-control" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.fechaNacimiento)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.nacionalidad, "Nacionalidad")
+                        @Html.TextBoxFor(model => model.nacionalidad, null, new { @class = "form-control", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.nacionalidad)
+                    </div>
+                </div>
+                @*<div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.zona, "Zona")
+                            @Html.TextBoxFor(model => model.zona, null, new { @class = "form-control", @maxlength = "100" })
+                            @Html.ValidationMessageFor(model => model.zona)
+                        </div>
+                    </div>*@
+                <div class="col-md-9">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.direccion, "Dirección")
+                        @Html.TextBoxFor(model => model.direccion, null, new { @class = "form-control", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.direccion)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.telefono, "Teléfono")
+                        @Html.TextBoxFor(model => model.telefono, null, new { @class = "form-control", @maxlength = "100" })
+                        @Html.ValidationMessageFor(model => model.telefono)
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.telefonoContacto, "Teléfono de contacto")
+                        @Html.TextBoxFor(model => model.telefonoContacto, null, new { @class = "form-control", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.telefonoContacto)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Datos sobre el Cargo
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoCargoActual, "Nombre Cargo")
+                        @Html.DropDownListFor(model => model.codigoCargoActual, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.area, "Area laboral")
+                        @Html.DropDownListFor(model => model.area, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoEscalaSalarial, "Escala Salarial")
+                        @Html.DropDownListFor(model => model.codigoEscalaSalarial, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoRecibeInstruccion, "Recibe Instrucciones")
+                        @Html.DropDownListFor(model => model.codigoRecibeInstruccion, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                @*<div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.fechaIngreso, "Fecha Ingreso")
+                            <div class='input-group date' id='datetimepicker-ingreso'>
+                                @Html.TextBoxFor(model => model.fechaIngreso, null, new {@class = "form-control"})
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.fechaIngreso)
+                        </div>
+                    </div>*@
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoTipoContratacion, "Tipo de contrato")
+                        @Html.DropDownListFor(model => model.codigoTipoContratacion, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.tiempoCompleto, "Tiempo completo")
+                        @Html.DropDownListFor(model => model.tiempoCompleto, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fechaInicioCargo, "Fecha de Ingreso")
+                        <div class='input-group date' id='datetimepicker-inicio'>
+                            @Html.TextBoxFor(model => model.fechaInicioCargo, null, new { @class = "form-control" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.fechaInicioCargo)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fechaRetiro, "Fecha de Retiro")
+                        <div class='input-group date' id='datetimepicker-retiro'>
+                            @Html.TextBoxFor(model => model.fechaRetiro, null, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.fechaRetiro)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.tipoInicio, "Tipo de inicio")
+                        @Html.DropDownListFor(model => model.tipoInicio, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.usuario_correo, "Correo electrónico")
+                        @Html.TextBoxFor(model => model.usuario_correo, null, new { @class = "form-control", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.usuario_correo)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fechaFinContrato, "Fecha Final de Contrato")
+                        <div class='input-group date' id='datetimepicker-fin'>
+                            @Html.TextBoxFor(model => model.fechaFinContrato, null, new { @class = "form-control" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.fechaFinContrato)
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.codigoAFP, "AFP")
+                        @Html.DropDownListFor(model => model.codigoAFP, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.nua, "Nro. NUA/CUA")
+                        @Html.TextBoxFor(model => model.nua, null, new { @class = "form-control", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.nua)
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.cotizante, "Cotizante AFP")
+                        @Html.DropDownListFor(model => model.cotizante, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.tipoSeguro, "Tipo de seguro")
+                        @Html.DropDownListFor(model => model.tipoSeguro, null, "-- Seleccionar --", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.numeroSeguro, "Nro. de Seguro")
+                        @Html.TextBoxFor(model => model.numeroSeguro, null, new { @class = "form-control", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.numeroSeguro)
+                    </div>
+                </div>
+                @*<div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.salario, "Salario")
+                            @Html.TextBoxFor(model => model.salario, null, new { @class = "form-control", @maxlength = "200" })
+                            @Html.ValidationMessageFor(model => model.salario)
+                        </div>
+                    </div>*@
+                <div class="col-md-4">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.numeroCuenta, "Nro. de Cuenta")
+                        @Html.TextBoxFor(model => model.numeroCuenta, null, new { @class = "form-control", @maxlength = "200" })
+                        @Html.ValidationMessageFor(model => model.numeroCuenta)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @*<div class="col-md-4">
+                        <div class="eval-filter form-group">
+                            @Html.LabelFor(model => model.codigoEsEvaluado, "Evaluado por")
+                            @Html.DropDownListFor(model => model.codigoEsEvaluado, null, "-- Seleccionar --", new { @class = "form-control" })
+                        </div>
+                    </div>*@
+            </div>
+        </div>
+    </div>
+
+        @*<div class="form-actions btn-action">
+                <button type="submit" class="btn btn-primary">Modificar Colaborador</button>
+                @if (Model.estadoADM == "P")
+                {
+                    <a href="@Url.Action("Alta", "Personal", new { item = Model.item })" class="btn btn-primary btn-action" role="button" onclick="return confirm('Esta seguro de dar de alta al Colaborador actual?');">Alta de Colaborador</a>
+                }
+            </div>*@
+}
+
+<div>
+    @Html.ActionLink("Regresar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(function () {
+            $("input").attr("readonly", "readonly");
+            $("select").attr("disabled", "disabled");
+        });
+    </script>
+}
+

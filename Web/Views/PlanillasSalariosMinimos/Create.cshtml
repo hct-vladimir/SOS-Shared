@@ -1,0 +1,49 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.ParametrosPlanillas.SalarioMinimo
+
+@{
+    ViewBag.Title = "Salarios Mínimos";
+}
+
+<h2>Registro de Salarios Mínimos</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Ingresar datos del Salario Mínimo
+                </div>
+                <div class="panel-body collapse in">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FECHA_SALARIO_MINIMO, "Fecha")
+                        @Html.TextBoxFor(model => model.FECHA_SALARIO_MINIMO, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FECHA_SALARIO_MINIMO)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SALARIO_MINIMO, "Salario Mínimo")
+                        @Html.TextBoxFor(model => model.SALARIO_MINIMO, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SALARIO_MINIMO)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-default">Registrar</button>
+    </div>
+
+}
+
+<div class="form-links">
+    @Html.ActionLink("Regresar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

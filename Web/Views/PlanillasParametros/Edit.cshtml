@@ -1,0 +1,53 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.ParametrosPlanillas.Parametro
+
+@{
+    ViewBag.Title = "Modificar Parámetro";
+}
+
+<h2>Editar Parámetro</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Modificar datos del Parámetro
+                </div>
+                <div class="panel-body collapse in">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NOMBRE, "Codigo")
+                        @Html.TextBoxFor(model => model.NOMBRE, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NOMBRE)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DESCRIPCION, "Descripcion")
+                        @Html.TextBoxFor(model => model.DESCRIPCION, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DESCRIPCION)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.VALOR, "Grupo")
+                        @Html.TextBoxFor(model => model.VALOR, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.VALOR)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-default">Modificar</button>
+    </div>
+}
+
+<div class="form-links">
+    @Html.ActionLink("Regresar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

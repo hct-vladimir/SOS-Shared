@@ -1,0 +1,90 @@
+﻿@model List<Cerberus.Sos.Accounting.BusinessLogic.Entities.Reportes.ReporteBalanceComprobacion>
+@{
+    ViewBag.Title = "EstadoCuentas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Estados de Cuentas</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Elegir Cuenta
+    </div>
+    <div id="panel-busqueda" class="panel-body">
+        @using (Html.BeginForm("EstadoCuentas", "Reportes", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="TipoEstadoCuentaId">Tipo de retención</label>
+                        <select id="TipoEstadoCuentaId" name="TipoEstadoCuentaId" class="form-control">
+                            <option value="-1">-- Seleccionar --</option>
+                            <option value="1">Cuentas Por Pagar</option>
+                            <option value="2">Cuentas Por Cobrar</option>
+                            <option value="3">Padrinos</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="FechaDesde">De:</label>
+                        <div class='input-group date' id='datetimepicker-de'>
+                            @Html.TextBox("FechaDesde", null, new { @class = "form-control" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="FechaHasta">A:</label>
+                        <div class='input-group date' id='datetimepicker-a'>
+                            @Html.TextBox("FechaHasta", null, new { @class = "form-control" })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        }
+    </div>
+</div>
+
+@if (Model.Any())
+{
+    <h3>Estado de @ViewBag.TipoEstadoCuentaNombre</h3>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Cuenta</th>
+                    <th>Debe</th>
+                    <th>Haber</th>
+                    @*<th>Saldo Debe</th>
+                        <th>Saldo Haber</th>*@
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Numero</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.DEBITO.Value.ToString("N2")</td>
+                        <td>@item.CREDITO.Value.ToString("N2")</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+
+}

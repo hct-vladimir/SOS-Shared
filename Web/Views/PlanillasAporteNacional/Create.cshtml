@@ -1,0 +1,59 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.ParametrosPlanillas.AporteNacional
+
+@{
+    ViewBag.Title = "Registro Aporte Nacional Solidario";
+}
+
+<h2>Registro Aporte Nacional Solidario</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Ingresar datos del Aporte Nacional Solidario
+                </div>
+                <div class="panel-body collapse in">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.INTERVALO_INICIAL, "Sueldo Desde")
+                        @Html.TextBoxFor(model => model.INTERVALO_INICIAL, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.INTERVALO_INICIAL)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.INTERVALO_FINAL, "Sueldo Hasta")
+                        @Html.TextBoxFor(model => model.INTERVALO_FINAL, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.INTERVALO_FINAL)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PORCENTAJE, "Porcentaje")
+                        @Html.TextBoxFor(model => model.PORCENTAJE, null, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(model => model.PORCENTAJE)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.TIPO, "Tipo")
+                        @Html.TextBoxFor(model => model.TIPO, null, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.TIPO)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-default">Registrar</button>
+    </div>
+
+}
+
+<div class="form-links">
+    @Html.ActionLink("Regresar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

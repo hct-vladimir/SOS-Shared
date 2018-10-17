@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "LibroComprasVentas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Libros de Compras y Ventas</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Elegir Cuenta
+    </div>
+    <div id="panel-busqueda" class="panel-body">
+        @using (Html.BeginForm("LibroComprasVentas", "Reportes", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="cuenta-filter form-group">
+                        @Html.Label("Mes", "Mes")
+                        @Html.TextBox("Mes", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="cuenta-filter form-group">
+                        @Html.Label("Gestion", "Gestion")
+                        @Html.TextBox("Gestion", null, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="btn-group " role="group" aria-label="..." style="margin-bottom: 20px;">
+            <a href="#" class="btn btn-primary btn-action" role="button" ><i class="glyphicon glyphicon-list-alt"></i> Archivo Impuestos</a>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Libro de Compras
+    </div>
+    <div id="panel-ventas" class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Fecha Factura</th>
+                    <th>Nit</th>
+                    <th>Nombre</th>
+                    <th>Número de factura</th>
+                    <th>Número Autorización</th>
+                    <th>Importe Total Compra</th>
+                    <th>Importe No Sujeto a Crédito Fiscal</th>
+                    <th>Sub Total</th>
+                    <th>Descuentos</th>
+                    <th>Importe Base para Crédito Fiscal</th>
+                    <th>Crédito Fiscal IVA</th>
+                    <th>Código de Control</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var item in ViewBag.LibroCompras)
+                {
+                    <tr>
+                        <td>@item.FechaFactura.ToString("dd'/'MM'/'yyyy")</td>
+                        <td>@item.Nit</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.NumeroFactura</td>
+                        <td>@item.NumeroAutorizacion</td>
+                        <td>@item.Importe.ToString("N2")</td>
+                        <td>@item.TotalNoCreditoFiscal.ToString("N2")</td>
+                        <td>@item.ImporteTotal.ToString("N2")</td>
+                        <td>@item.Descuento.ToString("N2")</td>
+                        <td>@item.Total.ToString("N2")</td>
+                        <td>@item.CreditoFiscal_IVA.ToString("N2")</td>
+                        <td>@item.CodigoControl</td>
+                    </tr>
+                }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Libro de Ventas
+    </div>
+    <div id="panel-compras" class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Fecha Factura</th>
+                        <th>Número de factura</th>
+                        <th>Número Autorización</th>
+                        <th>Estado</th>
+                        <th>Nit</th>
+                        <th>Nombre</th>
+                        <th>Importe Factura</th>
+                        <th>Importe ICE</th>
+                        <th>Importe Operaciones Exentas</th>
+                        <th>Importe Tasa Cero</th>
+                        <th>Sub Total</th>
+                        <th>Descuento</th>
+                        <th>Importe Base para Débito Fiscal</th>
+                        <th>Debito Fiscal IVA</th>
+                        <th>Código de Control</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in ViewBag.LibroVentas)
+                    {
+                        <tr>
+                            <td>@item.FechaFactura.ToString("dd'/'MM'/'yyyy")</td>
+                            <td>@item.NumeroFactura</td>
+                            <td>@item.NumeroAutorizacion</td>
+                            <td>A</td>
+                            <td>@item.Nit</td>
+                            <td>@item.Nombre</td>
+                            <td>@item.Importe.ToString("N2")</td>
+                            <td>@item.ImporteImpuestoEsp.ToString("N2")</td>
+                            <td>@item.ImporteExento.ToString("N2")</td>
+                            <td>@item.ImporteTasaCero.ToString("N2")</td>
+                            <td>@item.SubTotal.ToString("N2")</td>
+                            <td>@item.Descuento.ToString("N2")</td>
+                            <td>@item.Total.ToString("N2")</td>
+                            <td>@item.DebitoFiscal_IVA.ToString("N2")</td>
+                            <td>@item.CodigoControl</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+</div>

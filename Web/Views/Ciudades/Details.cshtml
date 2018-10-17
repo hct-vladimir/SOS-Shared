@@ -1,0 +1,48 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.Ciudad
+
+@{
+    ViewBag.Title = "Ver Ciudad";
+}
+
+<h2>Ciudad</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Datos Ciudad
+            </div>
+            <div class="panel-body collapse in">
+                @using (Html.BeginForm())
+                {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Nombre, "Nombre")
+                            @Html.TextBoxFor(model => model.Nombre, null, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.Nombre)
+                        </div>
+                 }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    @*<div>
+        <h4>Ciudad</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+
+        </dl>
+    </div>*@
+<div class="form-links">
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Regresar", "Index")
+</div>

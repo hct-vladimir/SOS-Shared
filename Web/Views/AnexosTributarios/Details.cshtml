@@ -1,0 +1,45 @@
+﻿@model Cerberus.Sos.Accounting.BusinessLogic.Entities.AnexosTributario
+
+@{
+    ViewBag.Title = "Ver anexo tributario";
+}
+
+<h2>Anexo Tributario</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Datos de la Accion Nacional
+            </div>
+            <div class="panel-body collapse in">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Codigo, "Codigo")
+                        @Html.TextBoxFor(model => model.Codigo, null, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Codigo)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Descripcion, "Descripcion")
+                        @Html.TextBoxFor(model => model.Descripcion, null, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Descripcion)
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Grupo, "Grupo")
+                        @Html.TextBoxFor(model => model.Grupo, null, new { @class = "form-control", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.Grupo)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Regresar", "Index")
+</p>

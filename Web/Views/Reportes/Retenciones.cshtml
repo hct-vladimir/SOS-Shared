@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.Retencion>
+@{
+    ViewBag.Title = "Retenciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Retenciones</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Elegir Cuenta
+    </div>
+    <div id="panel-busqueda" class="panel-body">
+        @using (Html.BeginForm("Retenciones", "Reportes", FormMethod.Get))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="cuenta-filter form-group">
+                        @Html.Label("Mes", "Mes")
+                        @Html.TextBox("Mes", null, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="cuenta-filter form-group">
+                        @Html.Label("Gestion", "Gestion")
+                        @Html.TextBox("Gestion", null, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-default">Buscar</button>
+        }
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Libro de Compras
+    </div>
+    <div id="panel-ventas" class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>Fecha Comprobante</th>
+                    <th>Retención</th>
+                    <th>Retención IUE</th>
+                    <th>Retención RC-IVA</th>
+                    <th>Retención IT</th>
+                    <th>Retención IUE-BE</th>
+                    <th>Importe Total</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.FechaComprobante.Value.ToString("dd'/'MM'/'yyyy")</td>
+                        <td>@item.TiposRetencion.Descripcion</td>
+                        @if (item.TipoRetencionId == 1 || item.TipoRetencionId == 2)
+                        {
+                            <td>@item.ImporteRetencion.Value.ToString("N2")</td>
+                        }
+                        else
+                        {
+                            <td>0</td>
+                        }
+                        @if (item.TipoRetencionId == 3 || item.TipoRetencionId == 4)
+                        {
+                            <td>@item.ImporteRetencion.Value.ToString("N2")</td>
+                        }
+                        else
+                        {
+                            <td>0</td>
+                        }
+                        <td>@item.ImporteRetencionIT.Value.ToString("N2")</td>
+                        @if (item.TipoRetencionId == 5)
+                        {
+                            <td>@item.ImporteRetencion.Value.ToString("N2")</td>
+                        }
+                        else
+                        {
+                            <td>0</td>
+                        }
+                        <td>@item.ImporteTotal.ToString("N2")</td>
+                    </tr>
+                }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="panel-footer">
+        Total Retenciones: @ViewBag.TotalRetenciones.ToString("N2")
+    </div>
+</div>

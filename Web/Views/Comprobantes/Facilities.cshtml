@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Cerberus.Sos.Accounting.BusinessLogic.Entities.Facility>
+@{
+    ViewBag.Title = "Registro de Comprobantes";
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.PeriodoActivo))
+{
+    <h2 class="page-header">Registro de Comprobantes - Periodo Actual: @ViewBag.PeriodoActivo</h2>
+    if (TempData["FlashMessage"] != null)
+     {
+         <div class="alert alert-danger alert-dismissable">
+             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+             @TempData["FlashMessage"].ToString()
+         </div>
+     }
+    <h4 class="text-right">Estado: @ViewBag.EstadoCierre</h4>
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col-md-12">
+            @if ((ViewBag.EstadoCierreId == 2 || ViewBag.EstadoCierreId == 4) && @Context.User.IsInRole("ADMN-PRG"))
+            {
+                <div class="btn-group pull-right">
+                    <a href="@Url.Action("CambiarEstado", "CierresContables", new { ciudadId = ViewBag.CiudadOrigenId, periodoId = ViewBag.PeriodoActivoId, estadoId = 3})" class="btn btn-success btn-action" role="button" onclick="return confirm('Esta seguro de enviar a revisión la Contabilidad actual?')"><i class="glyphicon glyphicon-circle-arrow-right"></i> Enviar a Revisión</a>
+                </div>
+            }
+
+            @if (@Context.User.IsInRole("CORD-PRG") && ViewBag.EstadoCierreId == 3)
+            {
+                <div class="btn-group pull-right">
+                    <a href="@Url.Action("CambiarEstado", "CierresContables", new {ciudadId = ViewBag.CiudadOrigenId, periodoId = ViewBag.PeriodoActivoId, estadoId = 4})" class="btn btn-primary btn-action" role="button" onclick="return confirm('Esta seguro de devolver la Contabilidad actual con observaciones?')"><i class="glyphicon glyphicon-circle-arrow-left"></i> Enviar Observaciones</a>
+                    <a href="@Url.Action("CambiarEstado", "CierresContables", new {ciudadId = ViewBag.CiudadOrigenId, periodoId = ViewBag.PeriodoActivoId, estadoId = 7})" class="btn btn-success btn-action" role="button" onclick="return confirm('Esta seguro de enviar a revisión a la ON la Contabilidad actual?')"><i class="glyphicon glyphicon-circle-arrow-right"></i> Enviar a Revisión ON</a>
+                </div>
+            }
+
+            @if (@Context.User.IsInRole("CTBD-CLR") && ViewBag.EstadoCierreId == 7)
+            {
+                <div class="btn-group pull-right">
+                    <a href="@Url.Action("CambiarEstado", "CierresContables", new {ciudadId = ViewBag.CiudadOrigenId, periodoId = ViewBag.PeriodoActivoId, estadoId = 4})" class="btn btn-primary btn-action" role="button" onclick="return confirm('Esta seguro de devolver la Contabilidad actual con observaciones?')"><i class="glyphicon glyphicon-circle-arrow-left"></i> Enviar Observaciones</a>
+                    <a href="@Url.Action("CambiarEstado", "CierresContables", new {ciudadId = ViewBag.CiudadOrigenId, periodoId = ViewBag.PeriodoActivoId, estadoId = 5})" class="btn btn-success btn-action" role="button" onclick="return confirm('Esta seguro de Realizar el Cierre de la Contabilidad actual?')"><i class="glyphicon glyphicon-circle-arrow-right"></i> Cierre Contabilidad</a>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Contabilidad
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table id="recursos" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    @*<th>Id</th>*@
+                                    <th>Unidad de Programa</th>
+                                    <th>Comprobantes Registrados</th>
+                                    @*<th>Pendientes</th>
+                                    <th>Observados</th>*@
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        @*<td>@item.Id</td>*@
+                                        <td>@item.Codigo - @item.Nombre</td>
+                                        @if (@item.TotalComprobantes.HasValue)
+                                        {
+                                            <td>@item.TotalComprobantes.Value</td>
+                                        }
+                                        else
+                                        {
+                                            <td>0</td>
+                                        }
+                                        @*<td>0</td>
+                                        <td>0</td>*@
+                                        <td>@Html.ActionLink("Ver comprobantes", "Index", new { facilityId = item.Id, ciudadId = ViewBag.CiudadOrigenId })</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                @*<div class="panel-footer">Total Bs.: @ViewBag.TotalPresupuesto.ToString("N2")</div>*@
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h2 class="page-header">Registro de Comprobantes</h2>
+
+    <div class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        No existe un Periodo Contable Habilitado.
+    </div>
+}
+
+@if (@Context.User.IsInRole("PPTO-CLR") || @Context.User.IsInRole("CORD-PRG"))
+{
+    <div>
+        @Html.ActionLink("Regresar", "Index", "CierresContables")
+    </div>
+}

@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>S.O.S. - Contabilidad</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Datepicker-->
+    <link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- Bootstrap Multiselect -->
+    <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" type="text/css" />
+    <!-- MetisMenu CSS -->
+    <link href="~/Content/metisMenu.min.css" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link href="~/Content/datatables.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Content/Site.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                    <img alt="S.O.S." src="@Url.Content("~/Images/logo.png")">
+                </a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="#">Versión del Sistema: 1.0.0 </a>
+                </li>
+                <li>
+                    <a href="#">Ciudad: @Session["ciudadNombre"]</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>Bienvenido @Context.User.Identity.Name <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="@Url.Action("LogOff", "Usuarios")"><i class="fa fa-sign-out fa-fw"></i> Cerrar sesión</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search" style="display: none;">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Buscar...">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <!-- /input-group -->
+                        </li>
+                        @if (!Context.User.IsInRole("PPTO-CLR"))
+                        {
+                            <li>
+                                <a href="#"><i class="fa fa-sitemap fa-fw"></i> Administración<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level" aria-expanded="true" style="">
+                                    <li>
+                                        <a href="#"><i class="fa fa-cog fa-fw"></i> Parámetros<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level" aria-expanded="true">
+                                            <li><a href="@Url.Action("Index", "AccionesNacionales")">Acciones Nacionales</a></li>
+                                            <li><a href="@Url.Action("Index", "AnexosTributarios")">Anexos Tributarios</a></li>
+                                            <li><a href="@Url.Action("Index", "Bancos")">Bancos</a></li>
+                                            <li><a href="@Url.Action("Index", "CuentasBancos")">Cuentas Bancos</a></li>
+                                            <li><a href="@Url.Action("Index", "Ciudades")">Ciudades</a></li>
+                                            <li><a href="@Url.Action("Index", "CodigosAuditorias")">Códigos Auditoría</a></li>
+                                            <li><a href="@Url.Action("Index", "Contrapartes")">Contrapartes</a></li>
+                                            <li><a href="@Url.Action("Index", "Facilities")">Unidades de Programa</a></li>
+                                            <li><a href="@Url.Action("Index", "Territorios")">Territorios</a></li>
+                                        </ul>
+                                        <!-- /.nav-third-level -->
+                                    </li>
+                                    @*<li><a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Plan Programático</a></li>*@
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        }
+                        <li>
+                            <a href="#"><i class="fa fa-calendar fa-fw"></i> Presupuesto<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level" aria-expanded="true" style="">
+                                @if (Context.User.IsInRole("PPTO-CLR"))
+                                {
+                                    <li><a href="@Url.Action("Gestion", "Presupuestos")"><i class="fa fa-calendar-check-o fa-fw"></i> Gestión de Presupuestos</a></li>
+                                }
+
+                                @if (Context.User.IsInRole("CORD-PRG"))
+                                {
+                                    <li><a href="@Url.Action("Ciudades", "Presupuestos", new { presupuestoId = Session["presupuestoId"].ToString() })"><i class="fa fa-calendar-check-o fa-fw"></i> Revisión Presupuestos</a></li>
+                                }
+
+                                @if (Context.User.IsInRole("ADMN-PRG"))
+                                {
+                                    <li><a href="@Url.Action("Facilities", "Recursos", new { ciudadId = Session["ciudadId"].ToString()})"><i class="fa fa-tasks fa-fw"></i> Llenado de Presupuesto</a></li>
+                                }
+                                <li>
+                                    <a href="#"><i class="fa fa-list-alt fa-fw"></i> Reportes Presupuesto<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level" aria-expanded="true">
+                                        @if (Context.User.IsInRole("PPTO-CLR") || Context.User.IsInRole("CORD-PRG"))
+                                        {
+                                            <li><a href="@Url.Action("ReporteGeneral", "Presupuestos")">Reporte General</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("ReporteGeneral", "Presupuestos", new {ciudadId = Session["ciudadId"].ToString()})">Reporte General</a></li>
+                                        }
+
+                                        @if (Context.User.IsInRole("PPTO-CLR") || Context.User.IsInRole("CORD-PRG"))
+                                        {
+                                            <li><a href="@Url.Action("Resumen", "Presupuestos")">Resumen Presupuesto</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Resumen", "Presupuestos", new {ciudadId = Session["ciudadId"].ToString()})">Resumen Presupuesto</a></li>
+                                        }
+
+                                        @if (Context.User.IsInRole("PPTO-CLR") || Context.User.IsInRole("CORD-PRG"))
+                                        {
+                                            <li><a href="@Url.Action("Reportes", "Presupuestos")">Reportes Gerenciales</a></li>
+                                        }
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li><a href="@Url.Action("Historicos", "Recursos")"><i class="fa fa-newspaper-o fa-fw"></i> Presupuestos Históricos</a></li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-balance-scale fa-fw"></i> Contabilidad<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level" aria-expanded="true" style="">
+                                @if (Context.User.IsInRole("CTBD-CLR"))
+                                {
+                                    <li><a href="@Url.Action("Cierres", "Comprobantes")"><i class="fa fa-calendar-check-o fa-fw"></i> Cierres Contables</a></li>
+                                }
+                                else if (Context.User.IsInRole("CORD-PRG"))
+                                {
+                                    <li><a href="@Url.Action("Index", "CierresContables")"><i class="fa fa-calendar-check-o fa-fw"></i> Revisión Comprobantes</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@Url.Action("Facilities", "Comprobantes", new { ciudadId = Session["ciudadId"].ToString()})"><i class="fa fa-edit fa-fw"></i> Comprobantes</a></li>
+                                }
+                                <li><a href="@Url.Action("Index", "PlantillasAsientos")"><i class="fa fa-book fa-fw"></i> Bliblioteca de Asientos</a></li>
+                                <li><a href="@Url.Action("Mayores", "Reportes")"><i class="fa fa-list-alt fa-fw"></i> Mayores</a></li>
+                                <li><a href="@Url.Action("EstadoCuentas", "Reportes")"><i class="fa fa-sliders fa-fw"></i> Estados de Cuentas</a></li>
+                                <li>
+                                    <a href="#"><i class="fa fa-file-audio-o fa-fw"></i> Impuestos<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level" aria-expanded="true">
+                                        <li><a href="@Url.Action("LibroComprasVentas", "Reportes")">Libro de Compras y Ventas</a></li>
+                                        <li><a href="@Url.Action("Retenciones", "Reportes")">Retenciones</a></li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-newspaper-o fa-fw"></i> Estados Financieros<span class="fa arrow"></span></a>
+                                    <ul class="nav nav-third-level" aria-expanded="true">
+                                        <li><a href="@Url.Action("BalanceComprobacion", "Reportes")">Balance de Comprobación</a></li>
+                                        <li><a href="@Url.Action("BalanceGeneral", "Reportes")">Balance General</a></li>
+                                        <li><a href="@Url.Action("EstadoResultados", "Reportes")">Estado de Resultados</a></li>
+                                    </ul>
+                                    <!-- /.nav-third-level -->
+                                </li>
+                                @*<li><a href="@Url.Action("Index", "Mayores")"><i class="fa fa-book fa-fw"></i> Libros Mayores</a></li>*@
+                                @*<li><a href="#"><i class="fa fa-calculator fa-fw"></i> Tesorería</a></li>*@
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        @if (Context.User.IsInRole("PLNS-CLR"))
+                        {
+
+                            <li>
+                                <a href="#"><i class="fa fa-list-alt fa-fw"></i> Planillas<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level" aria-expanded="true" style="">
+                                    <li><a href="@Url.Action("Gestion", "Planillas")"><i class="fa fa-calendar-check-o fa-fw"></i> Gestión de Planillas</a></li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-cog fa-fw"></i> Parámetros<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level" aria-expanded="true">
+                                            <li><a href="@Url.Action("Index", "PlanillasParametros")">Parámetros Generales</a></li>
+                                            <li><a href="@Url.Action("Index", "PlanillasUfvs")">UFV's</a></li>
+                                            <li><a href="@Url.Action("Index", "PlanillasSalariosMinimos")">Salarios mínimos</a></li>
+                                            <li><a href="@Url.Action("Index", "PlanillasBonoAntiguedad")">Bonos de Antigüedad</a></li>
+                                            <li><a href="@Url.Action("Index", "PlanillasAporteNacional")">Aporte Nacional Solidario</a></li>
+                                        </ul>
+                                        <!-- /.nav-third-level -->
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="fa fa-users fa-fw"></i> Personal<span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level" aria-expanded="true">
+                                            <li><a href="@Url.Action("Index", "Personal")">Lista de Colaboradores</a></li>
+                                            <li><a href="@Url.Action("RetirosMesActual", "Personal")">Retiros del Mes</a></li>
+                                            <li><a href="@Url.Action("Ingresos", "Personal")">Alta de Colaboradores</a></li>
+                                            <li><a href="@Url.Action("Retiros", "Personal")">Baja de Colaboradores</a></li>
+                                        </ul>
+                                        <!-- /.nav-third-level -->
+                                    </li>
+                                </ul>
+                                <!-- /.nav-second-level -->
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <!-- Input Mask Plugin JavaScript -->
+    <script src="~/Scripts/jquery.inputmask.bundle.min.js"></script>
+    <!-- Moment for Bootstrap Datepicker -->
+    <script src="~/Scripts/moment-with-locales.min.js" type="text/javascript"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- Bootstrap Datepicker -->
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+    <!-- Bootstrap multiselect -->
+    <script src="~/Scripts/bootstrap-multiselect.js" type="text/javascript"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/Scripts/metisMenu.min.js"></script>
+    <!-- DataTables Plugin JavaScript -->
+    <script src="~/Scripts/datatables.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Scripts/Site.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

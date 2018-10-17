@@ -1,0 +1,111 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{3054A8C6-ABDA-4B98-A94A-B0C67B99E580}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{E92AEEFD-0BF4-4175-B4FB-C8153B421397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{08C438C5-BAD8-40AE-9B38-8C17CA8E558A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Security", "Security\Security.csproj", "{A0F75CEF-CCF1-4014-A868-EC05B68F4BB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{0853EC04-3454-4F9A-BFFE-8CEB22A5D3F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{2FAC757A-E346-4728-95E5-3D4C8E7DFB1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log", "Log\Log.csproj", "{0713FA72-E0AD-47B4-9E9D-C0A6341FFC4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-UserInterface", "01-UserInterface", "{03F6ADAB-2F2F-428D-89EB-889A0D5BFA92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Business", "02-Business", "{55B7B8FB-04C1-4AD6-8B74-F6B7B05804F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Data", "03-Data", "{DC1CA654-12E0-4000-BD8C-6B1FC5EA8D3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04-UnitTests", "04-UnitTests", "{E7FDA9B8-8640-4D7D-9F66-E00176D88AEC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "05-Transverse", "05-Transverse", "{6D8D0006-69B0-41D4-B3EB-EF4621B7B673}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3054A8C6-ABDA-4B98-A94A-B0C67B99E580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3054A8C6-ABDA-4B98-A94A-B0C67B99E580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3054A8C6-ABDA-4B98-A94A-B0C67B99E580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3054A8C6-ABDA-4B98-A94A-B0C67B99E580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E92AEEFD-0BF4-4175-B4FB-C8153B421397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E92AEEFD-0BF4-4175-B4FB-C8153B421397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E92AEEFD-0BF4-4175-B4FB-C8153B421397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E92AEEFD-0BF4-4175-B4FB-C8153B421397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08C438C5-BAD8-40AE-9B38-8C17CA8E558A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08C438C5-BAD8-40AE-9B38-8C17CA8E558A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08C438C5-BAD8-40AE-9B38-8C17CA8E558A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08C438C5-BAD8-40AE-9B38-8C17CA8E558A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0F75CEF-CCF1-4014-A868-EC05B68F4BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F75CEF-CCF1-4014-A868-EC05B68F4BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F75CEF-CCF1-4014-A868-EC05B68F4BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F75CEF-CCF1-4014-A868-EC05B68F4BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0853EC04-3454-4F9A-BFFE-8CEB22A5D3F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0853EC04-3454-4F9A-BFFE-8CEB22A5D3F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0853EC04-3454-4F9A-BFFE-8CEB22A5D3F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0853EC04-3454-4F9A-BFFE-8CEB22A5D3F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FAC757A-E346-4728-95E5-3D4C8E7DFB1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FAC757A-E346-4728-95E5-3D4C8E7DFB1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FAC757A-E346-4728-95E5-3D4C8E7DFB1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FAC757A-E346-4728-95E5-3D4C8E7DFB1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0713FA72-E0AD-47B4-9E9D-C0A6341FFC4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0713FA72-E0AD-47B4-9E9D-C0A6341FFC4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0713FA72-E0AD-47B4-9E9D-C0A6341FFC4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0713FA72-E0AD-47B4-9E9D-C0A6341FFC4E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3054A8C6-ABDA-4B98-A94A-B0C67B99E580} = {03F6ADAB-2F2F-428D-89EB-889A0D5BFA92}
+		{E92AEEFD-0BF4-4175-B4FB-C8153B421397} = {55B7B8FB-04C1-4AD6-8B74-F6B7B05804F3}
+		{08C438C5-BAD8-40AE-9B38-8C17CA8E558A} = {DC1CA654-12E0-4000-BD8C-6B1FC5EA8D3A}
+		{A0F75CEF-CCF1-4014-A868-EC05B68F4BB9} = {6D8D0006-69B0-41D4-B3EB-EF4621B7B673}
+		{0853EC04-3454-4F9A-BFFE-8CEB22A5D3F4} = {6D8D0006-69B0-41D4-B3EB-EF4621B7B673}
+		{2FAC757A-E346-4728-95E5-3D4C8E7DFB1F} = {E7FDA9B8-8640-4D7D-9F66-E00176D88AEC}
+		{0713FA72-E0AD-47B4-9E9D-C0A6341FFC4E} = {6D8D0006-69B0-41D4-B3EB-EF4621B7B673}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://cerberusdiaconia.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = BusinessLogic\\BusinessLogic.csproj
+		SccProjectTopLevelParentUniqueName1 = AccountingSos.sln
+		SccProjectName1 = BusinessLogic
+		SccLocalPath1 = BusinessLogic
+		SccProjectUniqueName2 = DataAccess\\DataAccess.csproj
+		SccProjectTopLevelParentUniqueName2 = AccountingSos.sln
+		SccProjectName2 = DataAccess
+		SccLocalPath2 = DataAccess
+		SccProjectUniqueName3 = Log\\Log.csproj
+		SccProjectTopLevelParentUniqueName3 = AccountingSos.sln
+		SccProjectName3 = Log
+		SccLocalPath3 = Log
+		SccProjectUniqueName4 = Security\\Security.csproj
+		SccProjectTopLevelParentUniqueName4 = AccountingSos.sln
+		SccProjectName4 = Security
+		SccLocalPath4 = Security
+		SccProjectUniqueName5 = Test\\Test.csproj
+		SccProjectTopLevelParentUniqueName5 = AccountingSos.sln
+		SccProjectName5 = Test
+		SccLocalPath5 = Test
+		SccProjectUniqueName6 = Utility\\Utility.csproj
+		SccProjectTopLevelParentUniqueName6 = AccountingSos.sln
+		SccProjectName6 = Utility
+		SccLocalPath6 = Utility
+		SccProjectUniqueName7 = Web\\Web.csproj
+		SccProjectTopLevelParentUniqueName7 = AccountingSos.sln
+		SccProjectName7 = Web
+		SccLocalPath7 = Web
+	EndGlobalSection
+EndGlobal

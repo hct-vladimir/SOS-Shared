@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="849bbb79c1474c4d85770062fe4ba4a1" Name="Diagram1">
+        <EntityTypeShape EntityType="AccountingSosDBModel.Banco" Width="1.5" PointX="5.75" PointY="0.5" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.CodigosAuditoria" Width="1.5" PointX="10.875" PointY="12.625" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Contraparte" Width="1.5" PointX="8.875" PointY="11.625" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Territorio" Width="1.5" PointX="3.125" PointY="8" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TiposComprobante" Width="1.75" PointX="7.5" PointY="0.5" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.AccionesNacionale" Width="2" PointX="9" PointY="7.875" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.AnexosTributario" Width="1.5" PointX="10.875" PointY="10.25" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Ciudad" Width="1.5" PointX="0.5" PointY="6.875" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Territorios_Ciudades" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.CuentaBanco" Width="1.5" PointX="6.875" PointY="3.125" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasBancos_Bancos" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.NivelProgramatico" Width="2.125" PointX="0.5" PointY="11.875" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.RecursoMes" Width="2.125" PointX="4.875" PointY="15.25" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.CuentaContable" Width="1.875" PointX="10" PointY="15.25" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.CuentaNavision" Width="1.625" PointX="7.625" PointY="15.75" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.FacturaComprador" Width="2" PointX="12.5" PointY="8.375" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.PlanProgramatico" Width="1.75" PointX="0.5" PointY="13.875" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TiposCuenta" Width="1.5" PointX="12.875" PointY="16.25" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasContables_Contrapartes" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasContables_CuentasNavision" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasContables_TiposCuentas" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlanProgramatico_NivelProgramatico" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Comprobante" Width="2.25" PointX="9.625" PointY="0.75" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Comprobantes_CuentasBancos" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Comprobantes_TiposComprobantes" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TipoMoneda" Width="1.5" PointX="14.75" PointY="2.625" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Comprobantes_TiposMonedas" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.CuentaAsiento" Width="1.5" PointX="7.25" PointY="7.125" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasAsientos_AccionesNacionales" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasAsientos_AnexosTributarios" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Comprobantes_Ciudades" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasAsientos_CodigosAuditoria" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasAsientos_Comprobantes" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasAsientos_Contrapartes" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasAsientos_Cuentas" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasAsientos_PlanProgramatico" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasAsientos_Territorios" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Usuario" Width="1.5" PointX="0.5" PointY="0.5" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Usuarios_Ciudades" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.EstadoPresupuesto" Width="1.75" PointX="7.5" PointY="19.5" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TipoObservacion" Width="1.5" PointX="12.75" PointY="10.5" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Observacion" Width="1.875" PointX="15.125" PointY="9.5" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Observaciones_TiposObservaciones" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Recurso" Width="1.75" PointX="5.125" PointY="7.75" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_Contrapartes" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_Cuentas" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_PlanProgramatico" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_Territorios" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_RecursosMeses_Recursos" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TraspasosPrograma" Width="1.75" PointX="12.875" PointY="12.5" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasTraspasos_ComprobantesAN" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasTraspasos_ComprobantesProg" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Factura" Width="1.5" PointX="12.625" PointY="2.375" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Facturas_FacturasCompradores" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Facturas_TiposMonedas" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Retencion" Width="1.5" PointX="16.625" PointY="1" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TiposRetencion" Width="1.5" PointX="16.75" PointY="4.875" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Retenciones_TiposRetenciones" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Cierre" Width="1.875" PointX="18" PointY="12.875" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.EstadosCierre" Width="1.875" PointX="15.5" PointY="13.625" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.EstadosComprobante" Width="1.875" PointX="12.375" PointY="0.5" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TiposCierre" Width="1.875" PointX="15.5" PointY="15.625" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Cierres_EstadosCierres" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Cierres_TiposCierres" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Comprobantes_EstadosComprobantes" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Facility" Width="1.5" PointX="4.125" PointY="2.5" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TipoCambio" Width="1.5" PointX="14.75" PointY="5.25" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Facilities_Ciudades" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Comprobantes_Facilities" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasBancos_Facilities" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_Facilities" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_TiposCambio_TiposMonedas" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Rol" Width="1.5" PointX="2.25" PointY="0.5" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.UsuarioRol" Width="1.5" PointX="2.25" PointY="4" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_UsuariosRoles_Roles" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_UsuariosRoles_Usuarios" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.PlantillaAsiento" Width="1.5" PointX="18.5" PointY="1.75" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.PlantillaCuenta" Width="1.5" PointX="18.5" PointY="5.125" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlantillasCuentas_AccionesNacionales" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlantillasCuentas_AnexosTributarios" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlantillasCuentas_CodigosAuditoria" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlantillasCuentas_Contrapartes" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlantillasCuentas_Cuentas" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlantillasCuentas_PlanProgramatico" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlantillasCuentas_PlantillasAsientos" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlantillasCuentas_Territorios" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_AccionesNacionales" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_CodigosAuditoria" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TiposFacility" Width="1.5" PointX="4" PointY="0.5" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Facilities_TiposFacilities" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlanProgramatico_PlanProgramatico" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.UsuarioCiudad" Width="2.375" PointX="12.375" PointY="19.25" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.CierreContable" Width="1.5" PointX="20.875" PointY="12.125" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.PeriodoCierre" Width="1.5" PointX="18.25" PointY="17" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CierresContables_Ciudades" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CierresContables_EstadosCierres" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CierresContables_PeriodosCierres" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CierresContables_TiposCierres" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Comprobantes_CierresContables" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.VCierreContable" Width="1.875" PointX="2.625" PointY="16.5" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.EstadoCuenta" Width="1.75" PointX="20.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TiposEstadosCuenta" Width="1.875" PointX="20.5" PointY="6.75" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.VComprobante" Width="1.5" PointX="3" PointY="11.125" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_EstadosCuentas_CiudadesDebe" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_EstadosCuentas_CiudadesHaber" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_EstadosCuentas_CuentasAsientosDebe" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_EstadosCuentas_CuentasAsientosHaber" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_EstadosCuentas_FacilitiesDebe" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_EstadosCuentas_FacilitiesHaber" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_EstadosCuentas_TiposEstadosCuentas" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_Ciudades" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.PresupuestoCiudad" Width="2" PointX="0.5" PointY="22.125" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.PresupuestoFacility" Width="2" PointX="5" PointY="22.875" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.TiposPresupuesto" Width="1.875" PointX="0.5" PointY="20" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PresupuestosCiudades_Ciudades" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PresupuestosCiudades_EstadosPresupuestos" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PresupuestosFacilities_EstadosPresupuestos" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PresupuestosFacilities_Facilities" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.Presupuesto" Width="1.75" PointX="2.875" PointY="19.125" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Presupuestos_TiposPresupuestos" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PresupuestosCiudades_Presupuestos" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PresupuestosFacilities_Presupuestos" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_Presupuestos" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Presupuestos_TiposPresupuestos1" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.FacilityCuentaContable" Width="2.25" PointX="15.25" PointY="17.75" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.FacilityPlanProgramatico" Width="2.125" PointX="22.875" PointY="0.75" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.PlanProgramaticoCuenta" Width="2.375" PointX="9.625" PointY="21.875" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_FacilitiesCuentasContables_CuentasContables" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlanProgramaticoCuentas_CuentasContables" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_FacilitiesCuentasContables_Facilities" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_FacilitiesPlanProgramatico_Facilities" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_FacilitiesPlanProgramatico_PlanProgramatico" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PlanProgramaticoCuentas_PlanProgramatico" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.PresupuestoFacilityCompartido" Width="2.5" PointX="12.375" PointY="22.625" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PresupuestosFacilitiesComp_Ciudades" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PresupuestosFacilitiesComp_EstadosPresupuestos" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_PresupuestosFacilitiesComp_PresupuestosFacilities" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.CodigoMarcoLogico" Width="2.375" PointX="20.375" PointY="18.375" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_Recursos_CodigosMarcoLogico" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.RecursosExcel" Width="1.75" PointX="18" PointY="20" />
+        <EntityTypeShape EntityType="AccountingSosDBModel.RecursosExcelLote" Width="1.5" PointX="20.875" PointY="22.875" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_RecursosExcel_RecursosExcelLote" />
+        <AssociationConnector Association="AccountingSosDBModel.FK_CuentasAsientos_CodigosMarcoLogico" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
